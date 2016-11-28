@@ -132,3 +132,18 @@ body {
   color: #333333;
   text-decoration: none;
 }
+
+.form-module .login {
+    background: #f2f2f2;
+    width: 100%;
+    padding: 15px 40px;
+    box-sizing: border-box;
+    color: #666666;
+    font-size: 12px;
+    text-align: center;
+}
+.form-module .login a {
+    background: #f2f2f2;
+    color: #333333;
+    text-decoration: none;
+}
