@@ -39,6 +39,7 @@ function validate2(){
     if (id_res.id == "1")
     {
         location.href="screen/third.html";
+        //location.href="third";
     }
 }
 
