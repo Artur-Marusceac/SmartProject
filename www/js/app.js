@@ -30,7 +30,7 @@ window.onload = function()
 };
 
 
-function get_advisers()
+window.onload= function()
 {
      var advisers_list = document.getElementById("advisers_list");
     var xhr = new XMLHttpRequest();
@@ -53,7 +53,7 @@ function get_advisers()
             };
                xhr.open("GET", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=get_advisers_list", false);
                xhr.send();
-}
+};
 
 
 
