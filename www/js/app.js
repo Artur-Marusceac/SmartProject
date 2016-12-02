@@ -32,6 +32,7 @@ window.onload = function()
 
 function get_advisers()
 {
+     var advisers_list = document.getElementById("advisers_list");
     var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function(){
                   if(xhr.readyState == 4 && xhr.status==200 ){
