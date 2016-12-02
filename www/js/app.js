@@ -37,7 +37,8 @@ function get_advisers()
                   if(xhr.readyState == 4 && xhr.status==200 ){
                     
                     var ajaxDisplay = document.getElementById('ajaxDiv');
-                    var result = xhr.responseText;
+                    json_response = xhr.responseText;
+                    var result = JSON.parse(json_response);
                     ajaxDisplay.innerHTML = result;
                     for(var i=0; i<result.length;i++)  
                     {
