@@ -5,7 +5,7 @@
     
 function get_connection(){
     $conn = NULL;
-    $servername = "smartprojects.ee.bgu.ac.il";
+    $servername = "localhost";
     $username = "root";
     $password = "smart2016";
     $database = "PROJECTS";
@@ -71,18 +71,17 @@ function is_user_exist($username, $id)
 
 function get_advisers_list()
 {
-    $sql = "SELECT `USERFIRSTNAMEHEB`,`USERLASTNAMEHEB` FROM `USERS` WHERE `USERTYPE`>=128";
+    $sql = "SELECT `USERFIRSTNAMEENG`,`USERLASTNAMEENG` FROM `USERS` WHERE `USERTYPE`>=128";
     $conn = get_connection();
     $result = $conn->query($sql);
     $advisers_list = array();
     if ($result->num_rows > 0) {
         // output data of each row
         while($row = $result->fetch_assoc()) {
-            $adviser = array("first_name" => $row["USERFIRSTNAMEHEB"], "las_name" => $row["USERLASTNAMEHEB"]);
+            $adviser = array("first_name" => $row["USERFIRSTNAMEENG"], "last_name" => $row["USERLASTNAMEENG"]);
             array_push($advisers_list,$adviser);
         }
     }
-
     json_encode($advisers_list);
     return $advisers_list;
 
@@ -115,6 +114,7 @@ if (isset($_GET["action"]) && in_array($_GET["action"], $possible_url))
           break;
       case "get_advisers_list":
           $value = get_advisers_list();
+          break;
   }
 }
 
