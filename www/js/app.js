@@ -15,48 +15,40 @@ function validate(){
     }
 }
 
-function validate2(){
-    var xhr = new XMLHttpRequest();
-    var username = document.getElementById("login_username").value;
-    var id = document.getElementById("login_password").value;
-    var json_response="";
-
-    xhr.onreadystatechange = function(){
-        if(xhr.readyState == 4 && xhr.status==200 ){
-
-            var ajaxDisplay = document.getElementById('ajaxDiv');
-            json_response = xhr.responseText;
-            ajaxDisplay.innerHTML = json_response;
-        }
-    };
-    //queryString +=  "&wpm=" + wpm + "&sex=" + sex;
-    xhr.open("GET", "http://localhost/trunk/server/api.php?action=is_user_exist&username=" + username.toString() +"&id=" +id.toString(), false);
-    xhr.send(username,id);
-
-    var result = JSON.parse(json_response);
-    var id_res = eval('(' + result + ')');
-    
-    if (id_res.id == "1")
+window.onload = function()
+{
+    var year_list = document.getElementById("year_list");
+    var start_year = 2010;
+    var end_year = 2018;
+    for(var i = start_year; i >= start_year && i <= end_year; i++)
     {
-        location.href="screen/third.html";
-        //location.href="third";
+        var newYearListItem = document.createElement("option");
+        newYearListItem.textContent = i.toString();
+        year_list.appendChild(newYearListItem);
+        newYearListItem.setAttribute("value",i.toString());
     }
-}
+};
+
 
 
 function validate3(){
     var xhr = new XMLHttpRequest();
     var username = document.getElementById("login_username").value;
     var password = document.getElementById("login_password").value;
-      
+    var json_response=""; 
             xhr.onreadystatechange = function(){
                   if(xhr.readyState == 4 && xhr.status==200 ){
                     
                     var ajaxDisplay = document.getElementById('ajaxDiv');
-                    ajaxDisplay.innerHTML = xhr.responseText;
+                    json_response = xhr.responseText;
+                    var result = JSON.parse(json_response);
+                   ajaxDisplay.innerHTML = result.validateUserResult;
+                //    ajaxDisplay.innerHTML = json_response;
+                    if(result.validateUserResult===true) location.href="Third.html"; 
+                    
                   }
                };
-               //queryString +=  "&wpm=" + wpm + "&sex=" + sex;
                xhr.open("GET", "http://localhost/smartprojects/server/api.php?action=bgu_login&username=" + username.toString() +"&password=" +password.toString(), false);
                xhr.send(username,password); 
+               
 }
