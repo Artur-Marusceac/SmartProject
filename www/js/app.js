@@ -32,7 +32,6 @@ window.onload = function()
 
 function get_advisers()
 {
-    
     var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function(){
                   if(xhr.readyState == 4 && xhr.status==200 ){
@@ -48,9 +47,9 @@ function get_advisers()
                          advisersListItem.setAttribute("value",result.last_name);
                   }
                }
+            };
                xhr.open("GET", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=get_advisers_list", false);
                xhr.send();
-};
 }
 
 
@@ -73,7 +72,7 @@ function validate3(){
                     
                   }
                };
-               xhr.open("GET", "http://localhost/smartprojects/server/api.php?action=bgu_login&username=" + username.toString() +"&password=" +password.toString(), false);
+               xhr.open("GET", "http://localhost/smartprojects/server+/api.php?action=bgu_login&username=" + username.toString() +"&password=" +password.toString(), false);
                xhr.send(username,password); 
                
 }
