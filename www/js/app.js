@@ -44,6 +44,7 @@ function get_advisers()
                     {
                         var advisersListItem=document.createElement("option");
                          advisersListItem.textContent=result[i].first_name+" "+result[i].last_name;
+                         advisers_list.appendChild(advisersListItem);
                          advisersListItem.setAttribute("value",result.last_name);
                   }
                }
