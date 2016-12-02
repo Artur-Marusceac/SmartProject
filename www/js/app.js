@@ -40,10 +40,16 @@ function get_advisers()
                     var ajaxDisplay = document.getElementById('ajaxDiv');
                     var result = xhr.responseText;
                     ajaxDisplay.innerHTML = result;
+                    for(var i=0; i<result.length;i++)  
+                    {
+                        var advisersListItem=document.createElement("option");
+                         advisersListItem.textContent=result[i].first_name+" "+result[i].last_name;
+                         advisersListItem.setAttribute("value",result.last_name);
                   }
-               };
+               }
                xhr.open("GET", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=get_advisers_list", false);
                xhr.send();
+};
 }
 
 
