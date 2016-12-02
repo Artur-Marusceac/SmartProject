@@ -30,6 +30,24 @@ window.onload = function()
 };
 
 
+function get_advisers()
+{
+    
+    var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function(){
+                  if(xhr.readyState == 4 && xhr.status==200 ){
+                    
+                    var ajaxDisplay = document.getElementById('ajaxDiv');
+                    var result = xhr.responseText;
+                    ajaxDisplay.innerHTML = result;
+                  }
+               };
+               xhr.open("GET", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=get_advisers_list", false);
+               xhr.send();
+}
+
+
+
 
 function validate3(){
     var xhr = new XMLHttpRequest();
