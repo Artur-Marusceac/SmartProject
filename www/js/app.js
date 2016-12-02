@@ -34,6 +34,7 @@ function get_advisers()
 {
      var advisers_list = document.getElementById("advisers_list");
     var xhr = new XMLHttpRequest();
+    var json_response=""; 
             xhr.onreadystatechange = function(){
                   if(xhr.readyState == 4 && xhr.status==200 ){
                     
@@ -46,7 +47,7 @@ function get_advisers()
                         var advisersListItem=document.createElement("option");
                          advisersListItem.textContent=result[i].first_name+" "+result[i].last_name;
                          advisers_list.appendChild(advisersListItem);
-                         advisersListItem.setAttribute("value",result.last_name);
+                         advisersListItem.setAttribute("value",result[i].last_name);
                   }
                }
             };
