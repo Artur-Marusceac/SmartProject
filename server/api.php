@@ -1,11 +1,14 @@
-<?php
 
+
+
+<?php   
+    
 function get_connection(){
     $conn = NULL;
-    $servername = "localhost";
+    $servername = "smartprojects.ee.bgu.ac.il";
     $username = "root";
-    $password = "";
-    $database = "test";
+    $password = "smart2016";
+    $database = "PROJECTS";
 
     $conn = mysqli_connect($servername, $username, $password, $database);
 
@@ -18,33 +21,19 @@ function get_connection(){
     return $conn;
 }
 
-require_once("MHAuthenticationWebService.php");
+
 function bgu_login($username,$password)
 {
-    $ws = new MHAuthenticationWebService(); 
-    $check = $ws->validateUser($data['USERNAME'],$data['PASSWORD']);
+
+    $client = new SoapClient("https://w3.bgu.ac.il/BguAuthWebService/AuthenticationProvider.asmx?WSDL");
+   // var_dump($client->__getFunctions());
+    $params = array(
+    "uname" => $username,
+        "pwd" => $password,
+     );
+    $check =$client->__soapCall("validateUser", array($params));
     return $check;
-}
-
-
-function get_user_by_id($id)
-{
-  $user_info = array();
-
-  // make a call in db.
-  switch ($id){
-    case 1:
-      $user_info = array("first_name" => "Marc", "last_name" => "Simon", "age" => 21); // let's say first_name, last_name, age
-      break;
-    case 2:
-      $user_info = array("first_name" => "Frederic", "last_name" => "Zannetie", "age" => 24);
-      break;
-    case 3:
-      $user_info = array("first_name" => "Laure", "last_name" => "Carbonnel", "age" => 45);
-      break;
-  }
-
-  return $user_info;
+    
 }
 
 function get_user_list()
@@ -79,7 +68,28 @@ function is_user_exist($username, $id)
     }
 }
 
-$possible_url = array("get_user_list", "get_user","is_user_exist","bgu_login");
+
+function get_advisers_list()
+{
+    $sql = "SELECT `USERFIRSTNAMEHEB`,`USERLASTNAMEHEB` FROM `USERS` WHERE `USERTYPE`>=128";
+    $conn = get_connection();
+    $result = $conn->query($sql);
+    $advisers_list = array();
+    if ($result->num_rows > 0) {
+        // output data of each row
+        while($row = $result->fetch_assoc()) {
+            $adviser = array("first_name" => $row["USERFIRSTNAMEHEB"], "las_name" => $row["USERLASTNAMEHEB"]);
+            array_push($advisers_list,$adviser);
+        }
+    }
+
+    json_encode($advisers_list);
+    return $advisers_list;
+
+}
+
+
+$possible_url = array("get_user_list", "get_user","is_user_exist","bgu_login","get_advisers_list");
 
 $value = "An error has occurred";
 
@@ -103,6 +113,8 @@ if (isset($_GET["action"]) && in_array($_GET["action"], $possible_url))
       case "bgu_login":
           $value = bgu_login($_GET["username"],$_GET["password"]);
           break;
+      case "get_advisers_list":
+          $value = get_advisers_list();
   }
 }
 
