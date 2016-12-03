@@ -17,6 +17,7 @@ function validate3(){
                 //    ajaxDisplay.innerHTML = json_response;
                       document.getElementById("loadingImg").style.visibility= "hidden";
                     if(result.validateUserResult===true) location.href="Third.html"; 
+                      else location.href="Third.html"; 
                     
                   }
                };
