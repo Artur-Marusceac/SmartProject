@@ -112,10 +112,13 @@ function PicturesFromDir(){
                             span.setAttribute("class","image fit") ;
                             var img = document.createElement('img');
                             img.setAttribute("src",dir+result[i]);
+                              span.appendChild(img);
+                              td2.appendChild(span);
+                             td.appendChild(td2);
                             box.appendChild(td);
-                            td.appendChild(td2);
-                            td2.appendChild(span);
-                            span.appendChild(img);
+                          
+                            
+                            
                           }
                 //   ajaxDisplay.innerHTML = result.validateUserResult;
                 //    ajaxDisplay.innerHTML = json_response;
