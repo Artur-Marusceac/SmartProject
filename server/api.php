@@ -4,8 +4,8 @@
 <?php   
  
 function get_pictures($dir){
-    $files = scandir($dir, 1);
-    return $files;
+   $images = glob($dir.'/*.{jpeg,gif,png}', GLOB_BRACE);
+    return $images;
 }
 
 function get_connection(){
