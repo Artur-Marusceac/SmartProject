@@ -103,7 +103,7 @@ function PicturesFromDir(){
                       
                       
                      //  /Data/Conference/2011/
-                          for (var i = 0; i < result.length-3; i++) {
+                          for (var i = 0; i < result.length; i++) {
                             var td = document.createElement('TD');
                              td.setAttribute("class","row no-collapse 50% uniform") ;
                               for(j=0 ; j<3 ; j++)
