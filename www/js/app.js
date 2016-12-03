@@ -90,3 +90,20 @@ function CreateSearchTable()
 
 }
 
+function getFiles(){
+    var xhr = new XMLHttpRequest();
+    var dir = "/Data/Conference/2011/";
+    var json_response="";
+            xhr.onreadystatechange = function(){
+                  if(xhr.readyState == 4 && xhr.status==200 ){
+                    json_response = xhr.responseText;
+                    var result = JSON.parse(json_response);
+                //   ajaxDisplay.innerHTML = result.validateUserResult;
+                //    ajaxDisplay.innerHTML = json_response;
+                  }
+               };
+               xhr.open("GET", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=get_files&dir=" + dir.toString() , false);
+               xhr.send(dir);
+               
+ 
+}

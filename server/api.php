@@ -2,7 +2,12 @@
 
 
 <?php   
-    
+ 
+function get_files($dir){
+    $files = scandir($dir, 1);
+    return $files;
+}
+
 function get_connection(){
     $conn = NULL;
     $servername = "localhost";
@@ -88,7 +93,7 @@ function get_advisers_list()
 }
 
 
-$possible_url = array("get_user_list", "get_user","is_user_exist","bgu_login","get_advisers_list");
+$possible_url = array("get_user_list", "get_user","is_user_exist","bgu_login","get_advisers_list","get_files");
 
 $value = "An error has occurred";
 
