@@ -165,7 +165,7 @@ function get_advisers_list()
 }
 
 
-$possible_url = array("get_user_list", "get_user","is_user_exist","bgu_login","get_advisers_list","get_pictures");
+$possible_url = array("get_user_list", "get_user","is_user_exist","bgu_login","get_advisers_list","get_pictures","search_project");
 
 $value = "An error has occurred";
 

@@ -104,7 +104,11 @@ function PicturesFromDir(){
                           for (var i = 0; i < result.length(); i++) {
                            var box=document.getElementById("box");
                             var td = document.createElement('TD');
-                             td.setAttribute("class","row no-collapse 50% uniform") ;
+                            td.setAttribute("class","row no-collapse 50% uniform") ;
+                            var td2 = document.createElement('TD');
+                            td2.setAttribute("class","4u") ;
+                            var span = document.createElement('span');
+                            span.setAttribute("class","image fit") ;
                           }
                 //   ajaxDisplay.innerHTML = result.validateUserResult;
                 //    ajaxDisplay.innerHTML = json_response;
