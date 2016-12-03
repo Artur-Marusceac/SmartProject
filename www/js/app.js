@@ -16,22 +16,21 @@ function validate(){
 }
 
 
-
 window.onload= function()
 {
+
     var year_list = document.getElementById("year_list");
     var start_year = 2010;
     var end_year = 2018;
-    for(var i = start_year; i >= start_year && i <= end_year; i++)
-    {
+    for(var i = start_year; i >= start_year && i <= end_year; i++) {
         var newYearListItem = document.createElement("option");
         newYearListItem.textContent = i.toString();
         year_list.appendChild(newYearListItem);
-        newYearListItem.setAttribute("value",i.toString());
+        newYearListItem.setAttribute("value", i.toString());
     }
-    
-    
-     var advisers_list = document.getElementById("advisers_list");
+
+
+    var advisers_list = document.getElementById("advisers_list");
     var xhr = new XMLHttpRequest();
     var json_response=""; 
             xhr.onreadystatechange = function(){
