@@ -4,7 +4,7 @@
 <?php   
  
 function get_pictures($dir){
-   $images = glob($dir.'/*.{jpeg,gif,png}', GLOB_BRACE);
+   $images = glob('/var/www/html/Data/Conference/2011//*.{jpeg,gif,png}', GLOB_BRACE);
     return $images;
 }
 
