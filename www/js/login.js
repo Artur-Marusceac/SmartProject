@@ -16,7 +16,7 @@ function validate3(){
                     
                   }
                };
-               xhr.open("GET", "http:/localhost/zf/test/SmartProject/server/api.php?action=bgu_login&username=" + username.toString() +"&password=" +password.toString(), false);
+               xhr.open("GET", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=bgu_login&username=" + username.toString() +"&password=" +password.toString(), false);
                xhr.send(username,password); 
                
 }
