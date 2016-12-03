@@ -53,5 +53,40 @@ window.onload= function()
                xhr.send();
 };
 
+function CreateSearchTable()
+{
+       var myTableDiv=document.getElementById("search_table");
+    var table = document.createElement('TABLE');
+    var tableBody = document.createElement('TBODY');
+    
+    table.appendChild(tableBody);
+      
+   var tr = document.createElement('TR');
+    tableBody.appendChild(tr); 
+       var td = document.createElement('TD');
+           td.appendChild(document.createTextNode("Project ID" ));
+           tr.appendChild(td);
+        td = document.createElement('TD');
+           td.appendChild(document.createTextNode("Project Name"));
+           tr.appendChild(td);
+        td = document.createElement('TD');
+           td.appendChild(document.createTextNode("Advisers"));
+           tr.appendChild(td);
+        td = document.createElement('TD');
+           td.appendChild(document.createTextNode("Students"));
+           tr.appendChild(td);
+    
+    for (var i=1; i<3; i++){
+       tr = document.createElement('TR');
+       tableBody.appendChild(tr);
+       
+       for (var j=0; j<4; j++){
+           td = document.createElement('TD');
+           td.appendChild(document.createTextNode("Cell " + i + "," + j));
+           tr.appendChild(td);
+       }
+    }
+    myTableDiv.appendChild(table);
 
+}
 
