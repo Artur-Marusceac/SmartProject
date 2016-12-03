@@ -93,6 +93,7 @@ function CreateSearchTable()
 function PicturesFromDir(){
     var xhr = new XMLHttpRequest();
     var dir = "/Data/Conference/2011/";
+    var box=document.getElementById("box");
     var json_response="";
             xhr.onreadystatechange = function(){
                   if(xhr.readyState == 4 && xhr.status==200 ){
@@ -102,13 +103,19 @@ function PicturesFromDir(){
                       
                      //  /Data/Conference/2011/
                           for (var i = 0; i < result.length(); i++) {
-                           var box=document.getElementById("box");
+                
                             var td = document.createElement('TD');
                             td.setAttribute("class","row no-collapse 50% uniform") ;
                             var td2 = document.createElement('TD');
                             td2.setAttribute("class","4u") ;
                             var span = document.createElement('span');
                             span.setAttribute("class","image fit") ;
+                            var img = document.createElement('img');
+                            img.setAttribute("src",dir+result[i]);
+                            box.appendChild(td);
+                            td.appendChild(td2);
+                            td2.appendChild(span);
+                            span.appendChild(img);
                           }
                 //   ajaxDisplay.innerHTML = result.validateUserResult;
                 //    ajaxDisplay.innerHTML = json_response;
