@@ -4,8 +4,32 @@
 <?php   
  
 function get_pictures($dir){
-   $images = glob('/var/www/html/Data/Conference/2011//*.{jpeg,gif,png}', GLOB_BRACE);
-    return $images;
+    
+    // image extensions
+$extensions = array('jpg', 'jpeg', 'png', 'gif', 'bmp');
+
+// init result
+$result = array();
+
+// directory to scan
+$directory = new DirectoryIterator('/var/www/html/Data/Conference/2011/');
+
+// iterate
+foreach ($directory as $fileinfo) {
+    // must be a file
+    if ($fileinfo->isFile()) {
+        // file extension
+        $extension = strtolower(pathinfo($fileinfo->getFilename(), PATHINFO_EXTENSION));
+        // check if extension match
+        if (in_array($extension, $extensions)) {
+            // add to result
+            $result[] = $fileinfo->getFilename();
+        }
+    }
+}
+// print result
+    
+    return $result;
 }
 
 function get_connection(){
