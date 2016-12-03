@@ -103,6 +103,8 @@ function PicturesFromDir(){
                      //  /Data/Conference/2011/
                           for (var i = 0; i < result.length(); i++) {
                            var box=document.getElementById("box");
+                            var td = document.createElement('TD');
+                             td.setAttribute("class","row no-collapse 50% uniform") ;
                           }
                 //   ajaxDisplay.innerHTML = result.validateUserResult;
                 //    ajaxDisplay.innerHTML = json_response;
@@ -112,4 +114,26 @@ function PicturesFromDir(){
                xhr.send(dir);
                
  
+}
+                      
+                      
+function search_command()
+{
+    var year = window.document.getElementById("year_list").value;
+    var student_name =window.document.getElementById("student_name").value;
+    var adviser =window.document.getElementById("advisers_list").value;
+    var project_name =window.document.getElementById("project_name").value;
+
+
+    var xhr_search = new XMLHttpRequest();
+    var json_response="";
+    xhr_search.onreadystatechange = function(){
+        if(xhr_search.readyState == 4 && xhr_search.status==200 ){
+
+            json_response = xhr_search.responseText;
+            var result = JSON.parse(json_response);
+        }
+    };
+    xhr_search.open("GET", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=search_project&year=" + year.toString() +"&student_name=" +student_name.toString()+"&adviser=" +adviser.toString()+"&project_name=" +project_name.toString(), false);
+    xhr_search.send();
 }
