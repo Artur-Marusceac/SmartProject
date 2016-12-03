@@ -3,7 +3,7 @@
 
 <?php   
  
-function get_files($dir){
+function get_pictures($dir){
     $files = scandir($dir, 1);
     return $files;
 }
@@ -93,7 +93,7 @@ function get_advisers_list()
 }
 
 
-$possible_url = array("get_user_list", "get_user","is_user_exist","bgu_login","get_advisers_list","get_files");
+$possible_url = array("get_user_list", "get_user","is_user_exist","bgu_login","get_advisers_list","get_pictures");
 
 $value = "An error has occurred";
 
@@ -110,7 +110,9 @@ if (isset($_GET["action"]) && in_array($_GET["action"], $possible_url))
           else
           $value = "Missing argument";
         break;
-    
+     case "get_pictures":
+        $value = get_pictures();
+        break;
       case "is_user_exist":
           $value = is_user_exist($_GET["username"],$_GET["id"]);
           break;    
