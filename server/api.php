@@ -60,7 +60,7 @@ $extensions = array('jpg', 'jpeg', 'png', 'gif', 'bmp');
 $result = array();
 
 // directory to scan
-$directory = new DirectoryIterator('/var/www/html/Data/Conference/2011/');
+$directory = new DirectoryIterator('/var/www/html'.$dir);
 
 // iterate
 foreach ($directory as $fileinfo) {
