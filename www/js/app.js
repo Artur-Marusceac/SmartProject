@@ -20,7 +20,7 @@ window.onload= function()
 {
 
     var year_list = document.getElementById("year_list");
-    var start_year = 2010;
+    var start_year = 2005;
     var end_year = 2018;
     for(var i = start_year; i >= start_year && i <= end_year; i++) {
         var newYearListItem = document.createElement("option");
@@ -92,7 +92,8 @@ function CreateSearchTable()
 
 function PicturesFromDir(){
     var xhr = new XMLHttpRequest();
-    var dir = "/Data/Conference/2011/";
+    var year = document.getElementById("year_list").value;
+    var dir = "/Data/Conference/"+year+"/";
     var j=0;
     var box=document.getElementById("box");
     var json_response="";
@@ -101,8 +102,7 @@ function PicturesFromDir(){
                     json_response = xhr.responseText;
                     var result = JSON.parse(json_response);
                       
-                      
-                     //  /Data/Conference/2011/
+     
                           for (var i = 0; i < result.length; i++) {
                             var td = document.createElement('div');
                              td.setAttribute("class","row no-collapse 50% uniform") ;
