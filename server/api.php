@@ -3,6 +3,54 @@
 
 <?php   
  
+
+function search_project($year,$student_name,$adviser,$project_name)
+{
+
+    $sql = "SELECT sug.PROJECTID, sug.PROJECTNAMEENG,dat.USERFULLNAMEENG FROM PROJECTSUGGESTIONS sug,STUDENTS_DATA dat,USERS usr, ADVISERSUGGESTIONS ad WHERE sug.PROJECTID = dat.PROJECTID AND ad.PROJECTID=sug.PROJECTID AND ";
+
+    if ($adviser!="All")
+    {
+        $name = explode(" ", $adviser);
+        $sql = $sql . "ad.ADVISERID=usr.USERID AND usr.USERFIRSTNAMEENG='".$name[0]."' AND usr.USERLASTNAMEENG='".$name[1]."' OR (" ;
+    }
+    if ($year!="All")
+        $sql= $sql."sug.PROJECTID like '%".$year."%' OR ";
+    if ($project_name!="") {
+        $words_list = explode(" ", $project_name);
+        $project_sql="";
+        foreach ($words_list as $word) {
+            if ($project_sql!="")
+                $project_sql= $project_sql. "OR sug.PROJECTNAMEENG LIKE '%".$word."%' ";
+            else
+                $project_sql= $project_sql. "sug.PROJECTNAMEENG LIKE '%".$word."%' ";
+        }
+        $project_sql= $project_sql. " OR ";
+        $sql = $sql. $project_sql;
+    }
+    if ($student_name!="")
+    {
+        $sql = $sql. "dat.USERFULLNAMEENG LIKE '%".$student_name."%'";
+    }
+    $sql = $sql.')';
+    $conn = get_connection();
+    $search_result=array();
+    $result = $conn->query($sql);
+    $adviser_sql = "SELECT USERS.USERFIRSTNAMEENG,USERS.USERLASTNAMEENG FROM USERS,ADVISERSUGGESTIONS WHERE USERS.USERID =ADVISERSUGGESTIONS.ADVISERID AND ADVISERSUGGESTIONS.PROJECTID=";
+    if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            $adviser_sql=$adviser_sql."'".$row["projectid"]."'";
+            $adviser_result = $conn->query($sql);
+            while($row_adviser = $adviser_result->fetch_assoc()) {
+                $search_res_row = array("id"=>$row["projectid"],"name" => $row["projectnameeng"],"user_name"=>$row["userfullnameeng"],"adviser"=>$row_adviser["userfirstnameeng"].$row_adviser["userlastnameeng"]);
+                array_push($search_result,$search_res_row);
+            }
+        }
+    }
+    return json_encode($search_result);
+}
+
+
 function get_pictures($dir){
     
     // image extensions
@@ -145,6 +193,9 @@ if (isset($_GET["action"]) && in_array($_GET["action"], $possible_url))
           break;
       case "get_advisers_list":
           $value = get_advisers_list();
+          break;
+    case "search_project":
+          $value = search_project($_GET["year"],$_GET["student_name"],$_GET["adviser"],$_GET["project_name"]);
           break;
   }
 }

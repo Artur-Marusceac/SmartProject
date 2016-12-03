@@ -90,7 +90,7 @@ function CreateSearchTable()
 
 }
 
-function getFiles(){
+function PicturesFromDir(){
     var xhr = new XMLHttpRequest();
     var dir = "/Data/Conference/2011/";
     var json_response="";
@@ -98,6 +98,12 @@ function getFiles(){
                   if(xhr.readyState == 4 && xhr.status==200 ){
                     json_response = xhr.responseText;
                     var result = JSON.parse(json_response);
+                      
+                      
+                     //  /Data/Conference/2011/
+                          for (var i = 0; i < result.length(); i++) {
+                           var box=document.getElementById("box");
+                          }
                 //   ajaxDisplay.innerHTML = result.validateUserResult;
                 //    ajaxDisplay.innerHTML = json_response;
                   }
