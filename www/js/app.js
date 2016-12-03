@@ -114,7 +114,7 @@ function PicturesFromDir(){
                             span.setAttribute("class","image fit") ;
                             var img = document.createElement('img');
                             img.setAttribute("src",dir+result[i]);
-                            img.setAttribute("alt",'');
+                            img.setAttribute("alt","");
                               span.appendChild(img);
                               td2.appendChild(span);
                              td.appendChild(td2);
