@@ -13,7 +13,7 @@ function validate3(){
                     var ajaxDisplay = document.getElementById('ajaxDiv');
                     json_response = xhr.responseText;
                     var result = JSON.parse(json_response);
-                   ajaxDisplay.innerHTML = result.validateUserResult;
+                //   ajaxDisplay.innerHTML = result.validateUserResult;
                 //    ajaxDisplay.innerHTML = json_response;
                       document.getElementById("loadingImg").style.visibility= "hidden";
                     if(result.validateUserResult===true) location.href="Third.html"; 
