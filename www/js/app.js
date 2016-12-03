@@ -104,20 +104,20 @@ function PicturesFromDir(){
                       
                      //  /Data/Conference/2011/
                           for (var i = 0; i < result.length; i++) {
-                            var td = document.createElement('TD');
+                            var td = document.createElement('div');
                              td.setAttribute("class","row no-collapse 50% uniform") ;
                               for(j=0 ; j<3 ; j++)
                             {
-                            var td2 = document.createElement('TD');
+                            var td2 = document.createElement('div');
                             td2.setAttribute("class","4u") ;
                             var span = document.createElement('span');
                             span.setAttribute("class","image fit") ;
                             var img = document.createElement('img');
                             img.setAttribute("src",dir+result[i]);
                             img.setAttribute("alt","");
-                              span.appendChild(img);
-                              td2.appendChild(span);
-                             td.appendChild(td2);
+                            span.appendChild(img);
+                            td2.appendChild(span);
+                            td.appendChild(td2);
                             i++;
                             }
                             box.appendChild(td);
