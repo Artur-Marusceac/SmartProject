@@ -93,6 +93,7 @@ function CreateSearchTable()
 function PicturesFromDir(){
     var xhr = new XMLHttpRequest();
     var dir = "/Data/Conference/2011/";
+    var j=0;
     var box=document.getElementById("box");
     var json_response="";
             xhr.onreadystatechange = function(){
@@ -102,10 +103,11 @@ function PicturesFromDir(){
                       
                       
                      //  /Data/Conference/2011/
-                          for (var i = 0; i < result.length; i++) {
-                
+                          for (var i = 0; i < result.length-3; i++) {
                             var td = document.createElement('TD');
-                            td.setAttribute("class","row no-collapse 50% uniform") ;
+                             td.setAttribute("class","row no-collapse 50% uniform") ;
+                              for(j=0 ; j<3 ; j++)
+                            {
                             var td2 = document.createElement('TD');
                             td2.setAttribute("class","4u") ;
                             var span = document.createElement('span');
@@ -115,6 +117,8 @@ function PicturesFromDir(){
                               span.appendChild(img);
                               td2.appendChild(span);
                              td.appendChild(td2);
+                            i++;
+                            }
                             box.appendChild(td);
                           
                             
