@@ -77,7 +77,8 @@ foreach ($directory as $fileinfo) {
 }
 // print result
     
-    return $result;
+   // return $result;
+    return $directory;
 }
 
 function get_connection(){
