@@ -113,7 +113,7 @@ function PicturesFromDir(){
                             var span = document.createElement('span');
                             span.setAttribute("class","image fit") ;
                             var img = document.createElement('img');
-                            img.setAttribute("src",dir+'/'+result[i]);
+                            img.setAttribute("src","/Data/Conference/"+dir+'/'+result[i]);
                             img.setAttribute("alt","");
                             span.appendChild(img);
                             td2.appendChild(span);
