@@ -129,7 +129,7 @@ function PicturesFromDir(){
                 //    ajaxDisplay.innerHTML = json_response;
                   }
                };
-               xhr.open("GET", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=get_pictures&dir=" + dir.toString() , false);
+               xhr.open("GET", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=get_pictures&dir=" + dir , false);
                xhr.send(dir);
                
  
