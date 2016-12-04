@@ -93,7 +93,7 @@ function CreateSearchTable()
 function PicturesFromDir(){
     var xhr = new XMLHttpRequest();
     var year = document.getElementById("year_list").value;
-    var dir = "/Data/Conference/"+year+"/";
+    var dir = year;
     var j=0;
     var box=document.getElementById("box");
     var json_response="";
