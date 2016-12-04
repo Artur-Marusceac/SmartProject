@@ -157,5 +157,5 @@ function search_command()
         }
     };
     xhr_search.open("GET", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=search_project&year=" + year.toString() +"&student_name=" +student_name.toString()+"&adviser=" +adviser.toString()+"&project_name=" +project_name.toString(), false);
-    xhr_search.send();
+    xhr_search.send(year,student_name,adviser,project_name);
 }
