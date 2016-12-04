@@ -54,7 +54,7 @@ function search_project($year,$student_name,$adviser,$project_name)
                 ;
                 $order = 'PROJECTSUGGESTIONS.PROJECTID';
 
-                return $select;
+                return $year;
                 
                 if ($year){
                     $where_year = "PROJECTSUGGESTIONS.PROJECTID like '%$year%'";
