@@ -58,10 +58,10 @@ $extensions = array('jpg', 'jpeg', 'png', 'gif', 'bmp');
 
 // init result
 $result = array();
-
+    
 // directory to scan
 $directory = new DirectoryIterator('/var/www/html'.$dir);
-
+//$directory = new DirectoryIterator('/var/www/html/Data/Conference/2008/');
 // iterate
 foreach ($directory as $fileinfo) {
     // must be a file
@@ -78,7 +78,7 @@ foreach ($directory as $fileinfo) {
 // print result
     
    // return $result;
-    return $directory;
+    return json_encode($directory);
 }
 
 function get_connection(){
