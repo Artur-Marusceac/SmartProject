@@ -54,7 +54,6 @@ function search_project($year,$student_name,$adviser,$project_name)
                 ;
                 $order = 'PROJECTSUGGESTIONS.PROJECTID';
 
-                return $year;
                 
                 if ($year){
                     $where_year = "PROJECTSUGGESTIONS.PROJECTID like '%$year%'";
@@ -105,7 +104,7 @@ function search_project($year,$student_name,$adviser,$project_name)
                 $advisers_names = $db->fetchPairs("SELECT   CONCAT(IFNULL(PROJECTID, ''),'_',IFNULL(ADVISERNUMBER, '')), USERFULLNAMEENG  FROM ADVISERSUGGESTIONS_DATA ");
                 $students_names =  $db->fetchPairs("SELECT USERFULLNAMEENG, PROJECTID FROM STUDENTSPROJECTS_DATA");
                 
-                return $select;
+                return $students_names;
             }
     
 
