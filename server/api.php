@@ -47,14 +47,14 @@ $db->query("SET NAMES 'utf8'");
 function search_project($year,$student_name,$adviser,$project_name)
 {
                 $db=Zend_Registry::get('db');
-                return $db;
                 $select = $db->select()
 
                              ->from('PROJECTSUGGESTIONS',
                                      array('PROJECTID', 'PROJECTNAMEENG',  'PROJECTNAMEHEB', 'SUBMITEDBY',/*'COMPANYID',*/ 'TAKEN'))
                 ;
                 $order = 'PROJECTSUGGESTIONS.PROJECTID';
-                
+
+                return $select;
                 
                 if ($year){
                     $where_year = "PROJECTSUGGESTIONS.PROJECTID like '%$year%'";
