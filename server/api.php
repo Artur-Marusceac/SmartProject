@@ -5,15 +5,18 @@
 
 
 
-
-function search_project($year,$student_name,$adviser,$project_name)
-{
-    $db = new Zend_Db_Adapter_Pdo_Mysql(array(
+//require_once 'Zend/Loader/Autoloader.php';
+//$loader=Zend_Loader_Autoloader::getInstance();
+    $db = Zend_Db::factory('Pdo_Mysql',array(
     'host'     => 'localhost',
     'username' => 'root',
     'password' => 'smart2016',
     'dbname'   => 'PROJECTS'
 ));
+function search_project($year,$student_name,$adviser,$project_name)
+{
+
+
                 return $db;
                 $select = $db->select()
 
