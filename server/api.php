@@ -1,22 +1,52 @@
 
 
 
-<?php   
+<?php
+
+
+$root = "/var/www/html/zf";
+
+//error_reporting(E_ALL | E_STRICT);
+ini_set('display_errors', 0);
+
+set_include_path('.' .  PATH_SEPARATOR . $root.'/library'
+    // . PATH_SEPARATOR . '/opt/ZF/library'
+    . PATH_SEPARATOR . $root.'/public'
+    . PATH_SEPARATOR . '/opt/ZF/extras/library'
+    . PATH_SEPARATOR . '/opt/'
+    . PATH_SEPARATOR . get_include_path());
+
+include "Zend/Loader.php";
+Zend_Loader::registerAutoload();
+
+//load configuration
+
+$configLink = new Zend_Config_Ini($root.'/config/configDBLink.ini', 'general');
+$config = new Zend_Config_Ini($root.'/config/config.ini', 'general');
+$registry = Zend_Registry::getInstance();
+$registry->set('config', $config);
+
+
+$yearsData = new Zend_Config_Ini('/var/www/html/yearsData.ini','yearsData',array('allowModifications' => true));
+$registry->set('yearsData',$yearsData);
+
+//setup database
+$dbLink = Zend_Db::factory('oracle',$configLink->db);
+$db = Zend_Db::factory('Mysqli', $config->db);
+Zend_Db_Table::setDefaultAdapter($db);
+//$registry->set('db', $db);
+Zend_Registry::set('db', $db);
+Zend_Registry::set('dbLink',$dbLink);
+
+$db->query("SET NAMES 'utf8'");
 
 
 
-//require_once 'Zend/Loader/Autoloader.php';
-//$loader=Zend_Loader_Autoloader::getInstance();
-    $db = Zend_Db::factory('Pdo_Mysql',array(
-    'host'     => 'localhost',
-    'username' => 'root',
-    'password' => 'smart2016',
-    'dbname'   => 'PROJECTS'
-));
+
+
 function search_project($year,$student_name,$adviser,$project_name)
 {
-
-
+                $db=Zend_Registry::get('db');
                 return $db;
                 $select = $db->select()
 
