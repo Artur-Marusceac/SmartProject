@@ -130,6 +130,9 @@ function PicturesFromDir(){
                   }
                };
                xhr.open("GET", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=get_pictures&dir=" + dir.toString() , false);
+                while (box.firstChild) {
+                    box.removeChild(box.firstChild);
+                        }
                xhr.send(dir);
                
  
