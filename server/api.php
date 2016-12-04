@@ -14,8 +14,8 @@ $db = new Zend_Db_Adapter_Pdo_Mysql(array(
 function search_project($year,$student_name,$adviser,$project_name)
 {
     
-
-                $select = db->select()
+                return $db;
+                $select = $db->select()
 
                              ->from('PROJECTSUGGESTIONS',
                                      array('PROJECTID', 'PROJECTNAMEENG',  'PROJECTNAMEHEB', 'SUBMITEDBY',/*'COMPANYID',*/ 'TAKEN'))
@@ -68,9 +68,9 @@ function search_project($year,$student_name,$adviser,$project_name)
                     }
                 }
                 $select->order($order);
-                $projects = $this->db->fetchAll($select);
-                $advisers_names = $this->db->fetchPairs("SELECT   CONCAT(IFNULL(PROJECTID, ''),'_',IFNULL(ADVISERNUMBER, '')), USERFULLNAMEENG  FROM ADVISERSUGGESTIONS_DATA ");
-                $students_names =  $this->db->fetchPairs("SELECT USERFULLNAMEENG, PROJECTID FROM STUDENTSPROJECTS_DATA");
+                $projects = $db->fetchAll($select);
+                $advisers_names = $db->fetchPairs("SELECT   CONCAT(IFNULL(PROJECTID, ''),'_',IFNULL(ADVISERNUMBER, '')), USERFULLNAMEENG  FROM ADVISERSUGGESTIONS_DATA ");
+                $students_names =  $db->fetchPairs("SELECT USERFULLNAMEENG, PROJECTID FROM STUDENTSPROJECTS_DATA");
                 
                 return $select;
             }
