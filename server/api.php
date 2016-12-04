@@ -4,16 +4,16 @@
 <?php   
 
 
-$db = new Zend_Db_Adapter_Pdo_Mysql(array(
+
+
+function search_project($year,$student_name,$adviser,$project_name)
+{
+    $db = new Zend_Db_Adapter_Pdo_Mysql(array(
     'host'     => 'localhost',
     'username' => 'root',
     'password' => 'smart2016',
     'dbname'   => 'PROJECTS'
 ));
-
-function search_project($year,$student_name,$adviser,$project_name)
-{
-    
                 return $db;
                 $select = $db->select()
 
