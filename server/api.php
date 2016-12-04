@@ -78,8 +78,8 @@ foreach ($directory as $fileinfo) {
 }
 // print result
     
-   //return $result;
-   return json_encode(array($dirTest,$dir));
+   return $result;
+   //return json_encode(array($dirTest,$dir));
 }
 
 function get_connection(){
@@ -185,7 +185,7 @@ if (isset($_GET["action"]) && in_array($_GET["action"], $possible_url))
           $value = "Missing argument";
         break;
      case "get_pictures":
-        $value = get_pictures();
+        $value = get_pictures($_GET["dir"]);
         break;
       case "is_user_exist":
           $value = is_user_exist($_GET["username"],$_GET["id"]);
