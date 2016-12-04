@@ -60,8 +60,8 @@ $extensions = array('jpg', 'jpeg', 'png', 'gif', 'bmp');
 $result = array();
     
 // directory to scan
-    $dirTest= '/var/www/html/Data/Conference/'.$dir;
-$directory = new DirectoryIterator('/var/www/html/Data/Conference/'.$dir);
+    $dirTest= '/var/www/html/Data/Conference/'.$dir.'/';
+$directory = new DirectoryIterator('/var/www/html/Data/Conference/'.$dir.'/');
 //$directory = new DirectoryIterator('/var/www/html/Data/Conference/2008/');
 // iterate
 foreach ($directory as $fileinfo) {
@@ -78,8 +78,8 @@ foreach ($directory as $fileinfo) {
 }
 // print result
     
-   return $result;
-   // return json_encode($directory);
+   //return $result;
+   return json_encode(array($dirTest,$dir));
 }
 
 function get_connection(){
