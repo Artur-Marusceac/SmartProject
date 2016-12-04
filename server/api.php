@@ -72,7 +72,7 @@ function search_project($year,$student_name,$adviser,$project_name)
                 $advisers_names = $this->db->fetchPairs("SELECT   CONCAT(IFNULL(PROJECTID, ''),'_',IFNULL(ADVISERNUMBER, '')), USERFULLNAMEENG  FROM ADVISERSUGGESTIONS_DATA ");
                 $students_names =  $this->db->fetchPairs("SELECT USERFULLNAMEENG, PROJECTID FROM STUDENTSPROJECTS_DATA");
                 
-                return json_encode(array($projects,$advisers_names,$students_names));
+                return $select;
             }
     
 
