@@ -2,9 +2,82 @@
 
 
 <?php   
- 
+
+
+$db = new Zend_Db_Adapter_Pdo_Mysql(array(
+    'host'     => 'localhost',
+    'username' => 'root',
+    'password' => 'smart2016',
+    'dbname'   => 'PROJECTS'
+));
 
 function search_project($year,$student_name,$adviser,$project_name)
+{
+    
+
+                $select = db->select()
+
+                             ->from('PROJECTSUGGESTIONS',
+                                     array('PROJECTID', 'PROJECTNAMEENG',  'PROJECTNAMEHEB', 'SUBMITEDBY',/*'COMPANYID',*/ 'TAKEN'))
+                ;
+                $order = 'PROJECTSUGGESTIONS.PROJECTID';
+                
+                
+                if ($year){
+                    $where_year = "PROJECTSUGGESTIONS.PROJECTID like '%$year%'";
+                    $select->where($where_year);
+                }else{
+                    //search for all years - display search resalts in descending order
+                    $order = $order.' DESC';
+                }
+                if ($project_name){
+
+                    $words_list = explode(" ",  $project_name);
+                    foreach ($words_list as $word){
+                        /* search is case insensetive - option 'i' in REGEXP_LIKE */
+                            $select->where( "PROJECTNAMEENG LIKE '%$word%'"); /* Bind variable */
+                    }
+                }
+                 $select->joinLeft('ADVISERSUGGESTIONS',
+                                   'PROJECTSUGGESTIONS.PROJECTID = ADVISERSUGGESTIONS.PROJECTID',
+                                   array('ADVISERID', 'ADVISERNUMBER'))
+                            //->where('ADVISERSUGGESTIONS.ADVISERNUMBER = 1')
+                 ;
+                
+                if ($adviser){
+													$select_adviser_id = $this->db->select()
+														->from('USERS',	array('USERID'))
+														->where('USERNAME = ?', $adviser);
+													$adviserid = $this->db->fetchRow($select_adviser_id);
+                          $select->where('ADVISERSUGGESTIONS.ADVISERID = ?', $adviserid);
+
+                }
+                else{//Important: to prevent multiple same rows in case when adviser wasn't selected
+                     $select->where('ADVISERSUGGESTIONS.ADVISERNUMBER = 1');
+                }
+                 if ($student_name){
+
+                    $select->joinInner('STUDENTS_DATA',
+                                       'PROJECTSUGGESTIONS.PROJECTID = STUDENTS_DATA.PROJECTID',
+                                       array('USERFULLNAMEENG'))
+                    ;
+                    $names_list = explode(" ",  $student_name);
+                    //Zend_Debug::dump($names_list , 'names_list ', true);
+                    foreach ($names_list as $name){
+                            $select->where( "USERFULLNAMEENG LIKE '%$name%' ",  $name);
+                    }
+                }
+                $select->order($order);
+                $projects = $this->db->fetchAll($select);
+                $advisers_names = $this->db->fetchPairs("SELECT   CONCAT(IFNULL(PROJECTID, ''),'_',IFNULL(ADVISERNUMBER, '')), USERFULLNAMEENG  FROM ADVISERSUGGESTIONS_DATA ");
+                $students_names =  $this->db->fetchPairs("SELECT USERFULLNAMEENG, PROJECTID FROM STUDENTSPROJECTS_DATA");
+                
+                return json_encode(array($projects,$advisers_names,$students_names));
+            }
+    
+
+
+/*function search_project($year,$student_name,$adviser,$project_name)
 {
 
     $sql = "SELECT sug.PROJECTID, sug.PROJECTNAMEENG,dat.USERFULLNAMEENG FROM PROJECTSUGGESTIONS sug,STUDENTS_DATA dat,USERS usr, ADVISERSUGGESTIONS ad WHERE sug.PROJECTID = dat.PROJECTID AND ad.PROJECTID=sug.PROJECTID AND ";
@@ -48,7 +121,7 @@ function search_project($year,$student_name,$adviser,$project_name)
         }
     }
     return json_encode($search_result);
-}
+}*/
 
 
 function get_pictures($dir){
