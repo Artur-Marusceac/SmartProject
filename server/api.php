@@ -78,7 +78,7 @@ foreach ($directory as $fileinfo) {
 }
 // print result
     
-   return $dirTest;
+   return $result;
    // return json_encode($directory);
 }
 
