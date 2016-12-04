@@ -77,8 +77,8 @@ foreach ($directory as $fileinfo) {
 }
 // print result
     
-   // return $result;
-    return json_encode($directory);
+   return $result;
+   // return json_encode($directory);
 }
 
 function get_connection(){
