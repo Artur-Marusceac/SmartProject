@@ -30,6 +30,7 @@ window.onload= function()
     }
 
 
+
     var advisers_list = document.getElementById("advisers_list");
     var xhr = new XMLHttpRequest();
     var json_response=""; 
@@ -89,6 +90,7 @@ function CreateSearchTable()
     myTableDiv.appendChild(table);
 
 }
+
 
 function PicturesFromDir(){
     var xhr = new XMLHttpRequest();
