@@ -54,7 +54,7 @@ window.onload= function()
                xhr.send();
 };
 
-function CreateSearchTable()
+function CreateSearchTable(db_result)
 {
        var myTableDiv=document.getElementById("search_table");
     var table = document.createElement('TABLE');
@@ -77,13 +77,15 @@ function CreateSearchTable()
            td.appendChild(document.createTextNode("Students"));
            tr.appendChild(td);
     
-    for (var i=1; i<3; i++){
+    for (var i=1; i<db_result.length; i++){
        tr = document.createElement('TR');
        tableBody.appendChild(tr);
        
        for (var j=0; j<4; j++){
            td = document.createElement('TD');
-           td.appendChild(document.createTextNode("Cell " + i + "," + j));
+           td.appendChild(document.createTextNode(db_result[i][j]));
+           if (j==3)
+               td.appendChild(document.createTextNode(db_result[i][j][0]+","+db_result[i][j][1]));
            tr.appendChild(td);
        }
     }
@@ -156,6 +158,8 @@ function search_command()
 
             json_response = xhr_search.responseText;
             var result = JSON.parse(json_response);
+            CreateSearchTable(result);
+            location.href="Search_Results.html";
         }
     };
     xhr_search.open("GET", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=search_project&year=" + year.toString() +"&student_name=" +student_name.toString()+"&adviser=" +adviser.toString()+"&project_name=" +project_name.toString(), false);

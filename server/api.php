@@ -46,67 +46,77 @@ $db->query("SET NAMES 'utf8'");
 
 function search_project($year,$student_name,$adviser,$project_name)
 {
-                $db=Zend_Registry::get('db');
-                $select = $db->select()
+    $db=Zend_Registry::get('db');
+    $select = $db->select()
 
-                             ->from('PROJECTSUGGESTIONS',
-                                     array('PROJECTID', 'PROJECTNAMEENG',  'PROJECTNAMEHEB', 'SUBMITEDBY',/*'COMPANYID',*/ 'TAKEN'))
-                ;
-                $order = 'PROJECTSUGGESTIONS.PROJECTID';
+        ->from('PROJECTSUGGESTIONS',
+            array('PROJECTID', 'PROJECTNAMEENG',  'PROJECTNAMEHEB', 'SUBMITEDBY',/*'COMPANYID',*/ 'TAKEN'))
+    ;
+    $order = 'PROJECTSUGGESTIONS.PROJECTID';
 
-                
-                if ($year!="All"){
-                    $where_year = "PROJECTSUGGESTIONS.PROJECTID like '%$year%'";
-                    $select->where($where_year);
-                }else{
-                    //search for all years - display search resalts in descending order
-                    $order = $order.' DESC';
-                }
-                if ($project_name!=""){
 
-                    $words_list = explode(" ",  $project_name);
-                    foreach ($words_list as $word){
-                        /* search is case insensetive - option 'i' in REGEXP_LIKE */
-                            $select->where( "PROJECTNAMEENG LIKE '%$word%'"); /* Bind variable */
-                    }
-                }
-                 $select->joinLeft('ADVISERSUGGESTIONS',
-                                   'PROJECTSUGGESTIONS.PROJECTID = ADVISERSUGGESTIONS.PROJECTID',
-                                   array('ADVISERID', 'ADVISERNUMBER'))
-                            //->where('ADVISERSUGGESTIONS.ADVISERNUMBER = 1')
-                 ;
-                
-                if ($adviser!="All"){
-													$select_adviser_id = $this->db->select()
-														->from('USERS',	array('USERID'))
-														->where('USERNAME = ?', $adviser);
-													$adviserid = $this->db->fetchRow($select_adviser_id);
-                          $select->where('ADVISERSUGGESTIONS.ADVISERID = ?', $adviserid);
+    if ($year!="All"){
+        $where_year = "PROJECTSUGGESTIONS.PROJECTID like '%$year%'";
+        $select->where($where_year);
+    }else{
+        //search for all years - display search resalts in descending order
+        $order = $order.' DESC';
+    }
+    if ($project_name!=""){
 
-                }
-                else{//Important: to prevent multiple same rows in case when adviser wasn't selected
-                     $select->where('ADVISERSUGGESTIONS.ADVISERNUMBER = 1');
-                }
-                 if ($student_name){
+        $words_list = explode(" ",  $project_name);
+        foreach ($words_list as $word){
+            /* search is case insensetive - option 'i' in REGEXP_LIKE */
+            $select->where( "PROJECTNAMEENG LIKE '%$word%'"); /* Bind variable */
+        }
+    }
+    $select->joinLeft('ADVISERSUGGESTIONS',
+        'PROJECTSUGGESTIONS.PROJECTID = ADVISERSUGGESTIONS.PROJECTID',
+        array('ADVISERID', 'ADVISERNUMBER'))
+        //->where('ADVISERSUGGESTIONS.ADVISERNUMBER = 1')
+    ;
 
-                    $select->joinInner('STUDENTS_DATA',
-                                       'PROJECTSUGGESTIONS.PROJECTID = STUDENTS_DATA.PROJECTID',
-                                       array('USERFULLNAMEENG'))
-                    ;
-                    $names_list = explode(" ",  $student_name);
-                    //Zend_Debug::dump($names_list , 'names_list ', true);
-                    foreach ($names_list as $name){
-                            $select->where( "USERFULLNAMEENG LIKE '%$name%' ",  $name);
-                    }
-                }
-                $select->order($order);
-                $projects = $db->fetchAll($select);
-                $advisers_names = $db->fetchPairs("SELECT   CONCAT(IFNULL(PROJECTID, ''),'_',IFNULL(ADVISERNUMBER, '')), USERFULLNAMEENG  FROM ADVISERSUGGESTIONS_DATA ");
-                $students_names =  $db->fetchPairs("SELECT USERFULLNAMEENG, PROJECTID FROM STUDENTSPROJECTS_DATA");
-                
-                return json_encode($projects);
-            }
-    
+    if ($adviser!="All"){
+        $select_adviser_id = $this->db->select()
+            ->from('USERS',	array('USERID'))
+            ->where('USERNAME = ?', $adviser);
+        $adviserid = $this->db->fetchRow($select_adviser_id);
+        $select->where('ADVISERSUGGESTIONS.ADVISERID = ?', $adviserid);
+
+    }
+    else{//Important: to prevent multiple same rows in case when adviser wasn't selected
+        $select->where('ADVISERSUGGESTIONS.ADVISERNUMBER = 1');
+    }
+    if ($student_name){
+
+        $select->joinInner('STUDENTS_DATA',
+            'PROJECTSUGGESTIONS.PROJECTID = STUDENTS_DATA.PROJECTID',
+            array('USERFULLNAMEENG'))
+        ;
+        $names_list = explode(" ",  $student_name);
+        //Zend_Debug::dump($names_list , 'names_list ', true);
+        foreach ($names_list as $name){
+            $select->where( "USERFULLNAMEENG LIKE '%$name%' ",  $name);
+        }
+    }
+    $select->order($order);
+    $projects = $db->fetchAll($select);
+    $advisers_names = $db->fetchPairs("SELECT   CONCAT(IFNULL(PROJECTID, ''),'_',IFNULL(ADVISERNUMBER, '')), USERFULLNAMEENG  FROM ADVISERSUGGESTIONS_DATA ");
+    $students_names =  $db->fetchPairs("SELECT USERFULLNAMEENG, PROJECTID FROM STUDENTSPROJECTS_DATA");
+    $results = array();
+    foreach (array_keys($projects) as $key) {
+        $proj_id = $projects[$key]["PROJECTID"];
+        $proj_name = $projects[$key]["PROJECTNAMEENG"];
+        $adviser_name =  $advisers_names[$proj_id."_1"];
+        if ($advisers_names[$proj_id."_2"])
+            $adviser_name=$adviser_name.",".$advisers_names[$proj_id."_2"];
+        $student_name = array_keys($students_names,$proj_id);
+        array_push($results,array($proj_id,$proj_name,$adviser_name,$student_name));
+    }
+    return $results;
+
+}
+
 
 
 /*function search_project($year,$student_name,$adviser,$project_name)
