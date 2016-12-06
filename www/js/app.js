@@ -54,9 +54,15 @@ window.onload= function()
                xhr.send();
 };
 
+window.onload = function()
+{
+
+    var myTableDiv=document.getElementById("search_table");
+}
+
 function CreateSearchTable(db_result)
 {
-       var myTableDiv=document.getElementById("search_table");
+       //var myTableDiv=document.getElementById("search_table");
     var table = document.createElement('TABLE');
     var tableBody = document.createElement('TBODY');
     
