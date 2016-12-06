@@ -1,6 +1,6 @@
 /*jslint browser:true, devel:true, white:true, vars:true */
 
-var GlobalTable;
+var GlobalTable = document.createElement('TABLE');
 
 function validate(){
     var username = document.getElementById("login_username").value;
