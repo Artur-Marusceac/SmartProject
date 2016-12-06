@@ -21,18 +21,23 @@ window.onload= function()
 {
 
     var year_list = document.getElementById("year_list");
-    var start_year = 2005;
-    var end_year = 2018;
-    for(var i = start_year; i >= start_year && i <= end_year; i++) {
-        var newYearListItem = document.createElement("option");
-        newYearListItem.textContent = i.toString();
-        year_list.appendChild(newYearListItem);
-        newYearListItem.setAttribute("value", i.toString());
+    if (year_list!==null)
+    {
+        var start_year = 2005;
+        var end_year = 2018;
+        for(var i = start_year; i >= start_year && i <= end_year; i++) {
+            var newYearListItem = document.createElement("option");
+            newYearListItem.textContent = i.toString();
+            year_list.appendChild(newYearListItem);
+            newYearListItem.setAttribute("value", i.toString());
+        }
     }
 
 
 
     var advisers_list = document.getElementById("advisers_list");
+    if(advisers_list!==null)
+    {
     var xhr = new XMLHttpRequest();
     var json_response=""; 
             xhr.onreadystatechange = function(){
@@ -53,7 +58,7 @@ window.onload= function()
             };
                xhr.open("GET", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=get_advisers_list", false);
                xhr.send();
-    
+    }
      var myTableDiv=document.getElementById("search_table");
     if(myTableDiv!==null)
     myTableDiv.appendChild(GlobalTable);
