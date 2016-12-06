@@ -55,14 +55,14 @@ function search_project($year,$student_name,$adviser,$project_name)
                 $order = 'PROJECTSUGGESTIONS.PROJECTID';
 
                 
-                if ($year){
+                if ($year!="All"){
                     $where_year = "PROJECTSUGGESTIONS.PROJECTID like '%$year%'";
                     $select->where($where_year);
                 }else{
                     //search for all years - display search resalts in descending order
                     $order = $order.' DESC';
                 }
-                if ($project_name){
+                if ($project_name!=""){
 
                     $words_list = explode(" ",  $project_name);
                     foreach ($words_list as $word){
@@ -76,7 +76,7 @@ function search_project($year,$student_name,$adviser,$project_name)
                             //->where('ADVISERSUGGESTIONS.ADVISERNUMBER = 1')
                  ;
                 
-                if ($adviser){
+                if ($adviser!="All"){
 													$select_adviser_id = $this->db->select()
 														->from('USERS',	array('USERID'))
 														->where('USERNAME = ?', $adviser);
@@ -104,7 +104,7 @@ function search_project($year,$student_name,$adviser,$project_name)
                 $advisers_names = $db->fetchPairs("SELECT   CONCAT(IFNULL(PROJECTID, ''),'_',IFNULL(ADVISERNUMBER, '')), USERFULLNAMEENG  FROM ADVISERSUGGESTIONS_DATA ");
                 $students_names =  $db->fetchPairs("SELECT USERFULLNAMEENG, PROJECTID FROM STUDENTSPROJECTS_DATA");
                 
-                return $students_names;
+                return json_encode($projects);
             }
     
 
