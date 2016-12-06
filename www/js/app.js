@@ -1,5 +1,6 @@
 /*jslint browser:true, devel:true, white:true, vars:true */
 
+var GlobalTable;
 
 function validate(){
     var username = document.getElementById("login_username").value;
@@ -52,13 +53,13 @@ window.onload= function()
             };
                xhr.open("GET", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=get_advisers_list", false);
                xhr.send();
+    
+     var myTableDiv=document.getElementById("search_table");
+    if(myTableDiv!==null)
+    myTableDiv.appendChild(GlobalTable);
 };
 
-window.onload = function()
-{
 
-    var myTableDiv=document.getElementById("search_table");
-}
 
 function CreateSearchTable(db_result)
 {
@@ -95,7 +96,7 @@ function CreateSearchTable(db_result)
            tr.appendChild(td);
        }
     }
-    myTableDiv.appendChild(table);
+    GlobalTable=table;
 
 }
 

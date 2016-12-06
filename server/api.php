@@ -216,6 +216,41 @@ function get_connection(){
 }
 
 
+function bgu_login_session_id($username,$password)
+{
+    session_start();
+    $r=session_id();
+    
+    $client = new SoapClient("https://w3.bgu.ac.il/BguAuthWebService/AuthenticationProvider.asmx?WSDL");
+    $params = array(
+    "uname" => $username,
+        "pwd" => $password,
+     );
+    $check =$client->__soapCall("validateUser", array($params));
+    
+    // need to verify if check is true or false
+    
+    /* now registering a session for an authenticated user */
+    $_SESSION['username']=$username;
+
+/* now displaying the session id..... */
+
+    // echo "the session id id: ".$r;
+    // echo " and the session has been registered for: ".$_SESSION['username'];
+
+
+/* now destroying the session id */
+
+/*    if(isset($_SESSION['username']))
+    {
+        $_SESSION=array();
+        unset($_SESSION);
+        session_destroy();
+        echo "session destroyed...";
+    }  
+ */
+}
+
 function bgu_login($username,$password)
 {
 
