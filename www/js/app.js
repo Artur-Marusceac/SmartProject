@@ -176,7 +176,7 @@ function search_command()
 
             json_response = xhr_search.responseText;
             var result = JSON.parse(json_response);
-            if (result == "true")
+            if (result.toString() == "true")
                 location.href="Search_Results.html";
         }
     };
