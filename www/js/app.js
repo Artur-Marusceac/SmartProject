@@ -102,9 +102,10 @@ function CreateSearchTable(db_result)
        
        for (var j=0; j<4; j++){
            td = document.createElement('TD');
-           td.appendChild(document.createTextNode(db_result[i][j]));
            if (j==3)
                td.appendChild(document.createTextNode(db_result[i][j][0]+","+db_result[i][j][1]));
+           else
+               td.appendChild(document.createTextNode(db_result[i][j]));
            tr.appendChild(td);
        }
     }
