@@ -1,6 +1,5 @@
 /*jslint browser:true, devel:true, white:true, vars:true */
 
-var GlobalTable = document.createElement('TABLE');
 
 function validate(){
     var username = document.getElementById("login_username").value;
@@ -33,8 +32,6 @@ window.onload= function()
         }
     }
 
-
-
     var advisers_list = document.getElementById("advisers_list");
     if(advisers_list!==null)
     {
@@ -59,16 +56,26 @@ window.onload= function()
                xhr.open("GET", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=get_advisers_list", false);
                xhr.send();
     }
-     var myTableDiv=document.getElementById("search_table");
-    if(myTableDiv!==null)
-    myTableDiv.appendChild(GlobalTable);
+    var myTableDiv=document.getElementById("search_table");
+    if(myTableDiv!==null) {
+        xhr = new XMLHttpRequest();
+        json_response="";
+        xhr.onreadystatechange = function(){
+            if(xhr.readyState == 4 && xhr.status==200 ){
+                json_response = xhr.responseText;
+                var result = JSON.parse(json_response);
+                CreateSearchTable(result);
+            }
+        };
+        xhr.open("GET", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=get_search_results", false);
+        xhr.send();
+    }
 };
-
 
 
 function CreateSearchTable(db_result)
 {
-       //var myTableDiv=document.getElementById("search_table");
+    var myTableDiv=document.getElementById("search_table");
     var table = document.createElement('TABLE');
     var tableBody = document.createElement('TBODY');
     
@@ -101,7 +108,6 @@ function CreateSearchTable(db_result)
            tr.appendChild(td);
        }
     }
-    GlobalTable=table;
 
 }
 
@@ -170,8 +176,8 @@ function search_command()
 
             json_response = xhr_search.responseText;
             var result = JSON.parse(json_response);
-            CreateSearchTable(result);
-            location.href="Search_Results.html";
+            if (result == "true")
+                location.href="Search_Results.html";
         }
     };
     xhr_search.open("GET", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=search_project&year=" + year.toString() +"&student_name=" +student_name.toString()+"&adviser=" +adviser.toString()+"&project_name=" +project_name.toString(), false);

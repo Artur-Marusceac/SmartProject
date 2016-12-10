@@ -3,7 +3,7 @@
 
 <?php
 
-
+session_start();
 $root = "/var/www/html/zf";
 
 //error_reporting(E_ALL | E_STRICT);
@@ -113,11 +113,19 @@ function search_project($year,$student_name,$adviser,$project_name)
         $student_name = array_keys($students_names,$proj_id);
         array_push($results,array($proj_id,$proj_name,$adviser_name,$student_name));
     }
-    return $results;
-
+    $_SESSION["search_results"] = $results;
+    if ($results)
+        return true;
+    else
+        return false;
 }
 
 
+function get_search_results()
+{
+    if ($_SESSION["search_results"])
+        return $_SESSION["search_results"];
+}
 
 /*function search_project($year,$student_name,$adviser,$project_name)
 {
@@ -317,7 +325,7 @@ function get_advisers_list()
 }
 
 
-$possible_url = array("get_user_list", "get_user","is_user_exist","bgu_login","get_advisers_list","get_pictures","search_project");
+$possible_url = array("get_user_list", "get_user","is_user_exist","bgu_login","get_advisers_list","get_pictures","search_project", "get_search_results");
 
 $value = "An error has occurred";
 
@@ -346,8 +354,11 @@ if (isset($_GET["action"]) && in_array($_GET["action"], $possible_url))
       case "get_advisers_list":
           $value = get_advisers_list();
           break;
-    case "search_project":
+     case "search_project":
           $value = search_project($_GET["year"],$_GET["student_name"],$_GET["adviser"],$_GET["project_name"]);
+          break;
+      case "get_search_results":
+          $value = get_search_results();
           break;
   }
 }
