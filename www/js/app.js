@@ -96,7 +96,7 @@ function CreateSearchTable(db_result)
            td.appendChild(document.createTextNode("Students"));
            tr.appendChild(td);
     
-    for (var i=1; i<db_result.length; i++){
+    for (var i=0; i<db_result.length; i++){
        tr = document.createElement('TR');
        tableBody.appendChild(tr);
        
