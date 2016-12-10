@@ -108,7 +108,7 @@ function CreateSearchTable(db_result)
            tr.appendChild(td);
        }
     }
-
+    myTableDiv.appendChild(table);
 }
 
 
