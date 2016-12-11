@@ -208,6 +208,6 @@ function get_project_info()
             }
         }
     };
-    xhr_project_info.open("GET", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=get_project_info&user_id="+id.toString(), false);
+    xhr_project_info.open("GET", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=get_project_by_user_id&user_id="+id.toString(), false);
     xhr_project_info.send(id);
 }
