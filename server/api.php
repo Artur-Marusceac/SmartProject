@@ -127,6 +127,16 @@ function get_search_results()
         return $_SESSION["search_results"];
 }
 
+function get_project_info($student_id)
+{
+    $db = Zend_Registry::get('db');
+    $select=$db->select() ->from('STUDENTS_DATA',
+        array('TAKENPROJECTID', 'PROJECTID', 'STATUS'))
+        ->where('STUDENTS_DATA.USERID = ?', $student_id);
+    $ids = $db->fetchRow($select);
+    return $ids;
+}
+
 /*function search_project($year,$student_name,$adviser,$project_name)
 {
 
@@ -223,7 +233,6 @@ function get_connection(){
     return $conn;
 }
 
-
 function bgu_login_session_id($username,$password)
 {
     session_start();
@@ -305,7 +314,6 @@ function is_user_exist($username, $id)
     }
 }
 
-
 function get_advisers_list()
 {
     $sql = "SELECT `USERFIRSTNAMEENG`,`USERLASTNAMEENG` FROM `USERS` WHERE `USERTYPE`>=128";
@@ -324,8 +332,7 @@ function get_advisers_list()
 
 }
 
-
-$possible_url = array("get_user_list", "get_user","is_user_exist","bgu_login","get_advisers_list","get_pictures","search_project", "get_search_results");
+$possible_url = array("get_user_list", "get_user","is_user_exist","bgu_login","get_advisers_list","get_pictures","search_project", "get_search_results","get_project_info");
 
 $value = "An error has occurred";
 
@@ -350,6 +357,9 @@ if (isset($_GET["action"]) && in_array($_GET["action"], $possible_url))
           break;    
       case "bgu_login":
           $value = bgu_login($_GET["username"],$_GET["password"]);
+          break;
+      case "get_project_info":
+          $value = get_project_info($_GET["user_id"]);
           break;
       case "get_advisers_list":
           $value = get_advisers_list();

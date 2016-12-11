@@ -14,6 +14,7 @@
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
 		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
 	</head>
 	<body>
 		<div id="page-wrapper">
@@ -54,7 +55,7 @@
 						</ul>
 					</nav>
 				</header>
-
+            <div data-role="page" id="index">
 			<!-- Main -->
             <div class="row uniform 50%">
 			  <div class="12u">
@@ -72,7 +73,8 @@
                   </div>
             </div> 
        </div>
-</div> 
+</div>
+
                         <div class="row uniform 50%">
                             <div class="6u 12u(mobilep)">
                                 <input type="text" name="project_name" id="project_name" value="" placeholder="- Project Name -" />
@@ -98,7 +100,7 @@
                             </div>
                         </div>
 
-<div class="row uniform 50%">
+            <div class="row uniform 50%">
 			<div class="6u 12u(mobilep)">
           <ul class="actions">
                     <li><a href="#" onclick="search_command()" class="button special icon fa-search">Search</a></li>
@@ -106,6 +108,8 @@
                 </div>
             </div>
           <!-- Content -->
+                </div>
+
 							<section id="content">
 								
 							</section>
@@ -130,6 +134,6 @@
 			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
 			<script src="assets/js/main.js"></script>
             <script src="js/app.js"></script>
-
-	</body>
+            <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+    </body>
 </html>
