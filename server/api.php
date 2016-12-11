@@ -127,15 +127,70 @@ function get_search_results()
         return $_SESSION["search_results"];
 }
 
-function get_project_info($student_id)
+function get_project_info_by_user_id($student_id)
 {
     $db = Zend_Registry::get('db');
     $select=$db->select() ->from('STUDENTS_DATA',
         array('TAKENPROJECTID', 'PROJECTID', 'STATUS'))
         ->where('STUDENTS_DATA.USERID = ?', $student_id);
     $ids = $db->fetchRow($select);
-    return $ids;
+    $proj_id = $ids["PROJECTID"];
+    $taken_proj_id = $ids["TAKENPROJECTID"];
+
+    $students = getProjectStudents($proj_id);
+    $advisors = getProjectAdvisers($proj_id);
+    $status = getProjectStatus($proj_id);
+    $results = array ($students,$advisors,$status);
+    return $results;
 }
+
+function get_project_info_by_project_id($project_id)
+{
+return 0;
+}
+
+function getProjectStudents($projectId){
+    $db = Zend_Registry::get('db');
+    $select=$db->select()
+        ->from('STUDENTS_DATA',
+            array('USERID', 'USERFULLNAMEENG', 'EMAIL', 'TAKENPROJECTID'))
+        ->where('STUDENTS_DATA.PROJECTID = ?', $projectId);
+
+    $students = $db->fetchAll($select);
+    return $students;
+}
+
+function getProjectAdvisers($projectId){
+    $db = Zend_Registry::get('db');
+    $select = $db->select()
+        ->from('ADVISERSUGGESTIONS_DATA',
+            array('ADVISERID','ADVISERNUMBER', 'USERFULLNAMEENG', 'EMAIL'))
+        -> where('ADVISERSUGGESTIONS_DATA.PROJECTID = ?', $projectId)
+    ;
+    $advisers = $db->fetchAll($select);
+    return $advisers;
+}
+
+function getProjectStatus($projectId)
+{
+    $db = Zend_Registry::get('db');
+
+    $select = $db->select()
+        ->from('PROJECTS',
+            array('STATUS'))
+        -> where('PROJECTS.PROJECTID= ?', $projectId);
+
+    $status = $db->fetchAll($select);
+
+    $select = $db->select()
+        ->from('PROJECTSTATUS',
+            array('STATUSDESC'))
+        -> where('PROJECTSTATUS.STATUSID= ?', $status);
+    $status_name = $db->fetchAll($select);
+    return $status_name;
+}
+
+
 
 /*function search_project($year,$student_name,$adviser,$project_name)
 {
