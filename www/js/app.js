@@ -200,6 +200,12 @@ function get_project_info()
 
             json_response = xhr_project_info.responseText;
             var result = JSON.parse(json_response);
+            if (result)
+            {
+                var advisers = window.document.getElementById("advisers");
+                var students = window.document.getElementById("students");
+
+            }
         }
     };
     xhr_project_info.open("GET", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=get_project_info&user_id="+id.toString(), false);

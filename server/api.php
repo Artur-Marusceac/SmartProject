@@ -140,13 +140,29 @@ function get_project_info_by_user_id($student_id)
     $students = getProjectStudents($proj_id);
     $advisors = getProjectAdvisers($proj_id);
     $status = getProjectStatus($proj_id);
+    $proj_name = getProjectName($proj_id);
     $results = array ($students,$advisors,$status);
     return $results;
 }
 
 function get_project_info_by_project_id($project_id)
 {
-return 0;
+    $students = getProjectStudents($project_id);
+    $advisors = getProjectAdvisers($project_id);
+    $status = getProjectStatus($project_id);
+    $proj_name = getProjectName($project_id);
+    $results = array ($students,$advisors,$status);
+    return $results;
+}
+
+function getProjectName($projectId)
+{
+    $db = Zend_Registry::get('db');
+    $select=$db->select() ->from('PROJECTSUGGESTIONS',
+        array('PROJECTNAMEENG'))
+        ->where('PROJECTSUGGESTIONS.PROJECTID = ?', $projectId);
+    $name= $db->fetchRow($select);
+    return $name;
 }
 
 function getProjectStudents($projectId){
@@ -387,7 +403,7 @@ function get_advisers_list()
 
 }
 
-$possible_url = array("get_user_list", "get_user","is_user_exist","bgu_login","get_advisers_list","get_pictures","search_project", "get_search_results","get_project_info");
+$possible_url = array("get_user_list", "get_user","is_user_exist","bgu_login","get_advisers_list","get_pictures","search_project", "get_search_results","get_project_by_user_id","get_project_info_by_project_id");
 
 $value = "An error has occurred";
 
@@ -413,8 +429,11 @@ if (isset($_GET["action"]) && in_array($_GET["action"], $possible_url))
       case "bgu_login":
           $value = bgu_login($_GET["username"],$_GET["password"]);
           break;
-      case "get_project_info":
+      case "get_project_by_user_id":
           $value = get_project_info_by_user_id($_GET["user_id"]);
+          break;
+      case "get_project_by_project_id":
+          $value = get_project_info_by_project_id($_GET["project_id"]);
           break;
       case "get_advisers_list":
           $value = get_advisers_list();
