@@ -192,7 +192,7 @@ function search_command()
 
 function get_project_info()
 {
-    var id = document.getElementById("info_id");
+    var id = window.document.getElementById("info_id").value;
     var xhr_project_info = new XMLHttpRequest();
     var json_response="";
     xhr_project_info.onreadystatechange = function(){
