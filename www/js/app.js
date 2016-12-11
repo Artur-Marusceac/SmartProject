@@ -206,15 +206,15 @@ function get_project_info()
                 var students = window.document.getElementById("students");
                 var student_array = result[0];
                 for (var j=0; j< student_array.length;j++) {
-                    students.appendChild(student_array[j][0]+","+student_array[j][1]);
+                    students.appendChild(window.document.createTextNode(student_array[j][0]+","+student_array[j][1]));
                 }
                 var adviser_array = result[1];
                 for (var j=0; j< adviser_array.length;j++) {
-                    adviser_array.appendChild(adviser_array[j]);
+                    adviser_array.appendChild(window.document.createTextNode(adviser_array[j]));
                 }
                 var status = result[2];
                 var status_element = window.document.createElement("p");
-                status_element.innerText=status;
+                status_element.appendChild(window.document.createTextNode(status));
             }
         }
     };
