@@ -387,7 +387,7 @@ function get_advisers_list()
 
 }
 
-$possible_url = array("get_user_list", "get_user","is_user_exist","bgu_login","get_advisers_list","get_pictures","search_project", "get_search_results","get_project_info");
+$possible_url = array("get_user_list", "get_user","is_user_exist","bgu_login","get_advisers_list","get_pictures","search_project", "get_search_results","get_project_info_by_user_id");
 
 $value = "An error has occurred";
 
@@ -414,7 +414,7 @@ if (isset($_GET["action"]) && in_array($_GET["action"], $possible_url))
           $value = bgu_login($_GET["username"],$_GET["password"]);
           break;
       case "get_project_info":
-          $value = get_project_info($_GET["user_id"]);
+          $value = get_project_info_by_user_id($_GET["user_id"]);
           break;
       case "get_advisers_list":
           $value = get_advisers_list();
