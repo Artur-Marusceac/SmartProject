@@ -141,17 +141,15 @@ function get_project_info_by_user_id($student_id)
     $advisors = getProjectAdvisers($proj_id);
     $status = getProjectStatus($proj_id);
     $proj_name = getProjectName($proj_id);
-    $advisor_res = array();
+    $adviser_res = array();
     $student_res = array();
-    for ($i=0; $i<count($advisors); $i++)
-    {
-        array_push($advisor_res,$advisors[i]["USERFULLNAMEENG"]);
+    foreach (array_keys($advisors) as $key) {
+        array_push($adviser_res,$advisors[$key]["USERFULLNAMEENG"]);
     }
-    for ($i=0; $i<count($students); $i++)
-    {
-        array_push($student_res,array($students[i]["USERFULLNAMEENG"],$students[i]["EMAIL"]));
+    foreach (array_keys($students) as $key) {
+        array_push($student_res,array($students[$key]["USERFULLNAMEENG"],$students[$key]["EMAIL"]));
     }
-    $results = array ($student_res,$advisor_res,$status);
+    $results = array ($student_res,$adviser_res,$status);
     return $results;
 }
 
