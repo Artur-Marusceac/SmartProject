@@ -202,6 +202,6 @@ function get_project_info()
             var result = JSON.parse(json_response);
         }
     };
-    xhr_project_info.open("GET", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=get_project_info&id="+id.toString(), false);
+    xhr_project_info.open("GET", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=get_project_info&user_id="+id.toString(), false);
     xhr_project_info.send(id);
 }
