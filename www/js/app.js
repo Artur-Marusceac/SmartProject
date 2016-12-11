@@ -206,12 +206,11 @@ function get_project_info()
                 var students = window.document.getElementById("students");
                 var student_array = result[0];
                 for (var j=0; j< student_array.length;j++) {
-                    students.createTextNode(student_array[j][0]);
-                    students.createTextNode(student_array[j][1]);
+                    students.appendChild(student_array[j][0]+","+student_array[j][1]);
                 }
                 var adviser_array = result[1];
                 for (var j=0; j< adviser_array.length;j++) {
-                    advisers.createTextNode(adviser_array[j][0]);
+                    adviser_array.appendChild(adviser_array[j]);
                 }
                 var status = result[2];
                 var status_element = window.document.createElement("p");
