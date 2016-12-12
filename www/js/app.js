@@ -211,7 +211,7 @@ function get_project_info()
                     var mail = "mailto:"+student_array[j][1]+"?subject=New Mail&body=Mail text body";
                     var mlink = document.createElement('a');
                     mlink.setAttribute('href', mail);
-                    mlink.createTextNode("mail to: "+student_array[j][0]);
+                    mlink.innerText="mail to: "+student_array[j][0];
                     students.appendChild(window.document.createElement("br"));
                     students.appendChild(mlink);
                 }
