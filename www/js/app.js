@@ -221,7 +221,7 @@ function get_project_info()
                     advisers.appendChild(window.document.createTextNode("Advisers:"));
                     advisers.appendChild(window.document.createTextNode(adviser_array[j]));
                 }
-                var status = result[2];
+                var status = result[2][0]["STATUSDESC"];
                 var status_element = window.document.createElement("h5");
                 status_element.innerText = status;
                 var info_header = window.document.getElementById("info_p");
