@@ -205,21 +205,25 @@ function get_project_info()
                 var advisers = window.document.getElementById("advisers");
                 var students = window.document.getElementById("students");
                 var student_array = result[0];
+                students.appendChild(window.document.createTextNode("Students:"));
                 for (var j=0; j< student_array.length;j++) {
                     students.appendChild(window.document.createTextNode(student_array[j][0]));
                     var mail = "mailto:"+student_array[j][1]+"?subject=New Mail&body=Mail text body";
                     var mlink = document.createElement('a');
                     mlink.setAttribute('href', mail);
+                    mlink.createTextNode("mail to: "+student_array[j][0]);
                     students.appendChild(window.document.createElement("br"));
                     students.appendChild(mlink);
                 }
+
                 var adviser_array = result[1];
                 for (var j=0; j< adviser_array.length;j++) {
+                    advisers.appendChild(window.document.createTextNode("Advisers:"));
                     advisers.appendChild(window.document.createTextNode(adviser_array[j]));
                 }
                 var status = result[2];
                 var status_element = window.document.createElement("h5");
-                status_element.appendChild(window.document.createTextNode(status));
+                status_element.innerText = status;
                 var info_header = window.document.getElementById("info_p");
                 info_header.appendChild(status_element);
             }
