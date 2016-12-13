@@ -251,8 +251,12 @@ function get_project_info()
                     td.appendChild(mlink);
                     td.appendChild(document.createElement("br"));
                 }
+                tr.appendChild(td);
             }
             myTableDiv.appendChild(table);
+            var status_element = window.document.getElementById("status_project");
+            var status_project = result[2];
+            status_element.innerText = "Project Status: "+status_project;
             }
     };
     if (info_page) {
