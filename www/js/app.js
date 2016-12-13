@@ -104,6 +104,14 @@ function CreateSearchTable(db_result)
        
        for (var j=0; j<4; j++){
            td = document.createElement('TD');
+           if (j==0)
+           {
+               var project_id_link = document.createElement('a');
+               project_id_link.setAttribute('href', "Project_Info.html");
+               project_id_link.innerText=db_result[i][j];
+               project_id_link.setAttribute('onclick',"set_project_id("+project_id_link.innerText+")");
+               td.appendChild(project_id_link);
+           }
            if (j==3)
                if (db_result[i][j][0] && db_result[i][j][1] )
                    td.appendChild(document.createTextNode(db_result[i][j][0]+","+db_result[i][j][1]));
@@ -119,6 +127,12 @@ function CreateSearchTable(db_result)
     myTableDiv.appendChild(table);
 }
 
+var proj_id;
+function set_project_id(project_id)
+{
+    proj_id=project_id;
+    info_page=false;
+}
 
 function PicturesFromDir(){
     var xhr = new XMLHttpRequest();
@@ -265,7 +279,8 @@ function get_project_info()
     }
     else
     {  //TODO: set global param for project_id and change it when click
-        xhr_project_info.open("GET", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=get_project_by_project_id&project_id=" + id.toString(), false);
-        //xhr_project_info.send(project_id);
+        xhr_project_info.open("GET", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=get_project_by_project_id&project_id=" + proj_id.toString(), false);
+        xhr_project_info.send(proj_id);
+        info_page=true;
     }
 }
