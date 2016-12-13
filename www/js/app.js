@@ -132,7 +132,7 @@ function set_project_id(project_id)
 {
     proj_id=project_id;
     info_page=false;
-    return "Project_Info.html";
+    location.href="Project_Info.html";
 }
 
 function PicturesFromDir(){
