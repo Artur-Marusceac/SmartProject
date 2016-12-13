@@ -15,7 +15,7 @@
     <!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
     <!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
 </head>
-<body>
+<body onload="get_project_info()">
 <div id="page-wrapper">
 
     <!-- Header -->
@@ -60,7 +60,7 @@
             <div id="main" class="wrapper style1">
                 <div class="container">
 
-                    <div class="row" onload="get_project_info()">
+                    <div class="row">
                         <div class="12u">
 
                             <input type="text" id = "info_id" >
