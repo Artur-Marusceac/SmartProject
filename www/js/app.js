@@ -255,16 +255,16 @@ function get_project_info()
             }
             myTableDiv.appendChild(table);
             var status_element = window.document.getElementById("status_project");
-            var status_project = result[2];
+            var status_project = result[2][0]["STATUSDESC"];
             status_element.innerText = "Project Status: "+status_project;
             }
     };
-    if (info_page) {
+    if (info_page) { //TODO: when the session id will be implemented, take it from there in the php and send it as an argument. the request will not send argument
         xhr_project_info.open("GET", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=get_project_by_user_id&user_id=" + id.toString(), false);
         xhr_project_info.send(id);
     }
     else
-    {
+    {  //TODO: set global param for project_id and change it when click
         xhr_project_info.open("GET", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=get_project_by_project_id&project_id=" + id.toString(), false);
         //xhr_project_info.send(project_id);
     }
