@@ -73,6 +73,8 @@ window.onload= function()
 };
 
 
+var info_page = true; //if true from user_id, else(false) from project_id
+
 function CreateSearchTable(db_result)
 {
     var myTableDiv=document.getElementById("search_table");
@@ -190,6 +192,8 @@ function search_command()
     xhr_search.send(year,student_name,adviser,project_name);
 }
 
+
+
 function get_project_info()
 {
     var id = window.document.getElementById("info_id").value;
@@ -202,33 +206,62 @@ function get_project_info()
             var result = JSON.parse(json_response);
             if (result)
             {
-                var advisers = window.document.getElementById("advisers");
-                var students = window.document.getElementById("students");
-                var student_array = result[0];
-                students.appendChild(window.document.createTextNode("Students:"));
-                for (var j=0; j< student_array.length;j++) {
-                    students.appendChild(window.document.createTextNode(student_array[j][0]));
-                    var mail = "mailto:"+student_array[j][1]+"?subject=New Mail&body=Mail text body";
-                    var mlink = document.createElement('a');
-                    mlink.setAttribute('href', mail);
-                    mlink.innerText="mail to: "+student_array[j][0];
-                    students.appendChild(window.document.createElement("br"));
-                    students.appendChild(mlink);
-                }
 
+                var myTableDiv=document.getElementById("info_table");
+                var table = document.createElement('TABLE');
+                var tableBody = document.createElement('TBODY');
+
+                table.appendChild(tableBody);
+
+                var tr = document.createElement('TR');
+                tableBody.appendChild(tr);
+                var td = document.createElement('TD');
+                td.appendChild(document.createTextNode("Advisers" ));
+                tr.appendChild(td);
+                td = document.createElement('TD');
+                td.appendChild(document.createTextNode("Students"));
+                tr.appendChild(td);
+                td = document.createElement('TD');
+                td.appendChild(document.createTextNode("Email"));
+                tr.appendChild(td);
+                tr = document.createElement('TR');
+                tableBody.appendChild(tr);
+                td = document.createElement('TD');
                 var adviser_array = result[1];
                 for (var j=0; j< adviser_array.length;j++) {
-                    advisers.appendChild(window.document.createTextNode("Advisers:"));
-                    advisers.appendChild(window.document.createTextNode(adviser_array[j]));
+                    td.appendChild(document.createTextNode(adviser_array[j]));
+                    td.appendChild(document.createElement("br"));
                 }
-                var status = result[2][0]["STATUSDESC"];
-                var status_element = window.document.createElement("h5");
-                status_element.innerText = status;
-                var info_header = window.document.getElementById("info_p");
-                info_header.appendChild(status_element);
+                tr.appendChild(td);
+                var student_array = result[0];
+                td = document.createElement('TD');
+                for (var i=0;i<student_array.length;i++)
+                {
+                    td.appendChild(document.createTextNode(student_array[i][0]));
+                    td.appendChild(document.createElement("br"));
+                }
+                tr.appendChild(td);
+                td = document.createElement('TD');
+                for (var i=0;i<student_array.length;i++)
+                {
+                    var mail = "mailto:"+student_array[i][1]+"?subject=New Mail&body=Mail text body";
+                    var mlink = document.createElement('a');
+                    mlink.setAttribute('href', mail);
+                    mlink.innerText="mail to: "+student_array[i][0];
+                    td.appendChild(mlink);
+                    td.appendChild(document.createElement("br"));
+                }
             }
-        }
+            myTableDiv.appendChild(table);
+            }
     };
-    xhr_project_info.open("GET", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=get_project_by_user_id&user_id="+id.toString(), false);
-    xhr_project_info.send(id);
+    if (info_page) {
+        xhr_project_info.open("GET", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=get_project_by_user_id&user_id=" + id.toString(), false);
+        xhr_project_info.send(id);
+    }
+    else
+    {
+        xhr_project_info.open("GET", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=get_project_by_project_id&project_id=" + id.toString(), false);
+        //xhr_project_info.send(project_id);
+    }
 }
