@@ -107,9 +107,9 @@ function CreateSearchTable(db_result)
            if (j==0)
            {
                var project_id_link = document.createElement('a');
-               project_id_link.setAttribute('href', "#");
+               project_id_link.href = "#";
                project_id_link.innerText=db_result[i][j];
-               project_id_link.setAttribute('onclick',"set_project_id("+project_id_link.innerText+")");
+               project_id_link.onclick="set_project_id("+project_id_link.innerText+")";
                td.appendChild(project_id_link);
            }
            if (j==3)
@@ -132,7 +132,7 @@ function set_project_id(project_id)
 {
     proj_id=project_id;
     info_page=false;
-    location.href="Project_Info.html";
+    return "Project_Info.html";
 }
 
 function PicturesFromDir(){
