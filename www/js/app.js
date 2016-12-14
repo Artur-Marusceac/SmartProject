@@ -127,7 +127,13 @@ function CreateSearchTable(db_result)
     myTableDiv.appendChild(table);
 }
 
-
+function set_project_id(project_id)
+{
+    proj_id=project_id;
+    info_page=false;
+    location.href="Project_Info.html";
+    get_project_info();
+}
 
 function PicturesFromDir(){
     var xhr = new XMLHttpRequest();
@@ -202,7 +208,7 @@ function search_command()
 }
 
 
-/*function get_project_info()
+function get_project_info()
 {
     var id = window.document.getElementById("info_id").value;
     var xhr_project_info = new XMLHttpRequest();
@@ -277,4 +283,4 @@ function search_command()
         xhr_project_info.send(proj_id);
         info_page=true;
     }
-}*/
+}
