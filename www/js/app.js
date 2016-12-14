@@ -208,7 +208,6 @@ function search_command()
 }
 
 
-
 function get_project_info()
 {
     var id = window.document.getElementById("info_id").value;
