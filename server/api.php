@@ -409,7 +409,6 @@ function bgu_login($username,$password)
 
 
 
-
 function get_user_list()
 {
   $sql = "SELECT id, first_name, last_name, age FROM users";
@@ -503,6 +502,14 @@ if (isset($_GET["action"]) && in_array($_GET["action"], $possible_url))
           break;
   }
 }
+$possible_post_actions = array("set_project_id_for_project_info");
+if (isset($_POST["action"]) && in_array($_POST["action"], $possible_post_actions))
+    switch ($_POST["action"])
+    {
+        case "set_project_id_for_project_info":
+            $_SESSION["proj_id_for_proj_info"] = $_POST["project_id"];
+    }
+
 
 exit(json_encode($value));
 

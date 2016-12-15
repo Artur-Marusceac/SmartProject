@@ -62,7 +62,6 @@ window.onload= function()
 };
 
 
-var info_page = true; //if true from user_id, else(false) from project_id
 
 function CreateSearchTable(db_result)
 {
@@ -118,8 +117,8 @@ function CreateSearchTable(db_result)
 
 function set_project_id(project_id)
 {
-    proj_id=project_id;
-    info_page=false;
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=set_project_id_for_project_info&project_id="+project_id.toString(), false);
     location.href="Project_Info.html";
 }
 
