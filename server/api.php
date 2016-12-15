@@ -459,7 +459,7 @@ function get_advisers_list()
 
 }
 
-$possible_url = array("get_user_list", "get_user","is_user_exist","bgu_login","get_advisers_list","get_pictures","search_project", "get_search_results","get_project_by_user_id","get_project_info_by_project_id");
+$possible_url = array("get_user_list", "get_user","is_user_exist","bgu_login","get_advisers_list","get_pictures","search_project", "get_search_results","get_project_by_user_id","get_project_info");
 
 $value = "An error has occurred";
 
@@ -488,8 +488,9 @@ if (isset($_GET["action"]) && in_array($_GET["action"], $possible_url))
       case "get_project_by_user_id":
           $value = get_project_info_by_user_id($_GET["user_id"]);
           break;
-      case "get_project_by_project_id":
-          $value = get_project_info_by_project_id($_GET["project_id"]);
+      case "get_project_info":
+          if ($_SESSION["proj_id_for_proj_info"])
+            $value = get_project_info_by_project_id($_SESSION["proj_id_for_proj_info"]);
           break;
       case "get_advisers_list":
           $value = get_advisers_list();
@@ -507,7 +508,7 @@ if (isset($_REQUEST["action"]) && in_array($_REQUEST["action"], $possible_post_a
     switch ($_REQUEST["action"])
     {
         case "set_project_id_for_project_info":
-            $_SESSION["proj_id_for_proj_info"] = $_POST["project_id"];
+            $_SESSION["proj_id_for_proj_info"] = $_REQUEST["project_id"];
     }
 
 
