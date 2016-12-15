@@ -489,7 +489,7 @@ if (isset($_GET["action"]) && in_array($_GET["action"], $possible_url))
           $value = get_project_info_by_user_id($_GET["user_id"]);
           break;
       case "get_project_info":
-          if ($_SESSION["proj_id_for_proj_info"])
+          if ($_SESSION["proj_id_for_proj_info"]!="")
             $value = get_project_info_by_project_id($_SESSION["proj_id_for_proj_info"]);
           break;
       case "get_advisers_list":
