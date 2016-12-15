@@ -95,7 +95,7 @@ function CreateSearchTable(db_result)
            if (j==0)
            {
                var project_id_link = document.createElement('a');
-               //project_id_link.innerText=db_result[i][j];
+               project_id_link.innerText=db_result[i][j];
                project_id_link.setAttribute('href', "javascript:set_project_id("+db_result[i][j].toString()+")");
                td.appendChild(project_id_link);
            }
