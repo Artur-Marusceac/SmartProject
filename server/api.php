@@ -357,17 +357,12 @@ function bgu_login_session_id($username,$password)
 function getPersonAcademicYear($personId){
     $dbLink = Zend_Registry::get('dbLink');
     $data = $dbLink->fetchAll("SELECT * FROM EE_PERSON_DEPS WHERE TRIM(PERSON_ID) = '$personId'");
-
-    for($i = 0;$i<count($data);$i++) {
-        $this->insertData($data[$i], $data[$i]['PERSON_ID'], 'PERSON_ID');
-    }
     return $data;
 }
 
 function getPersonId($personLogin){
     $dbLink = Zend_Registry::get('dbLink');
     $row = $dbLink->fetchRow("SELECT * FROM EE_ARCHI_LOGIN WHERE LOGIN = '$personLogin'");
-    $this->insertData($row, $personLogin,'LOGIN');
     return $row;
 }
 
