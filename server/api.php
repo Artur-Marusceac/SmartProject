@@ -503,8 +503,8 @@ if (isset($_GET["action"]) && in_array($_GET["action"], $possible_url))
   }
 }
 $possible_post_actions = array("set_project_id_for_project_info");
-if (isset($_POST["action"]) && in_array($_POST["action"], $possible_post_actions))
-    switch ($_POST["action"])
+if (isset($_REQUEST["action"]) && in_array($_REQUEST["action"], $possible_post_actions))
+    switch ($_REQUEST["action"])
     {
         case "set_project_id_for_project_info":
             $_SESSION["proj_id_for_proj_info"] = $_POST["project_id"];
