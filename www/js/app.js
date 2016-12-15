@@ -1,21 +1,6 @@
 /*jslint browser:true, devel:true, white:true, vars:true */
 
 
-function validate(){
-    var username = document.getElementById("login_username").value;
-    var password = document.getElementById("login_password").value;
-    if ( username == "111" && password == "222"){
-        alert ("Login successfully");
-        window.location = "success.html"; // Redirecting to other page.
-    return false;
-    }
-    else{
-        window.alert("Login failed");
-
-    }
-}
-
-
 window.onload= function()
 {
 

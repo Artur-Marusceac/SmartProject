@@ -327,8 +327,7 @@ function bgu_login_session_id($username,$password)
     
     $client = new SoapClient("https://w3.bgu.ac.il/BguAuthWebService/AuthenticationProvider.asmx?WSDL");
     $params = array(
-    "uname" => $username,
-        "pwd" => $password,
+    "uname" => $username, "pwd" => $password,
      );
     $check =$client->__soapCall("validateUser", array($params));
     
@@ -355,9 +354,36 @@ function bgu_login_session_id($username,$password)
  */
 }
 
+function getPersonAcademicYear($personId){
+    $dbLink = Zend_Registry::get('dbLink');
+    $data = $dbLink->fetchAll("SELECT * FROM EE_PERSON_DEPS WHERE TRIM(PERSON_ID) = '$personId'");
+
+    for($i = 0;$i<count($data);$i++) {
+        $this->insertData($data[$i], $data[$i]['PERSON_ID'], 'PERSON_ID');
+    }
+    return $data;
+}
+
+function getPersonId($personLogin){
+    $dbLink = Zend_Registry::get('dbLink');
+    $row = $dbLink->fetchRow("SELECT * FROM EE_ARCHI_LOGIN WHERE LOGIN = '$personLogin'");
+    $this->insertData($row, $personLogin,'LOGIN');
+    return $row;
+}
+
+function getUserType($user_id)
+{
+    $db = Zend_Registry::get('db');
+    $select=$db->select() ->from('USERS_VIEW',
+        array('USERTYPE'))
+        ->where('USERS_VIEW.USERID = ?', $user_id);
+    $user_type= $db->fetchRow($select);
+    return $user_type;
+}
+
 function bgu_login($username,$password)
 {
-
+    session_start();
     $client = new SoapClient("https://w3.bgu.ac.il/BguAuthWebService/AuthenticationProvider.asmx?WSDL");
    // var_dump($client->__getFunctions());
     $params = array(
@@ -365,9 +391,29 @@ function bgu_login($username,$password)
         "pwd" => $password,
      );
     $check =$client->__soapCall("validateUser", array($params));
+    $array = json_decode(json_encode($check), True);
+    $res = $array["validateUserResult"];
+    if ($res) {
+        $resultId = getPersonId($username);
+        $id = $resultId['PERSON_ID'];
+        //get the academic year
+        $resultYears=getPersonAcademicYear($id);
+        $academic_year = -1;
+        for($i = 0;$i<count($resultYears);$i++) {
+            if($resultYears[$i]['ACADEMIC_YEAR'] != null && $academic_year <= $resultYears[$i]['ACADEMIC_YEAR']) {
+                $academic_year= $resultYears[$i]['ACADEMIC_YEAR'];
+            }
+        }
+        $user_type = getUserType($id);
+        $user_info = array($username,$id,$academic_year,$user_type);
+        $_SESSION['user_info'] = $user_info;
+        }
     return $check;
     
 }
+
+
+
 
 function get_user_list()
 {
