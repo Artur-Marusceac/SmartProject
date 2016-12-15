@@ -117,8 +117,16 @@ function CreateSearchTable(db_result)
 function set_project_id(project_id)
 {
     var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState == 4 && xhr.status==200 ){
+
+            json_response = xhr.responseText;
+            var result = JSON.parse(json_response);
+            if (result.toString() == "OK")
+                location.href="Project_Info.html";
+        }
+    };
     xhr.open("POST", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=set_project_id_for_project_info&project_id="+project_id.toString(), false);
-    location.href="Project_Info.html";
 }
 
 function PicturesFromDir(){

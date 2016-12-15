@@ -510,7 +510,8 @@ if (isset($_REQUEST["action"]) && in_array($_REQUEST["action"], $possible_post_a
     {
         case "set_project_id_for_project_info":
             $_SESSION["proj_id_for_proj_info"] = $_REQUEST["project_id"];
-            exit();
+            if ($_SESSION["proj_id_for_proj_info"]!="")
+                $value="OK";
             break;
     }
 
