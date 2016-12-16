@@ -4,7 +4,7 @@
 
 function PicturesFromDir(){
     var xhr = new XMLHttpRequest();
-    //var year = document.getElementById("year_l    ist").value;
+    //var year = document.getElementById("year_list").value;
     var year= 2012;
     var dir = year;
     var j=0;
@@ -15,8 +15,8 @@ function PicturesFromDir(){
                     json_response = xhr.responseText;
                     var result = JSON.parse(json_response);
          
-                          //for (var i = 0; i < result.length; i++) {
-                         for (var i = 0; i < 1; i++) {
+                          for (var i = 0; i < result.length; i++) {
+                     
                               
                             
                               
