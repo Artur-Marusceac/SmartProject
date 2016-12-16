@@ -43,7 +43,7 @@
 
 <div class="header-fixed">
     <a href="#" class="header-icon-1 open-left-sidebar"><i class="fa fa-navicon"></i></a>
-    <a href="index.html" class="header-logo">BOLT</a>
+    <a href="login.html" class="header-logo">BOLT</a>
     <a href="#" class="header-icon-2 open-right-sidebar"><i class="fa fa-envelope-o"></i></a>
 </div>
     
@@ -111,16 +111,16 @@
                 <a href="#" class="page-login-logo"></a>
                 <div class="login-input">
                     <i class="fa fa-user"></i>
-                    <input type="text" value="Username" onfocus="if (this.value=='Username') this.value = ''" onblur="if (this.value=='') this.value = 'Username'">
+                    <input type="text" value="Username" onfocus="if (this.value=='Username') this.value = ''" onblur="if (this.value=='') this.value = 'Username'" id="login_username">
                 </div>
                 <div class="login-password">
                     <i class="fa fa-lock"></i>
-                    <input type="password" value="password" onfocus="if (this.value=='password') this.value = ''" onblur="if (this.value=='') this.value = 'password'">
+                    <input type="password" value="password" onfocus="if (this.value=='password') this.value = ''" onblur="if (this.value=='') this.value = 'password'" id="login_password">
                 </div>
                 <a href="#" class="login-forgot"><i class="fa fa-eye"></i>Forgot Credentials</a>
                 <a href="#" class="login-create">Create Account<i class="fa fa-user"></i></a>
                 <div class="clear"></div>
-                <a href="#" class="login-button button button-small button-green button-fullscreen full-bottom">Login</a>
+                <a href="#" class="login-button button button-small button-green button-fullscreen full-bottom" onclick="validate_login()" >Login</a>
                 <div class="decoration"></div>
                 <div class="clear"></div>
             </div>
@@ -129,12 +129,6 @@
         
                 
         <div class="footer">
-            <div class="footer-content">
-                <h3 class="footer-logo">BOLT</h3>
-                <p class="footer-text">
-                    We aim to simplify your life by creating a beautiful and simple product that's feature rich and easy to use!
-                </p>
-            </div>
             <div class="footer-decoration"></div>
         </div>
         
