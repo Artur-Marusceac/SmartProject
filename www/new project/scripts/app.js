@@ -28,11 +28,12 @@ function PicturesFromDir(){
                           
         
                             var td2 = document.createElement('img');
-                            td2.setAttribute("data-original","/Data/Conference/"+dir+'/'+result[i]) ;
-                            td2.setAttribute("alt","img");
+                           
+                            
                             td2.setAttribute("class","preload-image responsive-image");
-                    
-         
+                              td2.setAttribute("data-original","/Data/Conference/"+dir+'/'+result[i]) ;
+                             td2.setAttribute("alt","img");
+                            
                             td.appendChild(td2);
                             content.appendChild(td);
                             }
