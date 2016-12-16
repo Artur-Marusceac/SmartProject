@@ -5,7 +5,7 @@
 function PicturesFromDir(){
     var xhr = new XMLHttpRequest();
     //var year = document.getElementById("year_list").value;
-    var year= 2012;
+    var year= 2011;
     var dir = year;
     var j=0;
     var content=document.getElementById("box");
@@ -20,7 +20,7 @@ function PicturesFromDir(){
                               
                             
                               
-                              
+                                
                             var td = document.createElement('a');
                             td.setAttribute("href","/Data/Conference/"+dir+'/'+result[i]) ;
                             td.setAttribute("class","scale-hover show-gallery") ;
