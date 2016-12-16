@@ -31,18 +31,13 @@ function PicturesFromDir(){
                             td.appendChild(td2);
                             content.appendChild(td);
                             }
-                    
-                            
-                            
-                      
-                //   ajaxDisplay.innerHTML = result.validateUserResult;
-                //    ajaxDisplay.innerHTML = json_response;
+
                   }
                };
                xhr.open("GET", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=get_pictures&dir=" + dir.toString() , false);
-                while (content.firstChild) {
+                /*while (content.firstChild) {
                     content.removeChild(content.firstChild);
-                    }
+                    }*/
                xhr.send(dir);
                
  
