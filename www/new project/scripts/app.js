@@ -1,11 +1,23 @@
 /*jslint browser:true, devel:true, white:true, vars:true */
 
+window.onload= function() {
 
+    var year_list = document.getElementById("year_list");
+    if (year_list !== null) {
+        var start_year = 2005;
+        var end_year = 2018;
+        for (var i = start_year; i >= start_year && i <= end_year; i++) {
+            var newYearListItem = document.createElement("option");
+            newYearListItem.textContent = i.toString();
+            year_list.appendChild(newYearListItem);
+            newYearListItem.setAttribute("value", i.toString());
+        }
+    }
+}
 
 function PicturesFromDir(){
     var xhr = new XMLHttpRequest();
-    //var year = document.getElementById("year_list").value;
-    var year= 2011;
+    var year = document.getElementById("year_list").value;
     var dir = year;
     var j=0;
     var content=document.getElementById("box");
