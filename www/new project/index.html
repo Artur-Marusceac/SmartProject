@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<!--
+  * Please see the included README.md file for license terms and conditions.
+  -->
+<head>
+    <title>app test</title>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+
+    <!--link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900|RobotoDraft:400,100,300,500,700,900'>
+    <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'-->
+    <link rel="stylesheet" type="text/css" href="app_framework/2.1/css/af.ui.min.css">
+    <link rel="stylesheet" type="text/css" href="app_framework/2.1/css/icons.min.css">
+    <link rel="stylesheet" href="css/old-android.css">
+    <link rel="stylesheet" type="text/css" href="css/index_main.less.css" class="main-less">
+    <!--meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=no">
+    <style>
+        @-ms-viewport { width: 100vw ; min-zoom: 100% ; zoom: 100% ; }          @viewport { width: 100vw ; min-zoom: 100% zoom: 100% ; }
+        @-ms-viewport { user-zoom: fixed ; min-zoom: 100% ; }                   @viewport { user-zoom: fixed ; min-zoom: 100% ; }
+    </style-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--link rel="stylesheet" href="css/app.css"-->
+    
+    <!--script src="cordova.js" id="xdkJScordova_"></script-->
+
+    <script src="cordova.js"></script>
+    <!-- phantom library, needed for Cordova api calls -->
+    <script src="js/login.js"></script>           <!-- for your event code, see README and file comments for details -->
+    <script src="js/init-app.js"></script>      <!-- for your init code, see README and file comments for details -->
+    <script src="xdk/init-dev.js"></script>     <!-- normalizes device and document ready events, see file for details -->
+    <!--script src="xhr.js"></script-->
+    
+    <script type="text/javascript" charset="utf-8" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+            <script type="application/javascript" src="app_framework/2.1/appframework.js"></script>
+        <script type="application/javascript" src="app_framework/2.1/appframework.ui.js" data-ver="1"></script>
+        <script type="application/javascript" src="js/index_user_scripts.js"></script>
+</head>
+
+
+<body id="afui">
+
+<div class="uwrap" id="content">
+    <div class="upage panel" id="mainpage" data-header="none" data-footer="none">
+            <div class="upage-outer">
+                    <div class="upage-content" id="mainsub">
+
+                        <div class="grid grid-pad urow uib_row_1 row-height-1" data-uib="layout/row" data-ver="0">
+                            <div class="col uib_col_1 col-0_12-12" data-uib="layout/col" data-ver="0">
+                                <div class="widget-container content-area vertical-col">
+
+                                    <div class="widget uib_w_1 d-margins Heading" data-uib="media/text" data-ver="0">
+                                        <div class="widget-container left-receptacle"></div>
+                                        <div class="widget-container right-receptacle"></div>
+                                        <div>
+                                            <p>Welcome</p>
+                                        </div>
+                                    </div>
+                                    <div class="widget uib_w_2 d-margins center" data-uib="media/text" data-ver="0">
+                                        <div class="widget-container left-receptacle"></div>
+                                        <div class="widget-container right-receptacle"></div>
+                                        <div>
+                                            <p>This is space for welcome message.</p>
+                                        </div>
+                                    </div>
+                                    <ul class="list widget uib_w_3 d-margins" data-uib="app_framework/listview" data-ver="1">
+                                        <li class="widget uib_w_4" data-uib="app_framework/listitem" data-ver="1"><a class="icon user" href="#login_page">Login</a>
+                                        </li>
+                                        <li class="widget uib_w_5" data-uib="app_framework/listitem" data-ver="1"><a class="icon pencil" href="#register_page">Login as a guest</a>
+                                        </li>
+                                    </ul><span class="uib_shim"></span>
+                                </div>
+                            </div>
+                            <span class="uib_shim"></span>
+                        </div>
+                    </div>
+                    <!-- /upage-content -->
+
+                </div>
+            <!-- /upage-outer -->
+            <div class="upage panel" id="register_page" data-header="af-header-1" data-footer="none">
+                <div class="upage-outer">
+                    <header class="container-group inner-element uib_w_11" data-uib="app_framework/header" data-ver="1" id="af-header-1">
+                        <h1>Register</h1>
+                        <div class="widget-container wrapping-col single-centered"></div>
+                        <div class="widget-container content-area horiz-area wrapping-col left with-back"><a class="button backButton">Back</a>
+                        </div>
+                        <div class="widget-container content-area horiz-area wrapping-col right"></div>
+                    </header>
+                    <div id="register_pagesub" class="upage-content ">
+
+                        <div class="grid grid-pad urow uib_row_3 row-height-3" data-uib="layout/row" data-ver="0">
+                            <div class="col uib_col_3 col-0_12-12" data-uib="layout/col" data-ver="0">
+                                <div class="widget-container content-area vertical-col">
+
+                                    <div class="widget uib_w_12 d-margins center" data-uib="media/text" data-ver="0">
+                                        <div class="widget-container left-receptacle"></div>
+                                        <div class="widget-container right-receptacle"></div>
+                                        <div>
+                                            <p>This space for register message.</p>
+                                        </div>
+                                    </div>
+                                    <div class="table-thing with-label widget uib_w_13" data-uib="app_framework/input" data-ver="1">
+                                        <input class="wide-control" placeholder="Name" type="text">
+                                    </div>
+                                    <div class="table-thing with-label widget uib_w_14" data-uib="app_framework/input" data-ver="1">
+                                        <input class="wide-control" placeholder="Email" type="text">
+                                    </div>
+                                    <div class="table-thing with-label widget uib_w_15" data-uib="app_framework/input" data-ver="1">
+                                        <input class="wide-control" placeholder="username" type="text">
+                                    </div>
+                                    <div class="table-thing with-label widget uib_w_16" data-uib="app_framework/input" data-ver="1">
+                                        <input class="wide-control" placeholder="password" type="text">
+                                    </div>
+                                    <div class="table-thing with-label widget uib_w_17" data-uib="app_framework/input" data-ver="1">
+                                        <input class="wide-control" placeholder="confirm password" type="text">
+                                    </div><a class="button widget uib_w_18 d-margins green" data-uib="app_framework/button" data-ver="1">Register</a><span class="uib_shim"></span>
+                                </div>
+                            </div>
+                            <span class="uib_shim"></span>
+                        </div>
+                    </div>
+                </div>
+                <!-- /upage-outer -->
+            </div>
+            <div class="upage panel" id="login_page" data-header="af-header-0" data-footer="none">
+                <div class="upage-outer">
+                    <header class="container-group inner-element uib_w_6" data-uib="app_framework/header" data-ver="1" id="af-header-0">
+                        <h1>Login</h1>
+                        <div class="widget-container wrapping-col single-centered"></div>
+                        <div class="widget-container content-area horiz-area wrapping-col left with-back"><a class="button backButton">Back</a>
+                        </div>
+                        <div class="widget-container content-area horiz-area wrapping-col right"></div>
+                    </header>
+                    <div id="login_pagesub" class="upage-content ">
+
+                        <div class="grid grid-pad urow uib_row_2 row-height-2" data-uib="layout/row" data-ver="0">
+                            <div class="col uib_col_2 col-0_12-12" data-uib="layout/col" data-ver="0">
+                                <div class="widget-container content-area vertical-col">
+
+                                    <div class="widget uib_w_7 d-margins center" data-uib="media/text" data-ver="0">
+                                        <div class="widget-container left-receptacle"></div>
+                                        <div class="widget-container right-receptacle"></div>
+                                        <div>
+                                            <p>This is space for login message.</p>
+                                        </div>
+                                    </div>
+                                    <div class="table-thing with-label widget uib_w_8" data-uib="app_framework/input" data-ver="1">
+                                        <input class="wide-control" placeholder="username" type="text" id="login_username">
+                                    </div>
+                                    <div class="table-thing with-label widget uib_w_9" data-uib="app_framework/input" data-ver="1">
+                                        <input class="wide-control" placeholder="password" type="password" id="login_password">
+                                        <img src="images/ajax-loader.gif"  id="loadingImg" style="position: absolute; top: 50%; left: 50%; visibility:hidden ">
+                                    </div><a  href="#" onclick="validate3()" class="button widget uib_w_10 d-margins green" data-uib="app_framework/button" data-ver="1">Login</a><span class="uib_shim"></span>
+
+                                </div>
+                            </div>
+                            <span class="uib_shim"></span>
+                        </div>
+                    </div>
+                </div>
+                 <!--div id = 'ajaxDiv'>Your result will display here</div-->
+                <!-- /upage-outer -->
+            </div>
+            <!-- /upage -->
+            
+    
+    
+    <!--div id = 'ajaxDiv'>Your result will display here</div-->
+    <div class="img_bgu">
+        <img src="bgu.png" alt="image" style="position: absolute; top: 50%; left: 50%; margin-left: -16px; margin-top: -18px">
+    </div>
+
+</div>
+    
+</body>
+</html>
