@@ -264,7 +264,7 @@ function get_project_info()
             myTableDiv.appendChild(table);
             var status_element = window.document.getElementById("status_project");
             var status_project = result[2][0]["STATUSDESC"];
-            var project_name = result[3];
+            var project_name = result[3].PROJECTNAMEENG;
             var project_name_element = window.document.getElementById("project_name");
             status_element.innerText = "Project Status : "+status_project;
             project_name_element.innerText = "Project Name : "+project_name;
