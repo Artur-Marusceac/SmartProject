@@ -731,10 +731,6 @@ label{
     display:none;
 }
 
-.pre-image{
-    display: none;
-}
-
 .responsive-video{
 	position:relative;
     min-height:300px;

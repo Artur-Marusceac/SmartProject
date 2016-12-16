@@ -23,15 +23,16 @@ function PicturesFromDir(){
                             var td2 = document.createElement('img');
                            
                             
-                            td2.setAttribute("class","responsive-image pre-image");
+                            td2.setAttribute("class","responsive-image");
                               //td2.setAttribute("src","/Data/Conference/"+dir+'/'+result[i]) ;
                               td2.setAttribute("data-original","/Data/Conference/"+dir+'/'+result[i]) ;
                              td2.setAttribute("alt","img");
                             
                             td.appendChild(td2);
                             content.appendChild(td);
-                            }
 
+                            }
+                        jQuery.getScript("plugins.js");
                   }
                };
                xhr.open("GET", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=get_pictures&dir=" + dir.toString() , false);

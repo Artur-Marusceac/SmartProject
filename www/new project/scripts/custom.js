@@ -19,13 +19,6 @@ $( document ).ready(function() {
         });
     });
 
-    $(function() {
-        $(".pre-image").lazyload({
-            threshold : 100,
-            effect : "fadeIn",
-            container: $("#page-content-scroll")
-        });
-    });
 
    //Enable Function to scale sidebar to the same height as content if the perspective sidebar is selected
     function create_sidebar_styles(){
