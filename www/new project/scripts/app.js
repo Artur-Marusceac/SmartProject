@@ -24,8 +24,8 @@ function PicturesFromDir(){
                            
                             
                             td2.setAttribute("class","responsive-image");
-                              //td2.setAttribute("src","/Data/Conference/"+dir+'/'+result[i]) ;
-                              td2.setAttribute("data-original","/Data/Conference/"+dir+'/'+result[i]) ;
+                              td2.setAttribute("src","/Data/Conference/"+dir+'/'+result[i]) ;
+                              //td2.setAttribute("data-original","/Data/Conference/"+dir+'/'+result[i]) ;
                              td2.setAttribute("alt","img");
                             
                             td.appendChild(td2);
