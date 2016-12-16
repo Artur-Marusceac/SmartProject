@@ -15,7 +15,8 @@ function PicturesFromDir(){
                     json_response = xhr.responseText;
                     var result = JSON.parse(json_response);
          
-                          for (var i = 0; i < result.length; i++) {
+                          //for (var i = 0; i < result.length; i++) {
+                         for (var i = 0; i < 1; i++) {
                               
                             
                               
