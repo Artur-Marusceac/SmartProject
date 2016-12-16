@@ -16,21 +16,22 @@ function PicturesFromDir(){
                     var result = JSON.parse(json_response);
          
                           for (var i = 0; i < result.length; i++) {
-                            var td = document.createElement('div');
-                            td.setAttribute("class","portfolio-item") ;
                               
-                            var td2 = document.createElement('a');
-                            td2.setAttribute("class","show-gallery") ;
-                            td2.setAttribute("href","/Data/Conference/"+dir+'/'+result[i]) ;
+                            
+                              
+                              
+                            var td = document.createElement('a');
+                            td.setAttribute("href","/Data/Conference/"+dir+'/'+result[i]) ;
+                            td.setAttribute("class","scale-hover show-gallery") ;
+                              
                           
         
-                            var td3 = document.createElement('img');
-                            td3.setAttribute("data-original","/Data/Conference/"+dir+'/'+result[i]) ;
-                            td3.setAttribute("alt","img");
-                            td3.setAttribute("class","preload-image responsive-image");
+                            var td2 = document.createElement('img');
+                            td2.setAttribute("data-original","/Data/Conference/"+dir+'/'+result[i]) ;
+                            td2.setAttribute("alt","img");
+                            td2.setAttribute("class","preload-image responsive-image");
                     
-                        
-                            td2.appendChild(td3);
+         
                             td.appendChild(td2);
                             content.appendChild(td);
                             }
