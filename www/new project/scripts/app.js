@@ -21,11 +21,11 @@ function PicturesFromDir(){
                               
                             var td2 = document.createElement('a');
                             td2.setAttribute("class","show-gallery") ;
-                            td2.setAttribute("href","/Data/Conference/"+dir+'/'+result[i]) ;
+                            td2.setAttribute("href","images/pictures/1.jpg") ;
                           
         
                             var td3 = document.createElement('img');
-                            td3.setAttribute("data-original","/Data/Conference/"+dir+'/'+result[i]) ;
+                            td3.setAttribute("data-original","images/pictures/1.jpg") ;
                             td3.setAttribute("alt","img");
                             td3.setAttribute("class","preload-image responsive-image");
                     
