@@ -1,0 +1,166 @@
+<!DOCTYPE HTML>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0 minimal-ui" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+<link href="styles/style.css" rel="stylesheet" type="text/css">
+<link href="styles/framework.css" rel="stylesheet" type="text/css">
+<link href="styles/font-awesome.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="scripts/jquery.js"></script>
+<script type="text/javascript" src="scripts/plugins.js"></script>
+<script type="text/javascript" src="scripts/custom.js"></script>
+<script type="text/javascript" src="scripts/custom.js"></script>
+<script src="scripts/login.js"></script>  
+</head>
+
+<body>
+    
+<div class="gallery-fix"></div>         <!-- Fix Gallery next/prev error on Android -->
+<div class="sidebar-tap-close"></div>   <!-- Overlay for content to close Sidebar -->
+<div class="sidebar-left-fix"></div>    <!-- The actual background of the Sidebar -->
+<div class="sidebar-right-fix"></div>   <!-- The actual background of the Sidebar -->
+
+<div class="header-fixed">
+    <a href="#" class="header-icon-1 open-left-sidebar"><i class="fa fa-navicon"></i></a>
+    <a href="login.html" class="header-logo">Login Page</a>
+</div>
+    
+<div class="sidebar-left">
+    <div class="sidebar-scroll">
+        <a href="#" class="sidebar-logo"></a>
+        <div class="sidebar-decoration"></div>
+        <div class="sidebar-menu">
+            <a class="menu-item" href="login.html"><!-- active-item -->
+                <i class="fa fa-home"></i>
+                Login Page
+                <i class="fa fa-circle"></i>
+            </a>
+            <div class="has-submenu">
+                <a class="menu-item open-submenu" href="#"><!-- active-item -->
+                    <i class="fa fa-cog"></i>
+                    Features
+                    <i class="fa fa-plus"></i>
+                </a>
+                <div class="submenu"><!--active-submenu-->
+                    <a class="menu-item" href="features-typography.html">
+                        <i class="fa fa-angle-right"></i>
+                        1st option ?
+                        <i class="fa fa-circle"></i>  
+                    </a>                              
+                    <a class="menu-item" href="features-tabs.html">
+                        <i class="fa fa-angle-right"></i>
+                        2nd option ?
+                        <i class="fa fa-circle"></i>                        
+                    </a>
+                </div>
+            </div>          
+                  <a class="menu-item" href=" "> <!-- active-item -->
+                    <i class="fa fa-camera"></i>
+                    Conference Galleries
+                    <i class="fa fa-plus"></i>
+                </a>               
+        </div>
+        <div class="sidebar-decoration"></div>
+    </div>
+</div>
+
+<div id="page-content"><!--Add sidebar-move to move with body-->
+    <div id="page-content-scroll"><!--Enables this element to be scrolled -->
+        <div class="header-mask">
+            <a href="#"><i class="fa fa-times"></i></a>
+            <a href="#"><i class="fa fa-bolt"></i></a>
+            <a href="#"><i class="fa fa-times"></i></a>
+            <div class="clear"></div>
+        </div>
+        
+        <div class="content-strip">
+            <div class="strip-content">
+                <h4>Login Page</h4>
+                <p>Login Page</p>
+                <i class="fa fa-code"></i>
+            </div>
+            <div class="overlay"></div>
+            <img class="preload-image" data-original="images/pictures/3.jpg" alt="img">
+        </div>
+        
+        <div class="content">
+            <a href="#" class="login-button button button-small button-green button-fullscreen full-bottom" onclick="PicturesFromDir()" >Change year list</a>
+            <div class="decoration"></div>
+
+            <div class="portfolio-adaptive portfolio-adaptive-three">
+                <div class="portfolio-adaptive-controls">
+                    <h4>Change View</h4>                        
+                    <a class="portfolio-switch adaptive-three active-adaptive" href="#"><i class="fa fa-th"></i></a>
+                    <a class="portfolio-switch adaptive-two" href="#"><i class="fa fa-th-large"></i></a>
+                    <a class="portfolio-switch adaptive-one" href="#"><i class="fa fa-navicon"></i></a>
+                    <div class="clear"></div>
+                    <p>
+                        Using the same classes as a portfolio, just with gallery links, so there's nothing new
+                        to learn when you use our gallery!
+                    </p>
+                </div>
+                <div class="decoration"></div>
+                <div class="portfolio-item">
+                    <a class="show-gallery" href="images/pictures/1.jpg" title="Add captions here!"><img data-original="images/pictures/1t.jpg" alt="img" class="preload-image responsive-image"></a>
+                </div>                        
+                <div class="portfolio-item">
+                    <a class="show-gallery" href="images/pictures/2.jpg" title="Add captions here!"><img data-original="images/pictures/2t.jpg" alt="img" class="preload-image responsive-image"></a>
+                </div>                         
+                <div class="portfolio-item">
+                    <a class="show-gallery" href="images/pictures/3.jpg" title="Add captions here!"><img data-original="images/pictures/3t.jpg" alt="img" class="preload-image responsive-image"></a>
+                </div>                         
+                <div class="portfolio-item">
+                    <a class="show-gallery" href="images/pictures/4.jpg" title="Add captions here!"><img data-original="images/pictures/4t.jpg" alt="img" class="preload-image responsive-image"></a>
+                </div>                        
+                <div class="portfolio-item">
+                    <a class="show-gallery" href="images/pictures/5.jpg" title="Add captions here!"><img data-original="images/pictures/5t.jpg" alt="img" class="preload-image responsive-image"></a>
+                </div>                         
+                <div class="portfolio-item">
+                    <a class="show-gallery" href="images/pictures/6.jpg" title="Add captions here!"><img data-original="images/pictures/6t.jpg" alt="img" class="preload-image responsive-image"></a>
+                </div>                        
+                <div class="portfolio-item">
+                    <a class="show-gallery" href="images/pictures/7.jpg" title="Add captions here!"><img data-original="images/pictures/7t.jpg" alt="img" class="preload-image responsive-image"></a>
+                </div>                        
+                <div class="portfolio-item">
+                    <a class="show-gallery" href="images/pictures/8.jpg" title="Add captions here!"><img data-original="images/pictures/8t.jpg" alt="img" class="preload-image responsive-image"></a>
+                </div>                         
+                <div class="portfolio-item">
+                    <a class="show-gallery" href="images/pictures/1.jpg" title="Add captions here!"><img data-original="images/pictures/1t.jpg" alt="img" class="preload-image responsive-image"></a>
+                </div>                        
+            </div>  
+            
+            <div class="decoration"></div>
+        </div>
+        <div id="content" class="content">         
+        </div>
+
+            
+        
+        
+                
+        <div class="footer">
+            <div class="footer-decoration"></div>
+        </div>
+        
+    </div>
+    <a href="#" class="back-to-top-badge"><i class="fa fa-caret-up"></i>Back to top</a>
+</div>
+    
+<div class="body-background"></div>
+
+
+    
+</body>
+
+
+
+
+
+
+
+
+
+
