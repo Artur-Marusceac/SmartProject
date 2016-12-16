@@ -50,7 +50,12 @@
     width: 3em;
 }
 
-
+select::-ms-expand {
+    display: none;
+}
+select {
+    height: 3em;
+}
 
 
 .header-fixed{
