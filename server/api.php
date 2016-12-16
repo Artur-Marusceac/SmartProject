@@ -167,7 +167,7 @@ function get_project_info_by_project_id($project_id)
     foreach (array_keys($students) as $key) {
         array_push($student_res,array($students[$key]["USERFULLNAMEENG"],$students[$key]["EMAIL"]));
     }
-    $results = array ($student_res,$adviser_res,$status);
+    $results = array ($student_res,$adviser_res,$status,$proj_name);
     return $results;
 }
 
