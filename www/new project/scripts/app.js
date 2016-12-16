@@ -16,21 +16,15 @@ function PicturesFromDir(){
                     var result = JSON.parse(json_response);
          
                           for (var i = 0; i < result.length; i++) {
-                     
-                              
-                            
-                              
-                                
+
                             var td = document.createElement('a');
                             td.setAttribute("href","/Data/Conference/"+dir+'/'+result[i]) ;
                             td.setAttribute("class","scale-hover show-gallery") ;
-                              
-                          
-        
                             var td2 = document.createElement('img');
                            
                             
                             td2.setAttribute("class","preload-image responsive-image");
+                              td2.setAttribute("src","/Data/Conference/"+dir+'/'+result[i]) ;
                               td2.setAttribute("data-original","/Data/Conference/"+dir+'/'+result[i]) ;
                              td2.setAttribute("alt","img");
                             
