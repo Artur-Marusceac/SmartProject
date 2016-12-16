@@ -8,7 +8,7 @@ function PicturesFromDir(){
     var year= 2012;
     var dir = year;
     var j=0;
-    var content=document.getElementById("content");
+    var content=document.getElementById("box");
     var json_response="";
             xhr.onreadystatechange = function(){
                   if(xhr.readyState == 4 && xhr.status==200 ){
