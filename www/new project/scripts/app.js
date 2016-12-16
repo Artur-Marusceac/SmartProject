@@ -4,7 +4,7 @@
 
 function PicturesFromDir(){
     var xhr = new XMLHttpRequest();
-    //var year = document.getElementById("year_list").value;
+    //var year = document.getElementById("year_l    ist").value;
     var year= 2012;
     var dir = year;
     var j=0;
@@ -30,10 +30,9 @@ function PicturesFromDir(){
                             td3.setAttribute("class","preload-image responsive-image");
                     
                         
+                            td2.appendChild(td3);
                             td.appendChild(td2);
-                            td.appendChild(td3);
-                            i++;
-                               content.appendChild(td);
+                            content.appendChild(td);
                             }
                     
                             
