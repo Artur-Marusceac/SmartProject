@@ -21,11 +21,11 @@ function PicturesFromDir(){
                               
                             var td2 = document.createElement('a');
                             td2.setAttribute("class","show-gallery") ;
-                            td2.setAttribute("href","images/pictures/1.jpg") ;
+                            td2.setAttribute("href","/Data/Conference/"+dir+'/'+result[i]) ;
                           
         
                             var td3 = document.createElement('img');
-                            td3.setAttribute("data-original","images/pictures/1.jpg") ;
+                            td3.setAttribute("data-original","/Data/Conference/"+dir+'/'+result[i]) ;
                             td3.setAttribute("alt","img");
                             td3.setAttribute("class","preload-image responsive-image");
                     
@@ -44,9 +44,9 @@ function PicturesFromDir(){
                };
                //xhr.open("GET", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=get_pictures&dir=" + dir.toString() , false);
                 xhr.open("GET", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=get_pictures&dir=" + 2012 , false);
-                while (content.firstChild) {
-                    content.removeChild(content.firstChild);
-                        }
+                //while (content.firstChild) {
+                 //   content.removeChild(content.firstChild);
+                 //       }
                xhr.send(dir);
                
  
