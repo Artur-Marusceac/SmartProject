@@ -224,16 +224,9 @@ function CreateSearchTable(db_result)
               // project_id_link.setAttribute('href', "javascript:set_project_id(\""+db_result[i][j]+"\")");
               // td.appendChild(project_id_link);
            }
-           if (j==3)
-               if (db_result[i][j][0] && db_result[i][j][1] )
-                   td.innerText=db_result[i][j][0]+","+db_result[i][j][1];
-               else if (db_result[i][j][0])
-                   td.innerText=db_result[i][j][0];
-               else
-                    td.innerText="";
            else
             td.innerText=db_result[i][j];
-           tr.appendChild(td);
+            tr.appendChild(td);
             myTableDiv.appendChild(tr);
        }
     }
