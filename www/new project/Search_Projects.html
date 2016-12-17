@@ -107,7 +107,18 @@
         
    <div class="content">
             <!--a href="#" class="login-button button button-small button-green button-fullscreen full-bottom" onclick="PicturesFromDir()" >Login</a-->
-                          <div class="row uniform 50%">
+       <div class="row uniform 50%">
+
+           <div class="select-wrapper">
+                <select name="Year" id="year_list">
+                    <option value="All">- Years -</option>
+                </select>
+            </div>
+        </div>
+       
+       
+       
+                <div class="row uniform 50%">
                             <div class="6u 12u(mobilep)">
                                 <input type="text" name="project_name" id="project_name" value="" placeholder="- Project Name -" />
                             </div>
@@ -132,8 +143,15 @@
                             </div>
                         </div>
 
- </div>
+            </div>
         
+        <div class="row uniform 50%">
+			<div class="6u 12u(mobilep)">
+          <ul class="actions">
+                    <li><a href="#" onclick="search_command()" class="button special icon fa-search">Search</a></li>
+             </ul>
+                </div>
+            </div>
 
             
         
