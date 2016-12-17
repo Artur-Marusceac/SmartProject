@@ -23,21 +23,20 @@
 <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Raleway:900' rel='stylesheet' type='text/css'>
 
-<title>Conference Gallery</title>
+<title>Epsilon 5.0</title>
 
 <link href="styles/style.css" rel="stylesheet" type="text/css">
 <link href="styles/framework.css" rel="stylesheet" type="text/css">
 <link href="styles/font-awesome.css" rel="stylesheet" type="text/css">
-<link href="styles/main.css" rel="stylesheet" type="text/css">
 
 <script type="text/javascript" src="scripts/jquery.js"></script>
 <script type="text/javascript" src="scripts/plugins.js"></script>
 <script type="text/javascript" src="scripts/custom.js"></script>
+ <script type="text/javascript" src="scripts/custom.js"></script>
 <script type="text/javascript" src="scripts/app.js"></script>
-
 </head>
 
-<body>
+<body class="has-cover">
     
 <div class="gallery-fix"></div>         <!-- Fix Gallery next/prev error on Android -->
 <div class="sidebar-tap-close"></div>   <!-- Overlay for content to close Sidebar -->
@@ -46,13 +45,18 @@
 
 <div class="header-fixed">
     <a href="#" class="header-icon-1 open-left-sidebar"><i class="fa fa-navicon"></i></a>
-    <a href="#" class="header-icon-2 open-right-sidebar"><i class="fa fa-envelope-o"></i></a>
+    <a href="index.html" class="header-logo">BOLT</a>
 </div>
 <div class="sidebar-left">
     <div class="sidebar-scroll">
         <a href="#" class="sidebar-logo"></a>
         <div class="sidebar-decoration"></div>
         <div class="sidebar-menu">
+            <a class="menu-item" href="login.html"><!-- active-item -->
+                <i class="fa fa-home"></i>
+                Login Page
+                <i class="fa fa-circle"></i>
+            </a>
             <div class="has-submenu">
                 <a class="menu-item open-submenu" href="#"><!-- active-item -->
                     <i class="fa fa-cog"></i>
@@ -90,7 +94,16 @@
             <a href="#"><i class="fa fa-times"></i></a>
             <div class="clear"></div>
         </div>
-
+        
+        <div class="content-strip">
+            <div class="strip-content">
+                <h4>Login Page</h4>
+                <p>Login Page</p>
+            </div>
+            <div class="overlay"></div>
+            <img class="preload-image" data-original="images/pictures/3.jpg" alt="img">
+        </div>
+        
         
    <div class="content">
             <!--a href="#" class="login-button button button-small button-green button-fullscreen full-bottom" onclick="PicturesFromDir()" >Login</a-->
