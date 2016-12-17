@@ -1,4 +1,6 @@
 /*jslint browser:true, devel:true, white:true, vars:true */
+/*jshint scripturl:true*/
+/*globals $:false */
 
 window.onload= function() {
 
@@ -36,22 +38,21 @@ window.onload= function() {
         xhr.open("GET", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=get_advisers_list", false);
         xhr.send();
     }
-
     var myTableDiv=document.getElementById("search_table");
     if(myTableDiv!==null) {
-        xhr = new XMLHttpRequest();
-        json_response="";
-        xhr.onreadystatechange = function(){
-            if(xhr.readyState == 4 && xhr.status==200 ){
-                json_response = xhr.responseText;
-                var result = JSON.parse(json_response);
+        var xhr_search = new XMLHttpRequest();
+        var json_res="";
+        xhr_search.onreadystatechange = function(){
+            if(xhr_search.readyState == 4 && xhr_search.status==200 ){
+                json_res = xhr_search.responseText;
+                var result = JSON.parse(json_res);
                 CreateSearchTable(result);
             }
         };
-        xhr.open("GET", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=get_search_results", false);
-        xhr.send();
+        xhr_search.open("GET", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=get_search_results", false);
+        xhr_search.send();
     }
-}
+};
 
 function PicturesFromDir(){
     var xhr = new XMLHttpRequest();
@@ -106,6 +107,7 @@ function PicturesFromDir(){
 
 function set_project_id(project_id)
 {
+    var json_response="";
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function(){
         if(xhr.readyState == 4 && xhr.status==200 ){
@@ -134,8 +136,8 @@ function get_project_info()
             {
                  var adviser_array = result[1];
                 for (var j=0; j< adviser_array.length;j++) {
-                    td.appendChild(document.createTextNode(adviser_array[j]));
-                    td.appendChild(document.createElement("br"));
+                    //td.appendChild(document.createTextNode(adviser_array[j]));
+                    //td.appendChild(document.createElement("br"));
                 }
                 var student_array = result[0];
                 for (var i=0;i<student_array.length;i++)
@@ -144,13 +146,13 @@ function get_project_info()
                     var mlink = document.createElement('a');
                     mlink.setAttribute('href', mail);
                     mlink.innerText="mail to: "+student_array[i][0];
-                    td.appendChild(mlink);
-                    td.appendChild(document.createElement("br"));
+                    //td.appendChild(mlink);
+                    //td.appendChild(document.createElement("br"));
                 }
 
             }
             var status_element = window.document.getElementById("status_p");
-            var status_project = result[2][0]["STATUSDESC"];
+            var status_project = result[2][0].STATUSDESC;
             var project_name = result[3].PROJECTNAMEENG;
             var project_name_element = window.document.getElementById("status_p");
             status_element.innerText = status_project;
@@ -216,7 +218,7 @@ function CreateSearchTable(db_result)
 
         for (var j=0; j<4; j++){
             td = document.createElement('TD');
-            if (j==0)
+            if (j===0)
             {
                 var project_id_link = document.createElement('a');
                 project_id_link.innerText=db_result[i][j];
