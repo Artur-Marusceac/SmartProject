@@ -223,7 +223,6 @@ function CreateSearchTable(db_result)
                td.setAttribute("class","table-sub-title");
            if (j===0)
            {
-                td = document.createElement('TD');
                //var project_id_link = document.createElement('a');
                //project_id_link.innerText=db_result[i][j];
                td.setAttribute('href', "javascript:set_project_id(\""+db_result[i][j]+"\")");
@@ -236,7 +235,7 @@ function CreateSearchTable(db_result)
                else
                     td.innerText="";
            else
-               td.innerText=db_result[i][j];
+            td.innerText=db_result[i][j];
            tr.appendChild(td);
             myTableDiv.appendChild(tr);
        }
