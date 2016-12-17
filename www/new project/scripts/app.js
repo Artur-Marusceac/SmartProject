@@ -215,7 +215,7 @@ function CreateSearchTable(db_result)
        for (var j=0; j<3; j++){
            td = document.createElement('TD');
                td.setAttribute("class","table-sub-title");
-           if (j===0)
+           if (j==0)
            {
                var link = document.createElement("a");
                 link.setAttribute("href", "http://www.microsoft.com");
