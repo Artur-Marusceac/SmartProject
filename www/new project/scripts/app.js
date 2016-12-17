@@ -230,13 +230,13 @@ function CreateSearchTable(db_result)
            }
            if (j==3)
                if (db_result[i][j][0] && db_result[i][j][1] )
-                   td.appendChild(document.createTextNode(db_result[i][j][0]+","+db_result[i][j][1]));
+                   td.innerText=db_result[i][j][0]+","+db_result[i][j][1];
                else if (db_result[i][j][0])
-                   td.appendChild(document.createTextNode(db_result[i][j][0]));
+                   td.innerText=db_result[i][j][0];
                else
-                    td.appendChild(document.createTextNode(""));
+                    td.innerText="";
            else
-               td.appendChild(document.createTextNode(db_result[i][j]));
+               td.innerText=db_result[i][j];
            tr.appendChild(td);
             myTableDiv.appendChild(tr);
        }
