@@ -218,8 +218,8 @@ function CreateSearchTable(db_result)
            if (j===0)
            {
                var link = document.createElement("a");
-                link.setAttribute("href", "http://www.microsoft.com");
-                var linkText = document.createTextNode("Click me");
+                link.setAttribute('href', "javascript:set_project_id(\""+db_result[i][j]+"\")");
+                var linkText = document.createTextNode(db_result[i][j].substring(3));
                link.appendChild(linkText);
                 td.appendChild(link);
               // project_id_link.setAttribute('href', "javascript:set_project_id(\""+db_result[i][j]+"\")");
