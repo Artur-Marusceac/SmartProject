@@ -209,16 +209,10 @@ function CreateSearchTable(db_result)
     td.innerText="Advisers";
     tr.appendChild(td);
     myTableDiv.appendChild(tr);
-    td = document.createElement('TD');
-    td.setAttribute("class","table-title");
-    td.innerText="Students";
-    tr.appendChild(td);
-    myTableDiv.appendChild(tr);
-
     for (var i=0; i<db_result.length; i++){
        tr = document.createElement('TR');
        if(i%2===0) tr.setAttribute("class","even");
-       for (var j=0; j<4; j++){
+       for (var j=0; j<3; j++){
            td = document.createElement('TD');
                td.setAttribute("class","table-sub-title");
            if (j===0)
