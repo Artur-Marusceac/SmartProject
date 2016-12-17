@@ -198,22 +198,26 @@ function CreateSearchTable(db_result)
     td.setAttribute("class","table-title");
     td.innerText="Project ID";
     tr.appendChild(td);
+    myTableDiv.appendChild(tr);
     td = document.createElement('TD');
     td.setAttribute("class","table-title");
     td.innerText="Project Name";
     tr.appendChild(td);
+    myTableDiv.appendChild(tr);
     td = document.createElement('TD');
     td.setAttribute("class","table-title");
     td.innerText="Advisers";
     tr.appendChild(td);
+    myTableDiv.appendChild(tr);
     td = document.createElement('TD');
     td.setAttribute("class","table-title");
     td.innerText="Students";
     tr.appendChild(td);
+    myTableDiv.appendChild(tr);
 
     for (var i=0; i<db_result.length; i++){
        tr = document.createElement('TR');
-       
+       if(i%2===0) tr.setAttribute("class","even");
        for (var j=0; j<4; j++){
            td = document.createElement('TD');
                td.setAttribute("class","table-sub-title");
