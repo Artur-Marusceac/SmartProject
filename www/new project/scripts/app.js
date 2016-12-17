@@ -191,51 +191,51 @@ function search_command()
 
 function CreateSearchTable(db_result)
 {
+  
     var myTableDiv=document.getElementById("search_table");
-    var table = document.createElement('TABLE');
-    var tableBody = document.createElement('TBODY');
-
-    table.appendChild(tableBody);
-
     var tr = document.createElement('TR');
-    tableBody.appendChild(tr);
     var td = document.createElement('TD');
-    td.appendChild(document.createTextNode("Project ID" ));
+    td.setAttribute("class","table-title");
+    td.innerText("Project ID" );
     tr.appendChild(td);
     td = document.createElement('TD');
-    td.appendChild(document.createTextNode("Project Name"));
+    td.setAttribute("class","table-title");
+    td.innerText("Project Name");
     tr.appendChild(td);
     td = document.createElement('TD');
-    td.appendChild(document.createTextNode("Advisers"));
+    td.setAttribute("class","table-title");
+    td.innerText("Advisers");
     tr.appendChild(td);
     td = document.createElement('TD');
-    td.appendChild(document.createTextNode("Students"));
+    td.setAttribute("class","table-title");
+    td.innerText("Students");
     tr.appendChild(td);
 
     for (var i=0; i<db_result.length; i++){
-        tr = document.createElement('TR');
-        tableBody.appendChild(tr);
-
-        for (var j=0; j<4; j++){
-            td = document.createElement('TD');
-            if (j===0)
-            {
-                var project_id_link = document.createElement('a');
-                project_id_link.innerText=db_result[i][j];
-                project_id_link.setAttribute('href', "javascript:set_project_id(\""+project_id_link.innerText.toString()+"\")");
-                td.appendChild(project_id_link);
-            }
-            if (j==3)
-                if (db_result[i][j][0] && db_result[i][j][1] )
-                    td.appendChild(document.createTextNode(db_result[i][j][0]+","+db_result[i][j][1]));
-                else if (db_result[i][j][0])
-                    td.appendChild(document.createTextNode(db_result[i][j][0]));
-                else
+       tr = document.createElement('TR');
+       
+       for (var j=0; j<4; j++){
+           td = document.createElement('TD');
+               td.setAttribute("class","table-sub-title");
+           if (j===0)
+           {
+               var project_id_link = document.createElement('a');
+               project_id_link.innerText=db_result[i][j];
+               project_id_link.setAttribute('href', "javascript:set_project_id(\""+project_id_link.innerText.toString()+"\")");
+               td.appendChild(project_id_link);
+           }
+           if (j==3)
+               if (db_result[i][j][0] && db_result[i][j][1] )
+                   td.appendChild(document.createTextNode(db_result[i][j][0]+","+db_result[i][j][1]));
+               else if (db_result[i][j][0])
+                   td.appendChild(document.createTextNode(db_result[i][j][0]));
+               else
                     td.appendChild(document.createTextNode(""));
-            else
-                td.appendChild(document.createTextNode(db_result[i][j]));
-            tr.appendChild(td);
-        }
+           else
+               td.appendChild(document.createTextNode(db_result[i][j]));
+           tr.appendChild(td);
+            myTableDiv.appendChild(tr);
+       }
     }
-    myTableDiv.appendChild(table);
+   
 }
