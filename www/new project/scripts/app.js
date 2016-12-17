@@ -217,9 +217,12 @@ function CreateSearchTable(db_result)
                td.setAttribute("class","table-sub-title");
            if (j===0)
            {
-               var project_id_link = document.createElement('a');
-               project_id_link.setAttribute('href', "javascript:set_project_id(\""+db_result[i][j]+"\")");
-               td.appendChild(project_id_link);
+               var link = document.createElement("a");
+                link.setAttribute("href", "http://www.microsoft.com");
+                var linkText = document.createTextNode("Click me");
+                td.appendChild(link);
+              // project_id_link.setAttribute('href', "javascript:set_project_id(\""+db_result[i][j]+"\")");
+              // td.appendChild(project_id_link);
            }
            if (j==3)
                if (db_result[i][j][0] && db_result[i][j][1] )
