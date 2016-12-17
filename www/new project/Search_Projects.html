@@ -28,11 +28,12 @@
 <link href="styles/style.css" rel="stylesheet" type="text/css">
 <link href="styles/framework.css" rel="stylesheet" type="text/css">
 <link href="styles/font-awesome.css" rel="stylesheet" type="text/css">
-
+<link href="styles/main.css" rel="stylesheet" type="text/css">
+    
 <script type="text/javascript" src="scripts/jquery.js"></script>
 <script type="text/javascript" src="scripts/plugins.js"></script>
 <script type="text/javascript" src="scripts/custom.js"></script>
-<script src="scripts/login.js"></script>
+<script type="text/javascript" src="scripts/app.js"></script>
 </head>
 
 <body class="has-cover">
@@ -96,33 +97,32 @@
         
         <div class="content-strip">
             <div class="strip-content">
-                <h4>Login Page</h4>
-                <p>Login Page</p>
+                <h4>Conference Gallery</h4>
+                <p>Conference Gallery</p>
             </div>
             <div class="overlay"></div>
             <img class="preload-image" data-original="images/pictures/3.jpg" alt="img">
         </div>
         
-        <div class="content">    
-            <div class="decoration"></div>
-            <div class="page-login full-bottom">
-                <div class="login-input"> 
-                    <i class="fa fa-user"></i>
-                    <input type="text" value="Username" onfocus="if (this.value=='Username') this.value = ''" onblur="if (this.value=='') this.value = 'Username'" id="login_username">
-                </div>
-                <div class="login-password">
-                    <i class="fa fa-lock"></i>
-                    <input type="password" value="password" onfocus="if (this.value=='password') this.value = ''" onblur="if (this.value=='') this.value = 'password'" id="login_password">
-                </div>
-                <a href="#" class="login-forgot"><i class="fa fa-eye"></i>Forgot Credentials</a>
-                <a href="#" class="login-create">Create Account<i class="fa fa-user"></i></a>
-                <div class="clear"></div>
-                <a href="#" class="login-button button button-small button-green button-fullscreen full-bottom" onclick="validate_login()" >Login</a>
-                <div class="decoration"></div>
-                <div class="clear"></div>
-            </div>
-            <div class="decoration"></div>
+        
+   <div class="content">
+            <!--a href="#" class="login-button button button-small button-green button-fullscreen full-bottom" onclick="PicturesFromDir()" >Login</a-->
+           <div class="select-wrapper">
+               <select onchange="PicturesFromDir()" name="Year" id="year_list">
+                   <option value="All">- Years -</option>
+               </select>
+           </div>
+
+            <div class="6u 12u(mobilep)">
+                <input type="text" name="project_name" id="project_name" value="" placeholder="- Project Name -" />
+                 </div>
+        
+        
         </div>
+        
+
+            
+        
         
                 
         <div class="footer">
