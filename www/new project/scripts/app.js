@@ -35,7 +35,7 @@ function PicturesFromDir(){
                             var td2 = document.createElement('img');
                            
                             
-                            td2.setAttribute("class","responsive-image");
+                            td2.setAttribute("class","preload-image responsive-image");
                               //td2.setAttribute("src","/Data/Conference/"+dir+'/'+result[i]) ;
                               td2.setAttribute("data-original","/Data/Conference/"+dir+'/'+result[i]) ;
                              td2.setAttribute("alt","img");
@@ -44,6 +44,16 @@ function PicturesFromDir(){
                             content.appendChild(td);
 
                             }
+                      //Preload Image
+
+                      $(function() {
+                          $(".preload-image").lazyload({
+                              threshold : 100,
+                              effect : "fadeIn",
+                              container: $("#page-content-scroll")
+                          });
+                      });
+
                       $(".gallery a, .show-gallery").swipebox();
                   }
                };
