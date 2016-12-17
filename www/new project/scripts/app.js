@@ -219,7 +219,7 @@ function CreateSearchTable(db_result)
            {
                var link = document.createElement("a");
                 link.setAttribute('href', "javascript:set_project_id(\""+db_result[i][j]+"\")");
-                var linkText = document.createTextNode(db_result[i][j].substring(3));
+                var linkText = document.createTextNode(db_result[i][j].substring(2));
                link.appendChild(linkText);
                 td.appendChild(link);
               // project_id_link.setAttribute('href', "javascript:set_project_id(\""+db_result[i][j]+"\")");
