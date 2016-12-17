@@ -223,10 +223,10 @@ function CreateSearchTable(db_result)
                td.setAttribute("class","table-sub-title");
            if (j===0)
            {
-               var project_id_link = document.createElement('a');
+                td = document.createElement('TD');
+               //var project_id_link = document.createElement('a');
                //project_id_link.innerText=db_result[i][j];
-               project_id_link.setAttribute('href', "javascript:set_project_id(\""+db_result[i][j]+"\")");
-               td.appendChild(project_id_link);
+               td.setAttribute('href', "javascript:set_project_id(\""+db_result[i][j]+"\")");
            }
            if (j==3)
                if (db_result[i][j][0] && db_result[i][j][1] )
