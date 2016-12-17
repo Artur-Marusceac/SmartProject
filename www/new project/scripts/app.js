@@ -22,10 +22,8 @@ window.onload= function() {
         xhr.onreadystatechange = function(){
             if(xhr.readyState == 4 && xhr.status==200 ){
 
-                var ajaxDisplay = document.getElementById('ajaxDiv');
                 json_response = xhr.responseText;
                 var result = JSON.parse(json_response);
-                ajaxDisplay.innerHTML = result;
                 for(var i=0; i<result.length;i++)
                 {
                     var advisersListItem=document.createElement("option");
