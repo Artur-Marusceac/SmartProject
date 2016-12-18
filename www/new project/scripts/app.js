@@ -134,20 +134,24 @@ function get_project_info()
             var result = JSON.parse(json_response);
             if (result)
             {
+                var adviser_text = document.getElementById("adviser_p");
                  var adviser_array = result[1];
                 for (var j=0; j< adviser_array.length;j++) {
-                    //td.appendChild(document.createTextNode(adviser_array[j]));
-                    //td.appendChild(document.createElement("br"));
+                    adviser_text.appendChild(document.createTextNode(adviser_array[i]));
+                    adviser_text.appendChild(document.createElement("br"));
                 }
+                var student_text = document.getElementById("student_p");
                 var student_array = result[0];
                 for (var i=0;i<student_array.length;i++)
                 {
-                    var mail = "mailto:"+student_array[i][1]+"?subject=New Mail&body=Mail text body";
+                    student_text.appendChild(document.createTextNode(student_array[i]));
+                    student_text.appendChild(document.createElement("br"));
+                    /*var mail = "mailto:"+student_array[i][1]+"?subject=New Mail&body=Mail text body";
                     var mlink = document.createElement('a');
                     mlink.setAttribute('href', mail);
                     mlink.innerText="mail to: "+student_array[i][0];
-                    //td.appendChild(mlink);
-                    //td.appendChild(document.createElement("br"));
+                    td.appendChild(mlink);
+                    td.appendChild(document.createElement("br"));*/
                 }
 
             }
