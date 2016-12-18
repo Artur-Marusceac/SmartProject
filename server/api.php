@@ -77,13 +77,16 @@ function search_project($year,$student_name,$adviser,$project_name)
     ;
 
     if ($adviser!="All"){
-        $select_adviser_id = $this->db->select()
+        $adviser_split = explode('%20',$adviser);
+        $select_adviser_id = $db->select()
             ->from('USERS',	array('USERID'))
-            ->where('USERNAME = ?', $adviser);
-        $adviserid = $this->db->fetchRow($select_adviser_id);
+            ->where('USERFIRSTNAMEENG = ?', $adviser_split[0])
+            ->where('USERLASTNAMEENG = ?', $adviser_split[1]);
+        $adviserid = $db->fetchRow($select_adviser_id);
         $select->where('ADVISERSUGGESTIONS.ADVISERID = ?', $adviserid);
 
     }
+
     else{//Important: to prevent multiple same rows in case when adviser wasn't selected
         $select->where('ADVISERSUGGESTIONS.ADVISERNUMBER = 1');
     }
