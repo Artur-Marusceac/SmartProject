@@ -65,33 +65,32 @@ window.onload= function()
 
 function CreateSearchTable(db_result)
 {
+  
     var myTableDiv=document.getElementById("search_table");
-    var table = document.createElement('TABLE');
-    var tableBody = document.createElement('TBODY');
-    
-    table.appendChild(tableBody);
-      
-   var tr = document.createElement('TR');
-    tableBody.appendChild(tr); 
-       var td = document.createElement('TD');
-           td.appendChild(document.createTextNode("Project ID" ));
-           tr.appendChild(td);
-        td = document.createElement('TD');
-           td.appendChild(document.createTextNode("Project Name"));
-           tr.appendChild(td);
-        td = document.createElement('TD');
-           td.appendChild(document.createTextNode("Advisers"));
-           tr.appendChild(td);
-        td = document.createElement('TD');
-           td.appendChild(document.createTextNode("Students"));
-           tr.appendChild(td);
-    
+    var tr = document.createElement('TR');
+    var td = document.createElement('TD');
+    td.setAttribute("class","table-title");
+    td.innerText("Project ID" );
+    tr.appendChild(td);
+    td = document.createElement('TD');
+    td.setAttribute("class","table-title");
+    td.innerText("Project Name");
+    tr.appendChild(td);
+    td = document.createElement('TD');
+    td.setAttribute("class","table-title");
+    td.innerText("Advisers");
+    tr.appendChild(td);
+    td = document.createElement('TD');
+    td.setAttribute("class","table-title");
+    td.innerText("Students");
+    tr.appendChild(td);
+
     for (var i=0; i<db_result.length; i++){
        tr = document.createElement('TR');
-       tableBody.appendChild(tr);
        
        for (var j=0; j<4; j++){
            td = document.createElement('TD');
+               td.setAttribute("class","table-sub-title");
            if (j==0)
            {
                var project_id_link = document.createElement('a');
@@ -109,9 +108,10 @@ function CreateSearchTable(db_result)
            else
                td.appendChild(document.createTextNode(db_result[i][j]));
            tr.appendChild(td);
+            myTableDiv.appendChild(tr);
        }
     }
-    myTableDiv.appendChild(table);
+   
 }
 
 function set_project_id(project_id)
