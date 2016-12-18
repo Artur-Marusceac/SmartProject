@@ -6700,7 +6700,7 @@ html, body {
     transform: translateX(0px);   
 }
 .sidebar-logo{
-    background-image:url(../images/logo-sidebar.png);
+    background-image:url(../images/logo-sidebar.svg);
     background-size:152px 56px;
     background-repeat:no-repeat;
     width:152px;
