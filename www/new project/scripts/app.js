@@ -52,6 +52,10 @@ window.onload= function() {
         xhr_search.open("GET", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=get_search_results", false);
         xhr_search.send();
     }
+
+    var project_info = document.getElementById("project_info_container");
+    if (project_info!==null)
+        get_project_info();
 };
 
 function PicturesFromDir(){
