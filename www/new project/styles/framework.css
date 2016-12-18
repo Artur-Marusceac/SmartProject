@@ -6701,12 +6701,12 @@ html, body {
 }
 .sidebar-logo{
     background-image:url(../images/logo-sidebar.svg);
-    background-size:152px 56px;
+    background-size:270px 99px;
     background-repeat:no-repeat;
-    width:152px;
-    height:56px;
+    width:270px;
+    height:99x;
     margin-top:20px;
-    margin-left:30px;
+    margin-left:40px;
 }
 
 .sidebar-decoration{
