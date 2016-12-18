@@ -141,14 +141,14 @@ function get_project_info()
                 var adviser_text = document.getElementById("adviser_p");
                  var adviser_array = result[1];
                 for (var j=0; j< adviser_array.length;j++) {
-                    adviser_text.appendChild(document.createTextNode(adviser_array[i]));
+                    adviser_text.appendChild(document.createTextNode(adviser_array[j]));
                     adviser_text.appendChild(document.createElement("br"));
                 }
                 var student_text = document.getElementById("student_p");
                 var student_array = result[0];
                 for (var i=0;i<student_array.length;i++)
                 {
-                    student_text.appendChild(document.createTextNode(student_array[i]));
+                    student_text.appendChild(document.createTextNode(student_array[i][0]));
                     student_text.appendChild(document.createElement("br"));
                     /*var mail = "mailto:"+student_array[i][1]+"?subject=New Mail&body=Mail text body";
                     var mlink = document.createElement('a');
@@ -162,9 +162,13 @@ function get_project_info()
             var status_element = window.document.getElementById("status_p");
             var status_project = result[2][0].STATUSDESC;
             var project_name = result[3].PROJECTNAMEENG;
-            var project_name_element = window.document.getElementById("status_p");
-            status_element.innerText = status_project;
-            project_name_element.innerText = "Project Name : "+project_name;
+            var project_name_element = window.document.getElementById("project_name");
+            var span = document.createElement("span");
+            span.setAttribute("class","highlighted bg-blue-dark color-white");
+            span.innerText="Project Status:";
+            status_element.appendChild(span);
+            status_element.appendChild(document.createTextNode(status_project));
+            project_name_element.innerText = "Information for project: "+project_name;
         }
     };
     xhr_project_info.open("GET", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=get_project_info", false);
