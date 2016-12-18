@@ -23,7 +23,7 @@
 <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Raleway:900' rel='stylesheet' type='text/css'>
 
-<title>Project App</title>
+<title>Project Application</title>
 
 <link href="../styles/style.css" rel="stylesheet" type="text/css">
 <link href="../styles/framework.css" rel="stylesheet" type="text/css">
@@ -45,7 +45,7 @@
 
 <div class="header-fixed">
     <a href="#" class="header-icon-1 open-left-sidebar"><i class="fa fa-navicon"></i></a>
-    <a href="#" class="header-logo">Project Application</a>
+    <a href="i#" class="header-logo">Project Application</a>
 </div>
 <div class="sidebar-left">
     <div class="sidebar-scroll">
@@ -69,14 +69,14 @@
                         Search Projects
                         <i class="fa fa-circle"></i>
                     </a>
-                    <a class="menu-item" href="Third/features-tabs.html">
+                    <a class="menu-item" href="features-tabs.html">
                         <i class="fa fa-angle-right"></i>
                         2nd option ?
                         <i class="fa fa-circle"></i>
                     </a>
                 </div>
             </div>
-            <a class="menu-item" href="Conference_Gallery.html"> <!-- active-item -->
+            <a class="menu-item" href="Third/Conference_Gallery.html"> <!-- active-item -->
                 <i class="fa fa-camera"></i>
                 Conference Galleries
                 <i class="fa fa-plus"></i>
@@ -97,8 +97,8 @@
         
         <div class="content-strip">
             <div class="strip-content">
-                <h4>Conference Gallery</h4>
-                <p>Conference Gallery</p>
+                <h4>Search Projects</h4>
+                <p>Search</p>
             </div>
             <div class="overlay"></div>
             <img class="preload-image" data-original="images/pictures/3.jpg" alt="img">
@@ -107,22 +107,58 @@
         
    <div class="content">
             <!--a href="#" class="login-button button button-small button-green button-fullscreen full-bottom" onclick="PicturesFromDir()" >Login</a-->
-           <div class="select-wrapper">
-               <select onchange="PicturesFromDir()" name="Year" id="year_list">
-                   <option value="All">- Years -</option>
-               </select>
-           </div>
-
-           <div class="gallery round-thumbs half-bottom" id="box">
-            </div>
+      
+       <div class="row uniform 50%">
+			  <div class="12u">
+                        <div class="select-wrapper">
+                            <select name="Years" id="year_list">
+                                <option value="All">- Year -</option>
+                            </select>
+                        </div>
+                </div>
+        </div>         
+       
+       
+       
+                <div class="row uniform 50%">
+                            <div class="6u 12u(mobilep)">
+                                <input type="text" name="project_name" id="project_name" value="" placeholder="- Project Name -" />
+                            </div>
+                         </div>
+                        
             
-        </div>
+         <div class="row uniform 50%">
+			  <div class="12u">
+                        <div class="select-wrapper">
+                            <select name="Advisers" id="advisers_list">
+                                <option value="All">- Adviser -</option>
+                            </select>
+                        </div>
+                </div>
+        </div>         
 
-                
-        <div class="footer">
-            <div class="footer-decoration"></div>
-        </div>
+
+               
+            <div class="row uniform 50%">
+                                <div class="6u 12u(mobilep)">
+                                <input type="text" name="Student_name" id="student_name" value="" placeholder="- Student Name-" />
+                            </div>
+                        </div>
+
+            </div>
         
+        <div class="row uniform 50%">
+			<div class="6u 12u(mobilep)">
+          <ul class="actions">
+                    <li><a href="#" onclick="search_command()" class="button special icon fa-search">Search</a></li>
+             </ul>
+                </div>
+            </div>
+
+            
+        
+        
+                
     </div>
     <a href="#" class="back-to-top-badge"><i class="fa fa-caret-up"></i>Back to top</a>
 </div>
