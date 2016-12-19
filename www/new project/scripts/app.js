@@ -230,7 +230,7 @@ function get_my_project_info()
             span.innerText="Project Status:";
             status_element.appendChild(span);
             status_element.appendChild(document.createTextNode(status_project));
-            project_name_element.innerText = "Information for project: "+project_name;
+            project_name_element.innerText = project_name;
         }
     };
     xhr_project_info.open("GET", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=get_project_by_user_id", false);
