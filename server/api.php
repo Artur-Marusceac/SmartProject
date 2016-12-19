@@ -143,6 +143,7 @@ function get_project_info_by_user_id($student_id)
     $students = getProjectStudents($proj_id);
     $advisors = getProjectAdvisers($proj_id);
     $status = getProjectStatus($proj_id);
+    $abstract = getAbstract($proj_id);
     $proj_name = getProjectName($proj_id);
     $adviser_res = array();
     $student_res = array();
@@ -152,7 +153,7 @@ function get_project_info_by_user_id($student_id)
     foreach (array_keys($students) as $key) {
         array_push($student_res,array($students[$key]["USERFULLNAMEENG"],$students[$key]["EMAIL"]));
     }
-    $results = array ($student_res,$adviser_res,$status,$proj_name);
+    $results = array ($student_res,$adviser_res,$status,$proj_name,$abstract);
     return $results;
 }
 
@@ -162,6 +163,7 @@ function get_project_info_by_project_id($project_id)
     $advisors = getProjectAdvisers($project_id);
     $status = getProjectStatus($project_id);
     $proj_name = getProjectName($project_id);
+    $abstract = getAbstract($project_id);
     $adviser_res = array();
     $student_res = array();
     foreach (array_keys($advisors) as $key) {
@@ -170,8 +172,18 @@ function get_project_info_by_project_id($project_id)
     foreach (array_keys($students) as $key) {
         array_push($student_res,array($students[$key]["USERFULLNAMEENG"],$students[$key]["EMAIL"]));
     }
-    $results = array ($student_res,$adviser_res,$status,$proj_name);
+    $results = array ($student_res,$adviser_res,$status,$proj_name,$abstract);
     return $results;
+}
+
+
+function getAbstract($project_id){
+    $db = Zend_Registry::get('db');
+    $select = $db->select()->from('ABSTRACTUPDATE', array('ABSTRACTENG','ABSTRACTHEB'))
+        ->where('PROJECTID = ?', $project_id)
+    ;
+    $data = $this->fetchRow($select);
+    return $data;
 }
 
 function getProjectName($projectId)
