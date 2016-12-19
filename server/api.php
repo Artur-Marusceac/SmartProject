@@ -182,7 +182,7 @@ function getAbstract($project_id){
     $select = $db->select()->from('ABSTRACTUPDATE', array('ABSTRACTENG','ABSTRACTHEB'))
         ->where('PROJECTID = ?', $project_id)
     ;
-    $data = $this->fetchRow($select);
+    $data = $db->fetchRow($select);
     return $data;
 }
 
