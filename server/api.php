@@ -176,7 +176,7 @@ function get_project_info_by_project_id($project_id)
     return $results;
 }
 
-//
+
 function getAbstract($project_id){
     $db = Zend_Registry::get('db');
     $select = $db->select()->from('ABSTRACTUPDATE', array('ABSTRACTENG','ABSTRACTHEB'))
@@ -424,9 +424,12 @@ function bgu_login($username,$password)
 
 function get_user_name($user_id)
 {
-    $dbLink = Zend_Registry::get('dbLink');
-    $row = $dbLink->fetchRow("SELECT `USERFIRSTNAMEENG`,`USERLASTNAMEENG` FROM `USERS` WHERE `USERID`=?",$user_id);
-    return $row;
+    $db = Zend_Registry::get('db');
+    $select=$db->select() ->from('USERS',
+        array('USERFIRSTNAMEENG','USERLASTNAMEENG'))
+        ->where('USERID = ?', $user_id);
+    $username= $db->fetchRow($select);
+    return $username;
 }
 
 function get_user_list()
