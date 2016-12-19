@@ -193,7 +193,14 @@ function search_command()
             json_response = xhr_search.responseText;
             var result = JSON.parse(json_response);
             if (result.toString() == "true")
-                location.href="Search_Results.html";
+                if(redirect=="Third")
+                    location.href="Third/Search_Results.html";
+                else if(redirect=="Fourth")
+                    location.href="Fourth/Search_Results.html";
+                else if(redirect=="Adviser")
+                    location.href="Adviser/Search_Results.html";
+                else location.href="Search_Results.html";
+                    
         }
     };
     xhr_search.open("GET", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=search_project&year=" + year.toString() +"&student_name=" +student_name.toString()+"&adviser=" +adviser.toString()+"&project_name=" +project_name.toString(), false);
