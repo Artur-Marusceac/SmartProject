@@ -67,10 +67,10 @@ window.onload= function() {
 
                 json_response = xhr.responseText;
                 var result = JSON.parse(json_response);
-                var user_full_name = result.USERFIRSTNAMEENG+result.USERLASTNAMEENG;
-                var p = window.document.createElement("p");
-                p.innerText = "Welcome " + user_full_name;
-                welcome_user_div.appendChild(p);
+                var user_full_name = result.USERFIRSTNAMEENG+" "+result.USERLASTNAMEENG;
+                var h = window.document.createElement("h4");
+                h.innerText = "Welcome " + user_full_name+"!";
+                welcome_user_div.appendChild(h);
             }
         };
         xhr.open("GET", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=get_user_name", false);
