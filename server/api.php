@@ -176,7 +176,7 @@ function get_project_info_by_project_id($project_id)
     return $results;
 }
 
-
+//
 function getAbstract($project_id){
     $db = Zend_Registry::get('db');
     $select = $db->select()->from('ABSTRACTUPDATE', array('ABSTRACTENG','ABSTRACTHEB'))
