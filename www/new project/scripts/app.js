@@ -182,7 +182,8 @@ function search_command()
     var student_name =window.document.getElementById("student_name").value;
     var adviser =window.document.getElementById("advisers_list").value;
     var project_name =window.document.getElementById("project_name").value;
-    var redirect= window.location.pathname;
+    var pathArray = window.location.pathname.split( '/' );
+    var redirect= pathArray[pathArray.length-2] ;//TODO: Test For Correct Redirect
 
     var xhr_search = new XMLHttpRequest();
     var json_response="";
