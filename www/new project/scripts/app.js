@@ -60,10 +60,21 @@ window.onload= function() {
     var welcome_user_div = window.document.getElementById("welcome_user");
     if (welcome_user_div!==null)
     {
-        var user_full_name = getFullName();
-        var p = window.document.createElement("p");
-        p.innerText = "Welcome " + user_full_name;
-        welcome_user_div.appendChild(p);
+        var xhr = new XMLHttpRequest();
+        var json_response="";
+        xhr.onreadystatechange = function(){
+            if(xhr.readyState == 4 && xhr.status==200 ){
+
+                json_response = xhr.responseText;
+                var result = JSON.parse(json_response);
+                var user_full_name = result.USERFIRSTNAMEENG+result.USERLASTNAMEENG;
+                var p = window.document.createElement("p");
+                p.innerText = "Welcome " + user_full_name;
+                welcome_user_div.appendChild(p);
+            }
+        };
+        xhr.open("GET", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=get_user_name", false);
+        xhr.send();
     }
     
      var my_project_info=document.getElementById("Fourth_Year_Project_Info");
@@ -319,24 +330,6 @@ function CreateSearchTable(db_result)
    
 }
 
-
-function getFullName()
-{
-
-    var xhr = new XMLHttpRequest();
-    var json_response="";
-    xhr.onreadystatechange = function(){
-        if(xhr.readyState == 4 && xhr.status==200 ){
-
-            json_response = xhr.responseText;
-            var result = JSON.parse(json_response);
-            return result.USERFIRSTNAMEENG+result.USERLASTNAMEENG;
-        }
-    };
-    xhr.open("GET", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=get_user_name", false);
-    xhr.send();
-
-}
 
 function get_session_registration_info()
 {
