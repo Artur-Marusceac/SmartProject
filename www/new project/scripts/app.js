@@ -56,6 +56,15 @@ window.onload= function() {
     var project_info = document.getElementById("project_info_container");
     if (project_info!==null)
         get_project_info();
+
+    var welcome_user_div = window.document.getElementById("welcome_user");
+    if (welcome_user_div!=null)
+    {
+        var user_full_name = getFullName();
+        var p = window.document.createElement("p");
+        p.innerText = "Welcome " + user_full_name;
+        welcome_user_div.appendChild(p);
+    }
 };
 
 function PicturesFromDir(){
@@ -246,4 +255,23 @@ function CreateSearchTable(db_result)
        }
     }
    
+}
+
+
+function getFullName()
+{
+
+    var xhr = new XMLHttpRequest();
+    var json_response="";
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState == 4 && xhr.status==200 ){
+
+            json_response = xhr.responseText;
+            var result = JSON.parse(json_response);
+            return result;
+        }
+    };
+    xhr.open("GET", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=get_user_name", false);
+    xhr.send();
+
 }
