@@ -69,6 +69,10 @@ window.onload= function() {
      var my_project_info=document.getElementById("Fourth_Year_Project_Info");
     if (my_project_info!==null)
         get_my_project_info();
+    
+    var session_registration=document.getElementById("Session_Registration");
+    if(session_registration!==null)
+        get_session_registration_info();
 };
 
 function PicturesFromDir(){
@@ -328,5 +332,70 @@ function getFullName()
     };
     xhr.open("GET", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=get_user_name", false);
     xhr.send();
+
+}
+
+function get_session_registration_info()
+{
+     var session_registration=document.getElementById("Session_Registration");
+    var xhr_project_info = new XMLHttpRequest();
+    var json_response="";
+    xhr_project_info.onreadystatechange = function(){
+        if(xhr_project_info.readyState == 4 && xhr_project_info.status==200 ){
+            json_response = xhr_project_info.responseText;
+            var result = JSON.parse(json_response);
+            if (result)
+            {
+                var id_array=result[0];
+                var adviser_array = result[1];
+                var room_array=result[2];
+                var building_array=result[3];
+                var start_time_array=result[4];
+                var end_time_array=result[5];
+                var seats_counter_array=result[6];
+                var type_array=result[7];
+                for (var j=0; j< id_array.length;j++) {
+                   var div= document.createElement("div");
+                    div.setAttribute("class","portfolio-item");
+                    var header=document.createElement("h4");
+                    header.innerText(adviser_array[j]);
+                    div.appendChild(header);
+                    var emLocation=document.createElement("em");
+                    emLocation.innerText("Building: "+building_array[j]+" Room: "+room_array[j]);
+                    div.appendChild(emLocation);
+                    var emTime=document.createElement("em");
+                    emTime.innerText(start_time_array[j]+"-"+end_time_array[j]);
+                    div.appendChild(emTime);
+                    var pCounter=document.createElement("4");
+                    pCounter.innerText=("Remaining Seats: "+seats_counter_array[j]);
+                    div.appendChild(pCounter);
+                   var vButton=document.createElement("a");//TODO: add onclick!
+                    vButton.setAttribute("class","user-item-icon-1 bg-green-dark scale-hover");
+                    vButton.setAttribute("id",id_array[j]);
+                    var ivButton=document.createElement("i");
+                    ivButton.setAttribute("class","fa fa-check");
+                    vButton.appendChild(ivButton);
+                    var xButton=document.createElement("a");
+                    xButton.setAttribute("class","user-item-icon-2 bg-red-dark scale-hover");
+                    xButton.setAttribute("id",id_array[j]);
+                     var ixButton=document.createElement("i");
+                    ixButton.setAttribute("class","fa fa-time");
+                    xButton.appendChild(ixButton);
+                    if(seats_counter_array[j]>0)
+                        {
+                            div.appendChild(vButton);
+                        }
+                  
+                    div.appendChild(xButton);
+                               
+                    session_registration.appendChild(div);
+                }
+
+            }
+         
+        }
+    };
+    xhr_project_info.open("GET", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=get_session_registration_info", false);
+    xhr_project_info.send();
 
 }
