@@ -226,6 +226,8 @@ function get_my_project_info()
             var project_name = result[3].PROJECTNAMEENG;
             var project_name_element = window.document.getElementById("Project_Name");
             var span = document.createElement("span");
+            var abstract_element = window.document.getElementById("Project_Abstract");
+            abstract_element.innerText=result[4][0];
             span.setAttribute("class","highlighted bg-blue-dark color-white");
             span.innerText="Project Status:";
             status_element.appendChild(span);
