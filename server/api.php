@@ -497,7 +497,7 @@ if (isset($_GET["action"]) && in_array($_GET["action"], $possible_url))
           $value = "Missing argument";
         break;
       case "get_session_data":
-          $value = $_SESSION['user_info'][1];
+          $value = $_SESSION['user_info'];
           break;
      case "get_pictures":
         $value = get_pictures($_GET["dir"]);
