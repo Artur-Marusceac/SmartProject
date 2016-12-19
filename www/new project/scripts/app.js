@@ -58,13 +58,17 @@ window.onload= function() {
         get_project_info();
 
     var welcome_user_div = window.document.getElementById("welcome_user");
-    if (welcome_user_div!=null)
+    if (welcome_user_div!==null)
     {
         var user_full_name = getFullName();
         var p = window.document.createElement("p");
         p.innerText = "Welcome " + user_full_name;
         welcome_user_div.appendChild(p);
     }
+    
+     var my_project_info=document.getElementById("Fourth_Year_Project_Info");
+    if (my_project_info!==null)
+        get_my_project_info();
 };
 
 function PicturesFromDir(){
@@ -181,6 +185,55 @@ function get_project_info()
         }
     };
     xhr_project_info.open("GET", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=get_project_info", false);
+    xhr_project_info.send();
+
+}
+
+function get_my_project_info()
+{
+    var xhr_project_info = new XMLHttpRequest();
+    var json_response="";
+    xhr_project_info.onreadystatechange = function(){
+        if(xhr_project_info.readyState == 4 && xhr_project_info.status==200 ){
+
+            json_response = xhr_project_info.responseText;
+            var result = JSON.parse(json_response);
+            if (result)
+            {
+                var adviser_text = document.getElementById("Adviser_Name");
+                 var adviser_array = result[1];
+                for (var j=0; j< adviser_array.length;j++) {
+                    adviser_text.appendChild(document.createTextNode(adviser_array[j]));
+                    adviser_text.appendChild(document.createElement("br"));
+                }
+                var student_text = document.getElementById("Students_Name");
+                var student_array = result[0];
+                for (var i=0;i<student_array.length;i++)
+                {
+                    student_text.appendChild(document.createTextNode(student_array[i][0]));
+                    student_text.appendChild(document.createElement("br"));
+                    /*var mail = "mailto:"+student_array[i][1]+"?subject=New Mail&body=Mail text body";
+                    var mlink = document.createElement('a');
+                    mlink.setAttribute('href', mail);
+                    mlink.innerText="mail to: "+student_array[i][0];
+                    td.appendChild(mlink);
+                    td.appendChild(document.createElement("br"));*/
+                }
+
+            }
+            var status_element = window.document.getElementById("Project_Status");
+            var status_project = result[2][0].STATUSDESC;
+            var project_name = result[3].PROJECTNAMEENG;
+            var project_name_element = window.document.getElementById("project_name");
+            var span = document.createElement("span");
+            span.setAttribute("class","highlighted bg-blue-dark color-white");
+            span.innerText="Project Status:";
+            status_element.appendChild(span);
+            status_element.appendChild(document.createTextNode(status_project));
+            project_name_element.innerText = "Information for project: "+project_name;
+        }
+    };
+    xhr_project_info.open("GET", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=get_project_by_user_id", false);
     xhr_project_info.send();
 
 }
