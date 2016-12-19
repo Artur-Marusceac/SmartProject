@@ -410,7 +410,12 @@ function bgu_login($username,$password)
     
 }
 
-
+function get_user_name($user_id)
+{
+    $dbLink = Zend_Registry::get('dbLink');
+    $row = $dbLink->fetchRow("SELECT `USERFIRSTNAMEENG`,`USERLASTNAMEENG` FROM `USERS` WHERE `USERID`=?",$user_id);
+    return $row;
+}
 
 function get_user_list()
 {
@@ -462,7 +467,7 @@ function get_advisers_list()
 
 }
 
-$possible_url = array("get_user_list", "get_user","is_user_exist","bgu_login","get_advisers_list","get_pictures","search_project", "get_search_results","get_project_by_user_id","get_project_info");
+$possible_url = array("get_user_list", "get_user","is_user_exist","bgu_login","get_advisers_list","get_pictures","search_project", "get_search_results","get_project_by_user_id","get_project_info","get_user_name");
 
 $value = "An error has occurred";
 
@@ -489,12 +494,15 @@ if (isset($_GET["action"]) && in_array($_GET["action"], $possible_url))
           $value = bgu_login($_GET["username"],$_GET["password"]);
           break;
       case "get_project_by_user_id":
-          $value = get_project_info_by_user_id($_GET["user_id"]);
+          $value = get_project_info_by_user_id($_SESSION['user_info'][1]);
           break;
       case "get_project_info":
           if ($_SESSION["proj_id_for_proj_info"]!="") {
               $value = get_project_info_by_project_id($_SESSION["proj_id_for_proj_info"]);
           }
+          break;
+      case "get_user_name":
+          $value = get_user_name($_SESSION['user_info'][1]);
           break;
       case "get_advisers_list":
           $value = get_advisers_list();
