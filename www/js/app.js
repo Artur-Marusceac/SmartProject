@@ -60,6 +60,7 @@ window.onload= function()
     if (project_info_table!==null)
         get_project_info();
 };
+};
 
 
 

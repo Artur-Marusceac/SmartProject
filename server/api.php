@@ -77,7 +77,7 @@ function search_project($year,$student_name,$adviser,$project_name)
     ;
 
     if ($adviser!="All"){
-        $adviser_split = explode('%20',$adviser);
+        $adviser_split = explode('_',$adviser);
         $select_adviser_id = $db->select()
             ->from('USERS',	array('USERID'))
             ->where('USERFIRSTNAMEENG = ?', $adviser_split[0])
