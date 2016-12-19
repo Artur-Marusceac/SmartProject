@@ -330,7 +330,7 @@ function getFullName()
 
             json_response = xhr.responseText;
             var result = JSON.parse(json_response);
-            return result;
+            return result.USERFIRSTNAMEENG+result.USERLASTNAMEENG;
         }
     };
     xhr.open("GET", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=get_user_name", false);
