@@ -182,8 +182,8 @@ function search_command()
     var student_name =window.document.getElementById("student_name").value;
     var adviser =window.document.getElementById("advisers_list").value;
     var project_name =window.document.getElementById("project_name").value;
-    var pathArray = window.location.pathname.split( '/' );
-    var redirect= pathArray[pathArray.length-2] ;//TODO: Test For Correct Redirect
+   // var pathArray = window.location.pathname.split( '/' );
+   // var redirect= pathArray[pathArray.length-2] ;//TODO: Test For Correct Redirect
 
     var xhr_search = new XMLHttpRequest();
     var json_response="";
@@ -193,13 +193,7 @@ function search_command()
             json_response = xhr_search.responseText;
             var result = JSON.parse(json_response);
             if (result.toString() == "true")
-                if(redirect=="Third")
-                    location.href="Third/Search_Results.html";
-                else if(redirect=="Fourth")
-                    location.href="Fourth/Search_Results.html";
-                else if(redirect=="Adviser")
-                    location.href="Adviser/Search_Results.html";
-                else location.href="Search_Results.html";
+                location.href="Search_Results.html";
                     
         }
     };
