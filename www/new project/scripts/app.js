@@ -193,8 +193,25 @@ function get_project_info()
 
 }
 
+function getSessionData()
+{
+    var xhr_project_info = new XMLHttpRequest();
+    var json_response="";
+    xhr_project_info.onreadystatechange = function() {
+        if (xhr_project_info.readyState == 4 && xhr_project_info.status == 200) {
+
+            json_response = xhr_project_info.responseText;
+            var result = JSON.parse(json_response);
+        }
+    }
+    xhr_project_info.open("GET", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=get_session_data", false);
+    xhr_project_info.send();
+}
+
 function get_my_project_info()
 {
+    getSessionData();
+
     var xhr_project_info = new XMLHttpRequest();
     var json_response="";
     xhr_project_info.onreadystatechange = function(){
