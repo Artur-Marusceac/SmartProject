@@ -183,7 +183,7 @@ function get_project_info()
                 var project_name = result[2].PROJECTNAMEENG;
                 var abstract = result[3].ABSTRACTHEB;
                 var project_name_element = window.document.getElementById("project_name");
-                project_name_element.innerText = "Information for project: "+project_name;
+                project_name_element.innerText = project_name;
                 var abstract_element = window.document.getElementById("abstract_p");
                 abstract_element.innerText = abstract;
             }
