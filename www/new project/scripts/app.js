@@ -180,7 +180,7 @@ function get_project_info()
                         student_text.appendChild(document.createElement("br"));
                     }
                 }
-                var project_name = result[2];
+                var project_name = result[2].PROJECTNAMEENG;
                 var abstract = result[3].ABSTRACTHEB;
                 var project_name_element = window.document.getElementById("project_name");
                 project_name_element.innerText = "Information for project: "+project_name;
