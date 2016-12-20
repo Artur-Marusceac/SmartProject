@@ -178,7 +178,7 @@ function get_project_info_by_project_id($project_id)
 function getSuggAbstract($project_id)
 {
     $db = Zend_Registry::get('db');
-    $select = $db->select()->from('PROJECTSUGGESTION', array('ABSTRACTENG','ABSTRACTHEB'))
+    $select = $db->select()->from('PROJECTSUGGESTIONS', array('ABSTRACTENG','ABSTRACTHEB'))
         ->where('PROJECTID = ?', $project_id)
     ;
     $data = $db->fetchRow($select);
