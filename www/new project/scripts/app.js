@@ -147,7 +147,7 @@ function set_project_id(project_id)
             json_response = xhr.responseText;
             var result = JSON.parse(json_response);
             if (result.toString() == "OK")
-                location.href="Project_Info.html";
+                location.href="My_Project_Info.html";
         }
     };
     xhr.open("POST", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=set_project_id_for_project_info&project_id="+project_id.toString(), false);
