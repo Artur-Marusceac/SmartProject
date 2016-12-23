@@ -276,14 +276,15 @@ function search_command()
     xhr_search.send(year,student_name,adviser,project_name);
 }
 
-function createGradesTable(grades)
+function createGradesTable()
 {
     var xhr_project_info = new XMLHttpRequest();
     var json_response="";
     xhr_project_info.onreadystatechange = function(){
         if(xhr_project_info.readyState == 4 && xhr_project_info.status==200 ){
+            json_response = xhr_search.responseText;
+            var grades = JSON.parse(json_response);
             var grade_table = window.document.getElementById("grades");
-
             var tr = document.createElement('TR');
             var td = document.createElement('TD');
             td.setAttribute("class","table-title");
