@@ -440,6 +440,21 @@ function get_advisers_list()
 
 }
 
+
+function getStudentGrades($studentId){
+    $db = Zend_Registry::get('db');
+    $select = $db->select()->from('GRADES',
+        array('GRADETYPE','GRADE','GRADEDATE'))
+        ->where('STUDENTID=?', $studentId)
+        ->order('GRADETYPE ASC');
+    $grades = $db->fetchAll($select);
+    $select = $db->select()->from('GRADETYPES',
+        array('GRADETYPE','GRADENAMEENG'));
+    $types=$db->fetchAll($select);
+    return $grades;
+}
+
+
 function get_conference_sessions()
 {
     $db = Zend_Registry::get('db');
@@ -449,7 +464,7 @@ function get_conference_sessions()
     return $sessions;
 }
 
-$possible_url = array("get_user_list","get_session_data" ,"get_user","is_user_exist","bgu_login","get_advisers_list","get_pictures","search_project", "get_search_results","get_project_by_user_id","get_project_info","get_user_name","get_conference_sessions");
+$possible_url = array("get_user_list","get_session_data" ,"get_user","is_user_exist","bgu_login","get_advisers_list","get_pictures","search_project", "get_search_results","get_project_by_user_id","get_project_info","get_user_name","get_conference_sessions","get_student_grades");
 
 $value = "An error has occurred";
 
@@ -491,6 +506,9 @@ if (isset($_GET["action"]) && in_array($_GET["action"], $possible_url))
           break;
       case "get_user_name":
           $value = get_user_name($_SESSION['user_info'][1]);
+          break;
+      case "get_student_grades":
+          $value = getStudentGrades($_SESSION['user_info'][1]);
           break;
       case "get_advisers_list":
           $value = get_advisers_list();
