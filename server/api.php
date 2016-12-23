@@ -444,15 +444,17 @@ function get_advisers_list()
 function getStudentGrades($studentId){
     $db = Zend_Registry::get('db');
     $select = $db->select()->from('GRADES',
-        array('GRADETYPE','GRADE','GRADEDATE'))
+        array('GRADE','GRADEDATE'))
         ->where('STUDENTID=?', $studentId)
         ->order('GRADETYPE ASC');
+    $select->joinLeft('GRADETYPES',
+        'GRADETYPES.GRADETYPE = GRADES.GRADETYPE',
+        array('GRADENAMEENG'));
     $grades = $db->fetchAll($select);
-    $select = $db->select()->from('GRADETYPES',
-        array('GRADETYPE','GRADENAMEENG'));
-    $types=$db->fetchAll($select);
+
     return $grades;
 }
+
 
 
 function get_conference_sessions()
