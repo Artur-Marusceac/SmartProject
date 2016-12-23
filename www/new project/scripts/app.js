@@ -342,6 +342,7 @@ function get_session_registration_info()
                     var emLocation=document.createElement("em");
                     emLocation.innerText="Building: "+result[j].BUILDING+" Room: "+result[j].ROOM;
                     div.appendChild(emLocation);
+                    div.appendChild(document.createElement("br"));
                     var emTime=document.createElement("em");
                     emTime.innerText=result[j].START_TIME+"-"+result[j].END_TIME;
                     div.appendChild(emTime);
