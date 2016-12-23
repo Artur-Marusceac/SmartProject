@@ -440,6 +440,12 @@ function get_advisers_list()
 
 }
 
+function getAllProjectLog($projectId){
+    $select = $this->select()->from($this)
+        ->where('PROJECTID=?', $projectId)
+        ->order('STAMP ASC');
+    return $this->fetchAll($select);
+}
 
 function getStudentGrades($studentId){
     $db = Zend_Registry::get('db');
@@ -466,7 +472,7 @@ function get_conference_sessions()
     return $sessions;
 }
 
-$possible_url = array("get_user_list","get_session_data" ,"get_user","is_user_exist","bgu_login","get_advisers_list","get_pictures","search_project", "get_search_results","get_project_by_user_id","get_project_info","get_user_name","get_conference_sessions","get_student_grades");
+$possible_url = array("get_user_list","get_session_data" ,"get_user","is_user_exist","bgu_login","get_advisers_list","get_pictures","search_project", "get_search_results","get_project_by_user_id","get_project_info","get_user_name","get_conference_sessions","get_student_grades","get_project_log");
 
 $value = "An error has occurred";
 
@@ -501,6 +507,9 @@ if (isset($_GET["action"]) && in_array($_GET["action"], $possible_url))
       case "get_conference_sessions":
           $value = get_conference_sessions();
           break;
+      case "get_project_log":
+          $value = getAllProjectLog($_SESSION['user_info'][1]);
+          break;
       case "get_project_info":
           if ($_SESSION["proj_id_for_proj_info"]!="") {
               $value = get_project_info_by_project_id($_SESSION["proj_id_for_proj_info"]);
@@ -533,6 +542,8 @@ if (isset($_REQUEST["action"]) && in_array($_REQUEST["action"], $possible_post_a
                 $value="OK";
             break;
     }
+
+
 
 
 exit(json_encode($value));

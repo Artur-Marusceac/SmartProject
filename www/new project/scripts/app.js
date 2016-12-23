@@ -78,8 +78,11 @@ window.onload= function() {
     }
     
      var my_project_info=document.getElementById("Fourth_Year_Project_Info");
-    if (my_project_info!==null)
+    if (my_project_info!==null) {
         get_my_project_info();
+
+    }
+
     
     var session_registration=document.getElementById("Session_Registration");
     if(session_registration!==null)
@@ -273,7 +276,44 @@ function search_command()
     xhr_search.send(year,student_name,adviser,project_name);
 }
 
+function createGradesTable(grades)
+{
+    var xhr_project_info = new XMLHttpRequest();
+    var json_response="";
+    xhr_project_info.onreadystatechange = function(){
+        if(xhr_project_info.readyState == 4 && xhr_project_info.status==200 ){
+            var grade_table = window.document.getElementById("grades");
 
+            var tr = document.createElement('TR');
+            var td = document.createElement('TD');
+            td.setAttribute("class","table-title");
+            td.innerText="Status";
+            tr.appendChild(td);
+            myTableDiv.appendChild(tr);
+            td = document.createElement('TD');
+            td.setAttribute("class","table-title");
+            td.innerText="Grade";
+            tr.appendChild(td);
+            myTableDiv.appendChild(tr);
+            for (var i=0; i<grades.length; i++){
+                tr = document.createElement('TR');
+                if(i%2===0) tr.setAttribute("class","even");
+                td = document.createElement('TD');
+                td.setAttribute("class","table-sub-title");
+                td.innerText=grades[i].GRADENAMEENG;
+                tr.appendChild(td);
+                myTableDiv.appendChild(tr);
+                td = document.createElement('TD');
+                td.setAttribute("class","table-sub-title");
+                td.innerText=grades[i].GRADE;
+                tr.appendChild(td);
+                myTableDiv.appendChild(tr);
+            }
+        }
+    };
+    xhr_project_info.open("GET", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=get_student_grades", false);
+    xhr_project_info.send();
+}
 
 function CreateSearchTable(db_result)
 {
