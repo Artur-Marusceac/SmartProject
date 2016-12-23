@@ -445,7 +445,7 @@ function get_conference_sessions()
     $db = Zend_Registry::get('db');
     $select=$db->select() ->from('CONFERENCE_SESSIONS',
         array('ID','HEAD','BUILDING','ROOM','START_TIME','END_TIME','SEATS','TYPE'));
-    $sessions= $db->fetchRow($select);
+    $sessions= $db->fetchAll($select);
     return $sessions;
 }
 
