@@ -84,6 +84,7 @@ window.onload= function() {
     var session_registration=document.getElementById("Session_Registration");
     if(session_registration!==null)
         get_session_registration_info();
+
 };
 
 function PicturesFromDir(){
@@ -380,7 +381,7 @@ function get_session_registration_info()
          
         }
     };
-    xhr_project_info.open("GET", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=get_session_registration_info", false);
+    xhr_project_info.open("GET", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=get_conference_sessions", false);
     xhr_project_info.send();
 
 }
