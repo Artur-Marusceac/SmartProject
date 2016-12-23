@@ -332,46 +332,37 @@ function get_session_registration_info()
             var result = JSON.parse(json_response);
             if (result)
             {
-                var id_array=result[0];
-                var adviser_array = result[1];
-                var room_array=result[2];
-                var building_array=result[3];
-                var start_time_array=result[4];
-                var end_time_array=result[5];
-                var seats_counter_array=result[6];
-                var type_array=result[7];
-                for (var j=0; j< id_array.length;j++) {
-                   var div= document.createElement("div");
+                for (var j=0; j<result.length;j++)
+                {
+                    var div= document.createElement("div");
                     div.setAttribute("class","portfolio-item");
                     var header=document.createElement("h4");
-                    header.innerText(adviser_array[j]);
+                    header.innerText=result[j].HEAD;
                     div.appendChild(header);
                     var emLocation=document.createElement("em");
-                    emLocation.innerText("Building: "+building_array[j]+" Room: "+room_array[j]);
+                    emLocation.innerText="Building: "+result[j].BUILDING+" Room: "+result[j].ROOM;
                     div.appendChild(emLocation);
                     var emTime=document.createElement("em");
-                    emTime.innerText(start_time_array[j]+"-"+end_time_array[j]);
+                    emTime.innerText=result[j].START_TIME+"-"+result[j].END_TIME;
                     div.appendChild(emTime);
                     var pCounter=document.createElement("4");
-                    pCounter.innerText=("Remaining Seats: "+seats_counter_array[j]);
+                    pCounter.innerText="Remaining Seats: "+result[j].SEATS;
                     div.appendChild(pCounter);
-                   var vButton=document.createElement("a");//TODO: add onclick!
+                    var vButton=document.createElement("a");//TODO: add onclick!
                     vButton.setAttribute("class","user-item-icon-1 bg-green-dark scale-hover");
-                    vButton.setAttribute("id",id_array[j]);
+                    vButton.setAttribute("id",result[j].ID);
                     var ivButton=document.createElement("i");
                     ivButton.setAttribute("class","fa fa-check");
                     vButton.appendChild(ivButton);
                     var xButton=document.createElement("a");
                     xButton.setAttribute("class","user-item-icon-2 bg-red-dark scale-hover");
-                    xButton.setAttribute("id",id_array[j]);
-                     var ixButton=document.createElement("i");
+                    xButton.setAttribute("id",result[j].ID);
+                    var ixButton=document.createElement("i");
                     ixButton.setAttribute("class","fa fa-time");
                     xButton.appendChild(ixButton);
-                    if(seats_counter_array[j]>0)
-                        {
-                            div.appendChild(vButton);
-                        }
-                  
+                    if(result[j].SEATS>0) {
+                        div.appendChild(vButton);
+                    }
                     div.appendChild(xButton);
                                
                     session_registration.appendChild(div);
