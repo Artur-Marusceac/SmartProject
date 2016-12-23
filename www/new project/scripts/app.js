@@ -345,7 +345,7 @@ function get_session_registration_info()
                     var emTime=document.createElement("em");
                     emTime.innerText=result[j].START_TIME+"-"+result[j].END_TIME;
                     div.appendChild(emTime);
-                    var pCounter=document.createElement("4");
+                    var pCounter=document.createElement("h4");
                     pCounter.innerText="Remaining Seats: "+result[j].SEATS;
                     div.appendChild(pCounter);
                     var vButton=document.createElement("a");//TODO: add onclick!
