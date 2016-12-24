@@ -555,7 +555,7 @@ if (isset($_GET["action"]) && in_array($_GET["action"], $possible_url))
           $value = get_search_results();
           break;
       case "get_project_log":
-          $project_id = get_project_id_by_student_id($_SESSION['user_info'][1]);
+          $project_id = get_project_id_by_student_id($_SESSION['user_info'][1])["PROJECTID"];
           $value = get_project_log($project_id);
           break;
   }
