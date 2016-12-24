@@ -81,6 +81,7 @@ window.onload= function() {
     if (my_project_info!==null) {
         get_my_project_info();
         createGradesTable();
+        createLogTable();
     }
 
     
@@ -416,4 +417,55 @@ function get_session_registration_info()
     xhr_project_info.open("GET", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=get_conference_sessions", false);
     xhr_project_info.send();
 
+}
+
+
+function createLogTable()
+{
+    var xhr_log_info = new XMLHttpRequest();
+    var json_response="";
+    xhr_log_info.onreadystatechange = function(){
+        if(xhr_log_info.readyState == 4 && xhr_log_info.status==200 ){
+            json_response = xhr_log_info.responseText;
+            var logs = JSON.parse(json_response);
+            var log_table = window.document.getElementById("log");
+            var tr = document.createElement('TR');
+            var td = document.createElement('TD');
+            td.setAttribute("class","table-title");
+            td.innerText="Date";
+            tr.appendChild(td);
+            log_table.appendChild(tr);
+            td = document.createElement('TD');
+            td.setAttribute("class","table-title");
+            td.innerText="Name";
+            tr.appendChild(td);
+            log_table.appendChild(tr);
+            td = document.createElement('TD');
+            td.setAttribute("class","table-title");
+            td.innerText="Action";
+            tr.appendChild(td);
+            log_table.appendChild(tr);
+            for (var i=0; i<grades.length; i++){
+                tr = document.createElement('TR');
+                if(i%2===0) tr.setAttribute("class","even");
+                td = document.createElement('TD');
+                td.setAttribute("class","table-sub-title");
+                td.innerText=logs[i].TIMEDATE;
+                tr.appendChild(td);
+                log_table.appendChild(tr);
+                td = document.createElement('TD');
+                td.setAttribute("class","table-sub-title");
+                td.innerText=logs[i].USERNAME;
+                tr.appendChild(td);
+                log_table.appendChild(tr);
+                td = document.createElement('TD');
+                td.setAttribute("class","table-sub-title");
+                td.innerText=logs[i].ACTION;
+                tr.appendChild(td);
+                log_table.appendChild(tr);
+            }
+        }
+    };
+    xhr_log_info.open("GET", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=get_project_log", false);
+    xhr_log_info.send();
 }

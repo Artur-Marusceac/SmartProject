@@ -380,6 +380,17 @@ function bgu_login($username,$password)
     
 }
 
+function get_project_id_by_student_id($studentId)
+{
+    $db = Zend_Registry::get('db');
+    $select=$db->select() ->from('STUDENTSPROJECTS',
+        array('PROJECTID'))
+        ->where('STUDENTID = ?', $studentId);
+    $projectId= $db->fetchRow($select);
+    return $projectId;
+}
+
+
 function get_user_name($user_id)
 {
     $db = Zend_Registry::get('db');
@@ -440,12 +451,12 @@ function get_advisers_list()
 
 }
 
-function getAllProjectLog($projectId){
+function get_project_log($projectId){
     $db = Zend_Registry::get('db');
-    $select = $db->select()->from('LOGS')
+    $select = $db->select()->from('LOGS',array('ACTION','USERNAME','TIMEDATE'))
         ->where('PROJECTID=?', $projectId)
         ->order('STAMP ASC');
-    return $this->fetchAll($select);
+    return $db->fetchAll($select);
 }
 
 function getStudentGrades($studentId){
@@ -544,6 +555,10 @@ if (isset($_GET["action"]) && in_array($_GET["action"], $possible_url))
           break;
       case "get_search_results":
           $value = get_search_results();
+          break;
+      case "get_project_log":
+          $project_id = get_project_id_by_student_id($_SESSION['user_info'][1]);
+          $value = get_project_log($project_id);
           break;
   }
 }
