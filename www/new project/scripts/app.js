@@ -80,7 +80,7 @@ window.onload= function() {
      var my_project_info=document.getElementById("Fourth_Year_Project_Info");
     if (my_project_info!==null) {
         get_my_project_info();
-
+        createGradesTable();
     }
 
     
@@ -200,7 +200,6 @@ function get_project_info()
 
 function get_my_project_info()
 {
-
     var xhr_project_info = new XMLHttpRequest();
     var json_response="";
     xhr_project_info.onreadystatechange = function(){
