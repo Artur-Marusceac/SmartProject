@@ -515,7 +515,7 @@ function get_project_dates($takenProjectId){
         )
     )
         ->where('TAKENPROJECTID=?', $takenProjectId);
-    return $this->fetchRow($select);
+    return $db->fetchRow($select);
 }
 
 
