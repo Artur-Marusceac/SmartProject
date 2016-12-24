@@ -492,7 +492,7 @@ function createSubmissionDatesTable()
             td.innerText="Date";
             tr.appendChild(td);
             date_table.appendChild(tr);
-            for (var i=0; i<dates.length; i++){
+            for (var i=0; i<dates.length;i++){
                 tr = document.createElement('TR');
                 if(i%2===0) tr.setAttribute("class","even");
                 td = document.createElement('TD');
