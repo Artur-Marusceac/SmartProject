@@ -445,7 +445,7 @@ function createLogTable()
             td.innerText="Action";
             tr.appendChild(td);
             log_table.appendChild(tr);
-            for (var i=0; i<grades.length; i++){
+            for (var i=0; i<logs.length; i++){
                 tr = document.createElement('TR');
                 if(i%2===0) tr.setAttribute("class","even");
                 td = document.createElement('TD');
