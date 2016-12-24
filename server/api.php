@@ -518,6 +518,20 @@ function get_project_dates($takenProjectId){
     return $db->fetchRow($select);
 }
 
+function get_messages($recipient=null){
+    $db = Zend_Registry::get('db');
+    $curDate = date('Y-M-d');
+    $select = $db->select()->from('MESSAGES',array('TITLE','CONTENT','LINK','USERNAME','TIMEDATE'))
+        ->where('RECIPIENT=?', 0)
+        ->where('DUEDATE >= ?',$curDate)
+        ->order('MID ASC');
+    if ($recipient){
+        $select->orWhere('RECIPIENT=?', $recipient);
+    }
+    $result = $db->fetchAll($select);
+    return $result;
+}
+
 
 function get_conference_sessions()
 {
@@ -528,7 +542,7 @@ function get_conference_sessions()
     return $sessions;
 }
 
-$possible_url = array("get_user_list","get_session_data" ,"get_user","is_user_exist","bgu_login","get_advisers_list","get_pictures","search_project", "get_search_results","get_project_by_user_id","get_project_info","get_user_name","get_conference_sessions","get_student_grades","get_project_log","get_project_dates");
+$possible_url = array("get_user_list","get_session_data" ,"get_user","is_user_exist","bgu_login","get_advisers_list","get_pictures","search_project", "get_search_results","get_project_by_user_id","get_project_info","get_user_name","get_conference_sessions","get_student_grades","get_project_log","get_project_dates", "get_messages");
 
 $value = "An error has occurred";
 
@@ -581,6 +595,9 @@ if (isset($_GET["action"]) && in_array($_GET["action"], $possible_url))
           break;
       case "get_advisers_list":
           $value = get_advisers_list();
+          break;
+      case "get_messages":
+          $value = get_messages();
           break;
      case "search_project":
           $value = search_project($_GET["year"],$_GET["student_name"],$_GET["adviser"],$_GET["project_name"]);

@@ -90,6 +90,9 @@ window.onload= function() {
     if(session_registration!==null)
         get_session_registration_info();
 
+    var messages = document.getElementById("Messages");
+    if(messages!==null)
+        get_messages();
 };
 
 function PicturesFromDir(){
@@ -528,4 +531,48 @@ function createSubmissionDatesTable()
     };
     xhr_dates_info.open("GET", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=get_project_dates", false);
     xhr_dates_info.send();
+}
+
+
+function get_messages()
+{
+    var messages=document.getElementById("messages");
+    var xhr_messages = new XMLHttpRequest();
+    var json_response="";
+    xhr_messages.onreadystatechange = function(){
+        if(xhr_messages.readyState == 4 && xhr_messages.status==200 ){
+            json_response = xhr_messages.responseText;
+            var result = JSON.parse(json_response);
+            if (result)
+            {
+                for (var j=0; j<result.length;j++)
+                {
+                    var div= window.document.createElement("div");
+                    div.setAttribute("class","portfolio-item");
+                    var header=window.document.createElement("h4");
+                    header.innerText=result[j].TITLE;
+                    div.appendChild(header);
+                    var emContent=window.document.createElement("em");
+                    emContent.innerText=result[j].CONTENT;
+                    div.appendChild(emLocation);
+                    div.appendChild(window.document.createElement("br"));
+                    var emTime=window.document.createElement("em");
+                    emTime.innerText=result[j].TIMEDATE;
+                    div.appendChild(emTime);
+                    if (result[j].LINK)
+                    {
+                        var link = window.document.createElement("a");
+                        link.setAttribute("href",result[j].LINK);
+                        link.innerText = "download";
+                        div.appendChild(link);
+                    }
+
+                    messages.appendChild(div);
+                }
+            }
+
+        }
+    };
+    xhr_messages.open("GET", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=get_messages", false);
+    xhr_messages.send();
 }
