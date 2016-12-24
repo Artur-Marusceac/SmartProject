@@ -461,7 +461,7 @@ function getStudentGrades($studentId){
     $grades = $db->fetchAll($select);
 
     return $grades;*/
-    $sql = "SELECT GRADES.GRADE,GRADETYPES.GRADENAMEENG FROM GRADES, GRADETYPES WHERE GRADES.GRADETYPE=GRADETYPES.GRADETYPE AND GRADES.STUDENTID="+$studentId;
+    $sql = "SELECT GRADES.GRADE,GRADETYPES.GRADENAMEENG FROM GRADES, GRADETYPES WHERE GRADES.GRADETYPE=GRADETYPES.GRADETYPE AND GRADES.STUDENTID=".$studentId;
     $conn = get_connection();
     $result = $conn->query($sql);
     $grades= array();
