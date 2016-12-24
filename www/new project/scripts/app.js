@@ -554,7 +554,7 @@ function get_messages()
                     div.appendChild(header);
                     var emContent=window.document.createElement("em");
                     emContent.innerText=result[j].CONTENT;
-                    div.appendChild(emLocation);
+                    div.appendChild(emContent);
                     div.appendChild(window.document.createElement("br"));
                     var emTime=window.document.createElement("em");
                     emTime.innerText=result[j].TIMEDATE;
