@@ -82,6 +82,7 @@ window.onload= function() {
         get_my_project_info();
         createGradesTable();
         createLogTable();
+        createSubmissionDatesTable();
     }
 
     
