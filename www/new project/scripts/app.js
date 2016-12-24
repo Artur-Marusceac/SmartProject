@@ -536,7 +536,7 @@ function createSubmissionDatesTable()
 
 function get_messages()
 {
-    var messages=document.getElementById("messages");
+    var messages=document.getElementById("Messages");
     var xhr_messages = new XMLHttpRequest();
     var json_response="";
     xhr_messages.onreadystatechange = function(){
