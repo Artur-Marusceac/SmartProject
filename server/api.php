@@ -488,6 +488,35 @@ function getStudentGrades($studentId){
     return $grades;
 }
 
+function get_taken_project_id_from_project_id($projectId)
+{
+    $db = Zend_Registry::get('db');
+    $select=$db->select() ->from('PROJECTS',
+        array('TAKENPROJECTID'))
+        ->where('PROJECTID=?', $projectId);
+    $taken_id= $db->fetchRow($select);
+    return $taken_id;
+}
+
+function get_project_dates($takenProjectId){
+    $db = Zend_Registry::get('db');
+    $select = $db->select()->from('PROJECTDATES',
+        array('pdr_sub'=> 'PDRS',       'pdr_ret'=>'PDRR',
+            'pdr_cor_sub'=> 'PDRCS',  'pdr_cor_ret'=>'PDRCR',
+            'pre_sub' => 'PS',        'pre_ret'=> 'PR',
+            'pre_cor_sub'=>'PCS',     'pre_cor_ret'=>'PCR',
+            'pro_sub'=>'PSS',         'pro_ret'=>'PSR',
+            'pro_cor_sub'=>'PSCS',    'pro_cor_ret'=>'PSCR',
+            'pro_2_sub'=>'PS2S',         'pro_2_ret'=>'PS2R',
+            'pro_cor_2_sub'=>'PSC2S',    'pro_cor_2_ret'=>'PSC2R',
+            'poster'=> 'POSTER',      'presentation'=>'PRESENTATION',
+            'fin_sub'=>'FS',          'fin_ret'=>'FR',
+            'fin_cor_sub'=>'FCS',     'fin_cor_ret'=>'FCR'
+        )
+    )
+        ->where('TAKENPROJECTID=?', $takenProjectId);
+    return $this->fetchRow($select);
+}
 
 
 function get_conference_sessions()
@@ -499,7 +528,7 @@ function get_conference_sessions()
     return $sessions;
 }
 
-$possible_url = array("get_user_list","get_session_data" ,"get_user","is_user_exist","bgu_login","get_advisers_list","get_pictures","search_project", "get_search_results","get_project_by_user_id","get_project_info","get_user_name","get_conference_sessions","get_student_grades","get_project_log");
+$possible_url = array("get_user_list","get_session_data" ,"get_user","is_user_exist","bgu_login","get_advisers_list","get_pictures","search_project", "get_search_results","get_project_by_user_id","get_project_info","get_user_name","get_conference_sessions","get_student_grades","get_project_log","get_project_dates");
 
 $value = "An error has occurred";
 
@@ -541,6 +570,11 @@ if (isset($_GET["action"]) && in_array($_GET["action"], $possible_url))
           break;
       case "get_user_name":
           $value = get_user_name($_SESSION['user_info'][1]);
+          break;
+      case "get_project_dates":
+          $project_id = get_project_id_by_student_id($_SESSION['user_info'][1])["PROJECTID"];
+          $taken_id = get_taken_project_id_from_project_id($project_id)["TAKENPROJECTID"];
+          $value = get_project_dates($taken_id);
           break;
       case "get_student_grades":
           $value = getStudentGrades($_SESSION['user_info'][1]);

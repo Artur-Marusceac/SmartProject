@@ -469,3 +469,49 @@ function createLogTable()
     xhr_log_info.open("GET", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=get_project_log", false);
     xhr_log_info.send();
 }
+
+
+function createSubmissionDatesTable()
+{
+    var xhr_dates_info = new XMLHttpRequest();
+    var json_response="";
+    xhr_dates_info.onreadystatechange = function(){
+        if(xhr_dates_info.readyState == 4 && xhr_dates_info.status==200 ){
+            json_response = xhr_dates_info.responseText;
+            var dates = JSON.parse(json_response);
+            var date_table = window.document.getElementById("dates");
+            var tr = document.createElement('TR');
+            var td = document.createElement('TD');
+            td.setAttribute("class","table-title");
+            td.innerText="Report Name";
+            tr.appendChild(td);
+            date_table.appendChild(tr);
+            td = document.createElement('TD');
+            td.setAttribute("class","table-title");
+            td.innerText="Date";
+            tr.appendChild(td);
+            date_table.appendChild(tr);
+            for (var i=0; i<dates.length; i++){
+                tr = document.createElement('TR');
+                if(i%2===0) tr.setAttribute("class","even");
+                td = document.createElement('TD');
+                td.setAttribute("class","table-sub-title");
+                td.innerText=logs[i].TIMEDATE;
+                tr.appendChild(td);
+                log_table.appendChild(tr);
+                td = document.createElement('TD');
+                td.setAttribute("class","table-sub-title");
+                td.innerText=logs[i].USERNAME;
+                tr.appendChild(td);
+                log_table.appendChild(tr);
+                td = document.createElement('TD');
+                td.setAttribute("class","table-sub-title");
+                td.innerText=logs[i].ACTION;
+                tr.appendChild(td);
+                log_table.appendChild(tr);
+            }
+        }
+    };
+    xhr_dates_info.open("GET", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=get_project_dates", false);
+    xhr_dates_info.send();
+}
