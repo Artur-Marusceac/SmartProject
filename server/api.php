@@ -441,13 +441,15 @@ function get_advisers_list()
 }
 
 function getAllProjectLog($projectId){
-    $select = $this->select()->from($this)
+    $db = Zend_Registry::get('db');
+    $select = $db->select()->from('LOGS')
         ->where('PROJECTID=?', $projectId)
         ->order('STAMP ASC');
     return $this->fetchAll($select);
 }
 
 function getStudentGrades($studentId){
+    /*
     $db = Zend_Registry::get('db');
     $select = $db->select()->from('GRADES',
         array('GRADE','GRADEDATE'))
@@ -458,6 +460,19 @@ function getStudentGrades($studentId){
         array('GRADENAMEENG'));
     $grades = $db->fetchAll($select);
 
+    return $grades;*/
+    $sql = "SELECT GRADES.GRADE,GRADETYPES.GRADENAMEENG FROM GRADES, GRADETYPES WHERE GRADES.GRADETYPE=GRADETYPES.GRADETYPE AND GRADES.STUDENTID="+$studentId;
+    $conn = get_connection();
+    $result = $conn->query($sql);
+    $grades= array();
+    if ($result->num_rows > 0) {
+        // output data of each row
+        while($row = $result->fetch_assoc()) {
+            $grade = array("status" => $row["GRADENAMEENG"], "grade" => $row["GRADE"]);
+            array_push($grades,$grade);
+        }
+    }
+    json_encode($grades);
     return $grades;
 }
 
