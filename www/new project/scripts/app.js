@@ -300,12 +300,12 @@ function createGradesTable()
                 if(i%2===0) tr.setAttribute("class","even");
                 td = document.createElement('TD');
                 td.setAttribute("class","table-sub-title");
-                td.innerText=grades[i].GRADENAMEENG;
+                td.innerText=grades[i].status;
                 tr.appendChild(td);
                 grade_table.appendChild(tr);
                 td = document.createElement('TD');
                 td.setAttribute("class","table-sub-title");
-                td.innerText=grades[i].GRADE;
+                td.innerText=grades[i].grade;
                 tr.appendChild(td);
                 grade_table.appendChild(tr);
             }
