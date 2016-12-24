@@ -289,12 +289,12 @@ function createGradesTable()
             td.setAttribute("class","table-title");
             td.innerText="Status";
             tr.appendChild(td);
-            myTableDiv.appendChild(tr);
+            grade_table.appendChild(tr);
             td = document.createElement('TD');
             td.setAttribute("class","table-title");
             td.innerText="Grade";
             tr.appendChild(td);
-            myTableDiv.appendChild(tr);
+            grade_table.appendChild(tr);
             for (var i=0; i<grades.length; i++){
                 tr = document.createElement('TR');
                 if(i%2===0) tr.setAttribute("class","even");
@@ -302,12 +302,12 @@ function createGradesTable()
                 td.setAttribute("class","table-sub-title");
                 td.innerText=grades[i].GRADENAMEENG;
                 tr.appendChild(td);
-                myTableDiv.appendChild(tr);
+                grade_table.appendChild(tr);
                 td = document.createElement('TD');
                 td.setAttribute("class","table-sub-title");
                 td.innerText=grades[i].GRADE;
                 tr.appendChild(td);
-                myTableDiv.appendChild(tr);
+                grade_table.appendChild(tr);
             }
         }
     };
