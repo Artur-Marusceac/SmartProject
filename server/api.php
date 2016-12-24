@@ -455,6 +455,7 @@ function get_project_log($projectId){
     $db = Zend_Registry::get('db');
     $select = $db->select()->from('LOGS',array('ACTION','USERNAME','TIMEDATE'))
         ->where('PROJECTID=?', $projectId)
+        ->where("ACTION not like '%Updated%Status%' AND ACTION not like '%Changed%status%'")
         ->order('STAMP ASC');
     return $db->fetchAll($select);
 }
