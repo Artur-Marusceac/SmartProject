@@ -533,9 +533,6 @@ if (isset($_GET["action"]) && in_array($_GET["action"], $possible_url))
       case "get_conference_sessions":
           $value = get_conference_sessions();
           break;
-      case "get_project_log":
-          $value = getAllProjectLog($_SESSION['user_info'][1]);
-          break;
       case "get_project_info":
           if ($_SESSION["proj_id_for_proj_info"]!="") {
               $value = get_project_info_by_project_id($_SESSION["proj_id_for_proj_info"]);
