@@ -243,7 +243,7 @@ function get_my_project_info()
             var abstract_element = window.document.getElementById("Project_Abstract");
             if (result[4])
                 abstract_element.innerText=result[4].ABSTRACTENG;
-            span.setAttribute("class","highlighted bg-blue-dark color-white");
+            span.setAttribute("class","highlighted bg-orange color-white");
             span.innerText="Project Status:";
             status_element.appendChild(span);
             status_element.appendChild(document.createTextNode(status_project));
