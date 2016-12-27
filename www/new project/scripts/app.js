@@ -566,7 +566,8 @@ function get_messages()
                         link.innerText = "download";
                         div.appendChild(link);
                     }
-
+                    div.appendChild(window.document.createElement("hr"));
+                    div.appendChild(window.document.createElement("br"));
                     messages.appendChild(div);
                 }
             }
