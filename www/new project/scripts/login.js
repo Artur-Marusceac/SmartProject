@@ -6,8 +6,7 @@ function validate_login(){
     var json_response="";
             xhr.onreadystatechange = function(){
                   if(xhr.readyState == 4 && xhr.status==200 ){
-                    
-                    var ajaxDisplay = document.getElementById('ajaxDiv');
+
                     json_response = xhr.responseText;
                     var result = JSON.parse(json_response);
                     if(result.validateUserResult===true) location.href="Fourth.html";
