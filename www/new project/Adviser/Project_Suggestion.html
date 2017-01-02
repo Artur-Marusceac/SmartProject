@@ -117,7 +117,7 @@
             <h4 style="color:orange">Project Suggestion</h4>
       </div>
        <div class="blog-post-comment-add">
-           <strong style="color:orange">Year</strong>
+           <strong style="color:orange">Year<span style="color:red">*</span></strong>
            <div class="row uniform 50%">
                <div class="12u">
                    <div class="select-wrapper">
@@ -128,14 +128,11 @@
                </div>
            </div>
            <br>
-           <strong style="color:orange">Project Name Hebrew</strong>
-           <em>required</em>
+           <strong style="color:orange">Project Name Hebrew<span style="color:red">*</span></strong>
            <input type="text" id="Project_Name_Heb">
-           <strong style="color:orange">Project Name English</strong>
-           <em>required</em>
+           <strong style="color:orange">Project Name English<span style="color:red">*</span></strong>
            <input type="text" id="Project_Name_Eng">
-           <strong style="color:orange">Senior Adviser</strong>
-           <em>required</em>
+           <strong style="color:orange">Senior Adviser<span style="color:red">*</span></strong>
            <input type="text" id="Senior_Adviser_Name">
            <strong style="color:orange">Second Adviser</strong>
            <div class="row uniform 50%">
@@ -159,11 +156,9 @@
                </div>
            </div>
            <br>
-           <strong style="color:orange">Abstract Hebrew</strong>
-           <em>required</em>
+           <strong style="color:orange">Abstract Hebrew<span style="color:red">*</span></strong>
            <textarea cols="30" rows="8" id="abstract_heb"></textarea>
-           <strong style="color:orange">Abstract English</strong>
-           <em>required</em>
+           <strong style="color:orange">Abstract English<span style="color:red">*</span></strong>
            <textarea cols="30" rows="8" id="abstract_eng"></textarea>
            <br>
            <strong style="color:orange">Company Name</strong>
@@ -180,9 +175,9 @@
            <strong style="color:orange">Keywords
                <span style="color:red">*</span>
            </strong>
-
+           <input type="text" id="keywords">
         </div>
-        <a href="#" class="button button-green button-right full-top full-bottom">Submit Suggestion</a>
+        <a href="#" class="button button-green button-right full-top full-bottom" onclick="submitProjectSuggestion()">Submit Suggestion</a>
 
             </div>
         
