@@ -245,34 +245,34 @@ function getProjectStatus($projectId)
 }
 
 function get_pictures($dir){
-    
+
     // image extensions
-$extensions = array('jpg', 'jpeg', 'png', 'gif', 'bmp');
+    $extensions = array('jpg', 'jpeg', 'png', 'gif', 'bmp');
 
 // init result
-$result = array();
-    
+    $result = array();
+
 // directory to scan
     $dirTest= '/var/www/html/Data/Conference/'.$dir.'/';
-$directory = new DirectoryIterator('/var/www/html/Data/Conference/'.$dir.'/');
+    $directory = new DirectoryIterator('/var/www/html/Data/Conference/'.$dir.'/');
 //$directory = new DirectoryIterator('/var/www/html/Data/Conference/2008/');
 // iterate
-foreach ($directory as $fileinfo) {
-    // must be a file
-    if ($fileinfo->isFile()) {
-        // file extension
-        $extension = strtolower(pathinfo($fileinfo->getFilename(), PATHINFO_EXTENSION));
-        // check if extension match
-        if (in_array($extension, $extensions)) {
-            // add to result
-            $result[] = $fileinfo->getFilename();
+    foreach ($directory as $fileinfo) {
+        // must be a file
+        if ($fileinfo->isFile()) {
+            // file extension
+            $extension = strtolower(pathinfo($fileinfo->getFilename(), PATHINFO_EXTENSION));
+            // check if extension match
+            if (in_array($extension, $extensions)) {
+                // add to result
+                $result[] = $fileinfo->getFilename();
+            }
         }
     }
-}
 // print result
-    
-   return $result;
-   //return json_encode(array($dirTest,$dir));
+
+    return $result;
+    //return json_encode(array($dirTest,$dir));
 }
 
 function get_connection(){
@@ -289,7 +289,7 @@ function get_connection(){
     }else{
         //echo "connected to mysql  ";
     }
-    
+
     return $conn;
 }
 
@@ -297,34 +297,34 @@ function bgu_login_session_id($username,$password)
 {
     session_start();
     $r=session_id();
-    
+
     $client = new SoapClient("https://w3.bgu.ac.il/BguAuthWebService/AuthenticationProvider.asmx?WSDL");
     $params = array(
-    "uname" => $username, "pwd" => $password,
-     );
+        "uname" => $username, "pwd" => $password,
+    );
     $check =$client->__soapCall("validateUser", array($params));
-    
+
     // need to verify if check is true or false
-    
+
     /* now registering a session for an authenticated user */
     $_SESSION['username']=$username;
 
-/* now displaying the session id..... */
+    /* now displaying the session id..... */
 
     // echo "the session id id: ".$r;
     // echo " and the session has been registered for: ".$_SESSION['username'];
 
 
-/* now destroying the session id */
+    /* now destroying the session id */
 
-/*    if(isset($_SESSION['username']))
-    {
-        $_SESSION=array();
-        unset($_SESSION);
-        session_destroy();
-        echo "session destroyed...";
-    }  
- */
+    /*    if(isset($_SESSION['username']))
+        {
+            $_SESSION=array();
+            unset($_SESSION);
+            session_destroy();
+            echo "session destroyed...";
+        }
+     */
 }
 
 function getPersonAcademicYear($personId){
@@ -349,31 +349,31 @@ function getUserType($user_id)
     return $user_type;
 }
 
-function bgu_login($username,$password)
+function ($username,$password)
 {
     session_start();
     $client = new SoapClient("https://w3.bgu.ac.il/BguAuthWebService/AuthenticationProvider.asmx?WSDL");
-   // var_dump($client->__getFunctions());
+    // var_dump($client->__getFunctions());
     $params = array(
-    "uname" => $username,
+        "uname" => $username,
         "pwd" => $password,
-     );
-    $check =$client->__soapCall("validateUser", array($params));
+    );
+    $check = $client->__soapCall("validateUser", array($params));
     $array = json_decode(json_encode($check), True);
     $res = $array["validateUserResult"];
     if ($res) {
         $resultId = getPersonId($username);
         $id = $resultId['PERSON_ID'];
         //get the academic year
-        $resultYears=getPersonAcademicYear($id);
+        $resultYears = getPersonAcademicYear($id);
         $academic_year = -1;
-        for($i = 0;$i<count($resultYears);$i++) {
-            if($resultYears[$i]['ACADEMIC_YEAR'] != null && $academic_year <= $resultYears[$i]['ACADEMIC_YEAR']) {
-                $academic_year= $resultYears[$i]['ACADEMIC_YEAR'];
+        for ($i = 0; $i < count($resultYears); $i++) {
+            if ($resultYears[$i]['ACADEMIC_YEAR'] != null && $academic_year <= $resultYears[$i]['ACADEMIC_YEAR']) {
+                $academic_year = $resultYears[$i]['ACADEMIC_YEAR'];
             }
         }
         $user_type = getUserType($id);
-        $user_info = array($username,$id,$academic_year,$user_type);
+        $user_info = array($username, $id, $academic_year, $user_type);
         $_SESSION['user_info'] = $user_info;
         /*switch ($user_type)
         {
@@ -391,8 +391,9 @@ function bgu_login($username,$password)
                 break;
 
         }*/
+
+    }
     return $check;
-    
 }
 
 function get_project_id_by_student_id($studentId)
@@ -418,21 +419,21 @@ function get_user_name($user_id)
 
 function get_user_list()
 {
-  $sql = "SELECT id, first_name, last_name, age FROM users";
-   $conn = get_connection();
-   $result = $conn->query($sql);    
+    $sql = "SELECT id, first_name, last_name, age FROM users";
+    $conn = get_connection();
+    $result = $conn->query($sql);
     $user_list = array();
     if ($result->num_rows > 0) {
-    // output data of each row
+        // output data of each row
         while($row = $result->fetch_assoc()) {
             $curr_user = array("id" => $row["id"], "name" => $row["first_name"]);
             array_push($user_list,$curr_user);
         }
 
-   }   
+    }
 
- json_encode($user_list);  
- return $user_list;
+    json_encode($user_list);
+    return $user_list;
 
 }
 
@@ -440,11 +441,11 @@ function is_user_exist($username, $id)
 {
     $sql = "Select id FROM users WHERE id = '" .$id ."' and first_name= '". $username ."'";
     $conn = get_connection();
-    $result = $conn->query($sql);  
+    $result = $conn->query($sql);
     if ($result->num_rows > 0) {
-         while($row = $result->fetch_assoc()) {
+        while($row = $result->fetch_assoc()) {
             return json_encode(array("id" => $row["id"]));
-         }
+        }
     }
 }
 
@@ -568,84 +569,84 @@ function getCompanies()
 {
     $db = Zend_Registry::get('db');
     $select = $db->select()->from('COMPANIES',array('COMPANYNAMEENG'))
-    ->order('COMPANYNAMEENG');
+        ->order('COMPANYNAMEENG');
     $data = $db->fetchAll($select);
     return $data;
 }
 
 
 
-$possible_url = array("get_user_list","get_session_data" ,"get_user","is_user_exist","bgu_login","get_advisers_list","get_pictures","search_project", "get_search_results","get_project_by_user_id","get_project_info","get_user_name","get_conference_sessions","get_student_grades","get_project_log","get_project_dates", "get_messages","get_comapnies");
+$possible_url = array("get_user_list","get_session_data" ,"get_user","is_user_exist","bgu_login","get_advisers_list","get_pictures","search_project", "get_search_results","get_project_by_user_id","get_project_info","get_user_name","get_conference_sessions","get_student_grades","get_project_log","get_project_dates", "get_messages","get_companies");
 
 $value = "An error has occurred";
 
 if (isset($_GET["action"]) && in_array($_GET["action"], $possible_url))
 {
-  switch ($_GET["action"])
+    switch ($_GET["action"])
     {
-      case "get_user_list":
-        $value = get_user_list();
-        break;
-      case "get_user":
-        if (isset($_GET["id"]))
-          $value = get_user_by_id($_GET["id"]);
-          else
-          $value = "Missing argument";
-        break;
-      case "get_session_data":
-          $value = $_SESSION['user_info'];
-          break;
-     case "get_pictures":
-        $value = get_pictures($_GET["dir"]);
-        break;
-      case "is_user_exist":
-          $value = is_user_exist($_GET["username"],$_GET["id"]);
-          break;    
-      case "bgu_login":
-          $value = bgu_login($_GET["username"],$_GET["password"]);
-          break;
-      case "get_project_by_user_id":
-          $value = get_project_info_by_user_id($_SESSION['user_info'][1]);
-          break;
-      case "get_conference_sessions":
-          $value = get_conference_sessions();
-          break;
-      case "get_project_info":
-          if ($_SESSION["proj_id_for_proj_info"]!="") {
-              $value = get_project_info_by_project_id($_SESSION["proj_id_for_proj_info"]);
-          }
-          break;
-      case "get_user_name":
-          $value = get_user_name($_SESSION['user_info'][1]);
-          break;
-      case "get_project_dates":
-          $project_id = get_project_id_by_student_id($_SESSION['user_info'][1])["PROJECTID"];
-          $taken_id = get_taken_project_id_from_project_id($project_id)["TAKENPROJECTID"];
-          $value = get_project_dates($taken_id);
-          break;
-      case "get_student_grades":
-          $value = getStudentGrades($_SESSION['user_info'][1]);
-          break;
-      case "get_advisers_list":
-          $value = get_advisers_list();
-          break;
-      case "get_messages":
-          $value = get_messages();
-          break;
-     case "search_project":
-          $value = search_project($_GET["year"],$_GET["student_name"],$_GET["adviser"],$_GET["project_name"]);
-          break;
-      case "get_search_results":
-          $value = get_search_results();
-          break;
-      case "get_project_log":
-          $project_id = get_project_id_by_student_id($_SESSION['user_info'][1])["PROJECTID"];
-          $value = get_project_log($project_id);
-          break;
-      case "get_comapnies":
-          $value = getCompanies();
-          break;
-  }
+        case "get_user_list":
+            $value = get_user_list();
+            break;
+        case "get_user":
+            if (isset($_GET["id"]))
+                $value = get_user_by_id($_GET["id"]);
+            else
+                $value = "Missing argument";
+            break;
+        case "get_session_data":
+            $value = $_SESSION['user_info'];
+            break;
+        case "get_pictures":
+            $value = get_pictures($_GET["dir"]);
+            break;
+        case "is_user_exist":
+            $value = is_user_exist($_GET["username"],$_GET["id"]);
+            break;
+        case "bgu_login":
+            $value = bgu_login($_GET["username"],$_GET["password"]);
+            break;
+        case "get_project_by_user_id":
+            $value = get_project_info_by_user_id($_SESSION['user_info'][1]);
+            break;
+        case "get_conference_sessions":
+            $value = get_conference_sessions();
+            break;
+        case "get_project_info":
+            if ($_SESSION["proj_id_for_proj_info"]!="") {
+                $value = get_project_info_by_project_id($_SESSION["proj_id_for_proj_info"]);
+            }
+            break;
+        case "get_user_name":
+            $value = get_user_name($_SESSION['user_info'][1]);
+            break;
+        case "get_project_dates":
+            $project_id = get_project_id_by_student_id($_SESSION['user_info'][1])["PROJECTID"];
+            $taken_id = get_taken_project_id_from_project_id($project_id)["TAKENPROJECTID"];
+            $value = get_project_dates($taken_id);
+            break;
+        case "get_student_grades":
+            $value = getStudentGrades($_SESSION['user_info'][1]);
+            break;
+        case "get_advisers_list":
+            $value = get_advisers_list();
+            break;
+        case "get_messages":
+            $value = get_messages();
+            break;
+        case "search_project":
+            $value = search_project($_GET["year"],$_GET["student_name"],$_GET["adviser"],$_GET["project_name"]);
+            break;
+        case "get_search_results":
+            $value = get_search_results();
+            break;
+        case "get_project_log":
+            $project_id = get_project_id_by_student_id($_SESSION['user_info'][1])["PROJECTID"];
+            $value = get_project_log($project_id);
+            break;
+        case "get_companies":
+            $value = getCompanies();
+            break;
+    }
 }
 $possible_post_actions = array("set_project_id_for_project_info");
 if (isset($_REQUEST["action"]) && in_array($_REQUEST["action"], $possible_post_actions))
