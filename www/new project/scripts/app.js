@@ -646,40 +646,40 @@ function submitProjectSuggestion()
 {
     var isValidForm = true;
     var year = window.document.getElementById("year_suggestion").value;
-    if (year!=="") {
+    if (year=="") {
         isValidForm = false;
         alert("year is missing");
     }
     var project_name_heb = window.document.getElementById("Project_Name_Heb").value;
-    if (project_name_heb!=="") {
+    if (project_name_heb=="") {
         isValidForm = false;
         alert("project name hebrew is missing");
     }
     var project_name_eng = window.document.getElementById("Project_Name_Eng").value;
-    if (project_name_eng!=="") {
+    if (project_name_eng=="") {
         isValidForm = false;
         alert("project name english is missing");
     }
     var senior_adviser = window.document.getElementById("Senior_Adviser_Name").value;
-    if (senior_adviser!=="") {
+    if (senior_adviser=="") {
         isValidForm = false;
         alert("senior adviser field is missing");
     }
     var second_adviser = window.document.getElementById("advisers_list").value;
     var third_adviser = window.document.getElementById("advisers_list2").value;
     var abstract_heb = window.document.getElementById("abstract_heb").value;
-    if (abstract_heb!=="") {
+    if (abstract_heb=="") {
         isValidForm = false;
         alert("abstract hebrew field is missing");
     }
     var abstract_eng = window.document.getElementById("abstract_eng").value;
-    if (abstract_eng!=="") {
+    if (abstract_eng=="") {
         isValidForm = false;
         alert("abstract english field is missing");
     }
     var company = window.document.getElementById("company_list").value;
     var keywords = window.document.getElementById("keywords").value;
-    if (keywords!=="") {
+    if (keywords=="") {
         isValidForm = false;
         alert("keywords field is missing");
     }
