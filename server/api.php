@@ -375,7 +375,22 @@ function bgu_login($username,$password)
         $user_type = getUserType($id);
         $user_info = array($username,$id,$academic_year,$user_type);
         $_SESSION['user_info'] = $user_info;
-        }
+        /*switch ($user_type)
+        {
+            case 144: //adviser
+                return "adviser";
+                break;
+            case 146: //supervisor
+                return "superviser";
+                break;
+            case 32://student
+                if ($academic_year=3)
+                    return "third";
+                else
+                    return "fourth";
+                break;
+
+        }*/
     return $check;
     
 }
@@ -542,7 +557,25 @@ function get_conference_sessions()
     return $sessions;
 }
 
-$possible_url = array("get_user_list","get_session_data" ,"get_user","is_user_exist","bgu_login","get_advisers_list","get_pictures","search_project", "get_search_results","get_project_by_user_id","get_project_info","get_user_name","get_conference_sessions","get_student_grades","get_project_log","get_project_dates", "get_messages");
+function getProjectIdsByAdviser($adviserId){
+    $db = Zend_Registry::get('db');
+    $select = $db->select()->from('ADVISERSUGGESTIONS',array('PROJECTID'))->where('ADVISERID = ?', $adviserId);
+    $data = $db->fetchAll($select);
+    return $data;
+}
+
+function getCompanies()
+{
+    $db = Zend_Registry::get('db');
+    $select = $db->select()->from('COMPANIES',array('COMPANYNAMEENG'))
+    ->order('COMPANYNAMEENG');
+    $data = $db->fetchAll($select);
+    return $data;
+}
+
+
+
+$possible_url = array("get_user_list","get_session_data" ,"get_user","is_user_exist","bgu_login","get_advisers_list","get_pictures","search_project", "get_search_results","get_project_by_user_id","get_project_info","get_user_name","get_conference_sessions","get_student_grades","get_project_log","get_project_dates", "get_messages","get_comapnies");
 
 $value = "An error has occurred";
 
@@ -608,6 +641,9 @@ if (isset($_GET["action"]) && in_array($_GET["action"], $possible_url))
       case "get_project_log":
           $project_id = get_project_id_by_student_id($_SESSION['user_info'][1])["PROJECTID"];
           $value = get_project_log($project_id);
+          break;
+      case "get_comapnies":
+          $value = getCompanies();
           break;
   }
 }

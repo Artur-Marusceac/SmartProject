@@ -76,6 +76,30 @@ window.onload= function() {
         xhr.open("GET", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=get_advisers_list", false);
         xhr.send();
     }
+
+    var company_list=document.getElementById("company_list");
+    if(company_list!==null)
+    {
+        var xhr = new XMLHttpRequest();
+        var json_response="";
+        xhr.onreadystatechange = function(){
+            if(xhr.readyState == 4 && xhr.status==200 ){
+
+                json_response = xhr.responseText;
+                var result = JSON.parse(json_response);
+                for(var i=0; i<result.length;i++)
+                {
+                    var companyItem=document.createElement("option");
+                    companyItem.textContent=result[i].companynameeng;
+                    companyItem.setAttribute("value",result[i].companynameeng);
+                    company_list.appendChild(companyItem);
+                }
+            }
+        };
+        xhr.open("GET", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=get_companies", false);
+        xhr.send();
+    }
+
     var myTableDiv=document.getElementById("search_table");
     if(myTableDiv!==null) {
         var xhr_search = new XMLHttpRequest();
