@@ -31,12 +31,12 @@ window.onload= function() {
                 {
                     var advisersListItem=document.createElement("option");
                     advisersListItem.textContent=result[i].first_name+" "+result[i].last_name;
-                    advisers_list.appendChild(advisersListItem);
                     advisersListItem.setAttribute("value",result[i].first_name+"_"+result[i].last_name);
                     if (advisers_list2!==null)
                     {
                         advisers_list2.appendChild(advisersListItem);
                     }
+                    advisers_list.appendChild(advisersListItem);
                 }
             }
         };
