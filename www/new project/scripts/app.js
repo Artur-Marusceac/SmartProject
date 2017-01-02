@@ -642,45 +642,49 @@ function get_messages()
 }
 
 
-function submitProjectSuggestion()
-{
+function submitProjectSuggestion() {
     var isValidForm = true;
     var year = window.document.getElementById("year_suggestion").value;
-    if (year=="") {
+    if (year == "") {
         isValidForm = false;
-        alert("year is missing");
+        window.document.getElementById("year_suggestion").style.borderColor="red";
     }
     var project_name_heb = window.document.getElementById("Project_Name_Heb").value;
-    if (project_name_heb=="") {
+    if (project_name_heb == "") {
         isValidForm = false;
-        alert("project name hebrew is missing");
+        window.document.getElementById("Project_Name_Heb").style.borderColor="red";
     }
     var project_name_eng = window.document.getElementById("Project_Name_Eng").value;
-    if (project_name_eng=="") {
+    if (project_name_eng == "") {
         isValidForm = false;
-        alert("project name english is missing");
+        window.document.getElementById("Project_Name_Eng").style.borderColor="red";
     }
     var senior_adviser = window.document.getElementById("Senior_Adviser_Name").value;
-    if (senior_adviser=="") {
+    if (senior_adviser == "") {
         isValidForm = false;
-        alert("senior adviser field is missing");
+        window.document.getElementById("Senior_Adviser_Name").style.borderColor="red";
     }
     var second_adviser = window.document.getElementById("advisers_list").value;
     var third_adviser = window.document.getElementById("advisers_list2").value;
     var abstract_heb = window.document.getElementById("abstract_heb").value;
-    if (abstract_heb=="") {
+    if (abstract_heb == "") {
         isValidForm = false;
-        alert("abstract hebrew field is missing");
+        window.document.getElementById("abstract_heb").style.borderColor="red";
     }
     var abstract_eng = window.document.getElementById("abstract_eng").value;
-    if (abstract_eng=="") {
+    if (abstract_eng == "") {
         isValidForm = false;
-        alert("abstract english field is missing");
+        window.document.getElementById("abstract_eng").style.borderColor="red";
     }
     var company = window.document.getElementById("company_list").value;
     var keywords = window.document.getElementById("keywords").value;
-    if (keywords=="") {
+    if (keywords == "") {
         isValidForm = false;
-        alert("keywords field is missing");
+        window.document.getElementById("keywords").style.borderColor="red";
     }
+    if (!isValidForm) {
+        alert("one of the fields is missing");
+    }
+    else
+    {}
 }
