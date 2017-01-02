@@ -90,8 +90,9 @@ window.onload= function() {
                 for(var i=0; i<result.length;i++)
                 {
                     var companyItem=document.createElement("option");
-                    companyItem.textContent=result[i].companynameeng;
-                    companyItem.setAttribute("value",result[i].companynameeng);
+                    var company_name = result[i].COMPANYNAMEENG;
+                    companyItem.textContent=company_name;
+                    companyItem.setAttribute("value",company_name);
                     company_list.appendChild(companyItem);
                 }
             }

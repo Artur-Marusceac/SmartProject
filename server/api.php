@@ -349,7 +349,7 @@ function getUserType($user_id)
     return $user_type;
 }
 
-function ($username,$password)
+function bgu_login($username,$password)
 {
     session_start();
     $client = new SoapClient("https://w3.bgu.ac.il/BguAuthWebService/AuthenticationProvider.asmx?WSDL");
