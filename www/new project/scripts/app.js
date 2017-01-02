@@ -28,6 +28,24 @@ window.onload= function() {
         }
     }
 
+    var adviser_name_sugg = document.getElementById("Senior_Adviser_Name");
+    if (adviser_name_sugg!==null)
+    {
+        var xhr = new XMLHttpRequest();
+        var json_response="";
+        xhr.onreadystatechange = function(){
+            if(xhr.readyState == 4 && xhr.status==200 ){
+
+                json_response = xhr.responseText;
+                var result = JSON.parse(json_response);
+                var user_full_name = result.USERFIRSTNAMEENG+" "+result.USERLASTNAMEENG;
+                adviser_name_sugg.value = user_full_name;
+            }
+        };
+        xhr.open("GET", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=get_user_name", false);
+        xhr.send();
+    }
+
     var advisers_list = document.getElementById("advisers_list");
     var advisers_list2 = document.getElementById("advisers_list2");
     if(advisers_list!==null || advisers_list2!==null)
