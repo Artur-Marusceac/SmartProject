@@ -452,9 +452,19 @@ function is_user_exist($username, $id)
 //not just senior advisers
 function get_second_advisers_list()
 {
-    $db = Zend_Registry::get('db');
-    $data = $db->fetchPairs("SELECT  USERID, concat(ifnull(initcap(trim(USERLASTNAMEENG)), '') , '  ' ,ifnull(initcap(trim(USERFIRSTNAMEENG)), '')) FROM USERS WHERE (USERTYPE > 64 OR USERTYPE=16 OR USERTYPE = 8) ORDER BY initcap(USERLASTNAMEENG)" );
-    return json_encode($data);
+    $sql = "SELECT USERID, concat(ifnull(initcap(trim(USERLASTNAMEENG)), '') , ' ' ,ifnull(initcap(trim(USERFIRSTNAMEENG)), '')) as FULLNAME FROM USERS WHERE (USERTYPE > 64 OR USERTYPE=16 OR USERTYPE = 8) ORDER BY initcap(USERLASTNAMEENG)" ;
+    $conn = get_connection();
+    $result = $conn->query($sql);
+    $advisers_list = array();
+    if ($result->num_rows > 0) {
+        // output data of each row
+        while($row = $result->fetch_assoc()) {
+            $adviser = array("USERID" => $row["USERID"], "FULLNAME" => $row["FULLNAME"]);
+            array_push($advisers_list,$adviser);
+        }
+    }
+    json_encode($advisers_list);
+    return $advisers_list;
 }
 
 function get_advisers_list()
