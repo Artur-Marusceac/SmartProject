@@ -648,8 +648,9 @@ function get_messages()
                     div.appendChild(emTime);
                     if (result[j].LINK)
                     {
+                        var prefix_link = "/zf/public/data/Messages/";
                         var link = window.document.createElement("a");
-                        link.setAttribute("href",result[j].LINK);
+                        link.setAttribute("href",prefix_link+result[j].LINK);
                         link.innerText = "download";
                         div.appendChild(link);
                     }
