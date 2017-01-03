@@ -186,7 +186,7 @@ function getSuggAbstract($project_id)
 
 function getUpdatedAbstract($project_id){
     $db = Zend_Registry::get('db');
-    $select = $db->select()->from('ABSTRACTUPDATE', array('ABSTRACTENG','ABSTRACTHEB'))
+    $select = $db->select()->from('PROJECTSUGGESTION', array('ABSTRACTENG','ABSTRACTHEB'))
         ->where('PROJECTID = ?', $project_id)
     ;
     $data = $db->fetchRow($select);
@@ -737,7 +737,7 @@ function getCompanyIdByCompanyName($company_name)
         array('COMPANYID'))
         ->where('COMPANYNAMEENG = ?', $company_name);
     $companyId= $db->fetchRow($select);
-    return $companyId;
+    return $companyId["COMPANYID"];
 }
 
 
