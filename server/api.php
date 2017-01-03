@@ -637,14 +637,11 @@ function add_new_suggestion($year,$project_name_heb,$project_name_eng,$senior_ad
         {
             add_keywords($keywords,$suggestionId);
             //adviser suggestion
-            if ($senior_adviser==$_SESSION[user_info][0])
-            {
                 addNewAdviserSuggestion($suggestionId, $senior_adviser, 1);//count advisers form 1
                 if ($second_adviser!="")
                     addNewAdviserSuggestion($suggestionId, $second_adviser, 2);
                 if ($third_adviser!="")
                     addNewAdviserSuggestion($suggestionId, $third_adviser, 3);
-            }
             else
             {
                 return "invalid. adviser!=user";
