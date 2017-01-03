@@ -411,7 +411,7 @@ function get_user_name($user_id)
 {
     $db = Zend_Registry::get('db');
     $select=$db->select() ->from('USERS',
-        array('USERFIRSTNAMEENG','USERLASTNAMEENG'))
+        array('USERFIRSTNAMEENG','USERLASTNAMEENG','USERID'))
         ->where('USERID = ?', $user_id);
     $username= $db->fetchRow($select);
     return $username;

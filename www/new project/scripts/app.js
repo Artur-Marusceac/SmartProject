@@ -38,8 +38,9 @@ window.onload= function() {
 
                 json_response = xhr.responseText;
                 var result = JSON.parse(json_response);
-                var user_full_name = result.USERFIRSTNAMEENG+" "+result.USERLASTNAMEENG;
-                adviser_name_sugg.value = user_full_name;
+                var user_full_name = result.USERLASTNAMEENG+" "+result.USERFIRSTNAMEENG;
+                adviser_name_sugg.value =  result.USERID;
+                adviser_name_sugg.innerText = user_full_name;
             }
         };
         xhr.open("GET", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=get_user_name", false);
