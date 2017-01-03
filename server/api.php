@@ -454,7 +454,7 @@ function get_second_advisers_list()
 {
     $db = Zend_Registry::get('db');
     $data = $db->fetchPairs("SELECT  USERID, concat(ifnull(initcap(trim(USERLASTNAMEENG)), '') , '  ' ,ifnull(initcap(trim(USERFIRSTNAMEENG)), '')) FROM USERS WHERE (USERTYPE > 64 OR USERTYPE=16 OR USERTYPE = 8) ORDER BY initcap(USERLASTNAMEENG)" );
-    return $data;
+    return json_encode($data);
 }
 
 function get_advisers_list()
