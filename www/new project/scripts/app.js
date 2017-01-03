@@ -83,13 +83,13 @@ window.onload= function() {
                 for(var i=0; i<result.length;i++)
                 {
                     var advisersListItem=document.createElement("option");
-                    advisersListItem.textContent=result[i].first_name+" "+result[i].last_name;
-                    advisersListItem.setAttribute("value",result[i].first_name+"_"+result[i].last_name);
+                    advisersListItem.textContent=result[i].FULLNAME;
+                    advisersListItem.setAttribute("value",result[i].USERID);
                     advisers_list.appendChild(advisersListItem);
                     if (advisers_list2!==null)
                     {
                         var advisersListItem=document.createElement("option");
-                        advisersListItem.textContent=result[i].first_name+" "+result[i].last_name;
+                        advisersListItem.textContent=result[i].FULLNAME;
                         advisersListItem.setAttribute("value",result[i].USERID);
                         advisers_list2.appendChild(advisersListItem);
                     }

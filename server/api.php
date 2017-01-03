@@ -467,6 +467,7 @@ function get_second_advisers_list()
     return $advisers_list;
 }
 
+
 function get_advisers_list()
 {
     $sql = "SELECT `USERFIRSTNAMEENG`,`USERLASTNAMEENG`,`USERID` FROM `USERS` WHERE `USERTYPE`>=128";
