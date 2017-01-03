@@ -47,7 +47,30 @@ window.onload= function() {
     }
 
     var advisers_list = document.getElementById("advisers_list");
-    var advisers_list2 = document.getElementById("advisers_list2");
+    if(advisers_list!==null)
+    {
+        var xhr = new XMLHttpRequest();
+        var json_response="";
+        xhr.onreadystatechange = function(){
+            if(xhr.readyState == 4 && xhr.status==200 ){
+
+                json_response = xhr.responseText;
+                var result = JSON.parse(json_response);
+                for(var i=0; i<result.length;i++)
+                {
+                    var advisersListItem=document.createElement("option");
+                    advisersListItem.textContent=result[i].first_name+" "+result[i].last_name;
+                    advisersListItem.setAttribute("value",result[i].first_name+"_"+result[i].last_name);
+                    advisers_list.appendChild(advisersListItem);
+                }
+            }
+        };
+        xhr.open("GET", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=get_advisers_list", false);
+        xhr.send();
+    }
+
+    var advisers_list = document.getElementById("second_advisers_list");
+    var advisers_list2 = document.getElementById("second_advisers_list2");
     if(advisers_list!==null || advisers_list2!==null)
     {
         var xhr = new XMLHttpRequest();
@@ -67,15 +90,16 @@ window.onload= function() {
                     {
                         var advisersListItem=document.createElement("option");
                         advisersListItem.textContent=result[i].first_name+" "+result[i].last_name;
-                        advisersListItem.setAttribute("value",result[i].first_name+"_"+result[i].last_name);
+                        advisersListItem.setAttribute("value",result[i].USERID);
                         advisers_list2.appendChild(advisersListItem);
                     }
                 }
             }
         };
-        xhr.open("GET", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=get_advisers_list", false);
+        xhr.open("GET", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=get_second_advisers_list", false);
         xhr.send();
     }
+
 
     var company_list=document.getElementById("company_list");
     if(company_list!==null)
@@ -431,7 +455,7 @@ function CreateSearchTable(db_result)
 
 function get_session_registration_info()
 {
-     var session_registration=document.getElementById("Session_Registration");
+    var session_registration=document.getElementById("Session_Registration");
     var xhr_project_info = new XMLHttpRequest();
     var json_response="";
     xhr_project_info.onreadystatechange = function(){
@@ -686,5 +710,19 @@ function submitProjectSuggestion() {
         alert("one of the fields is missing");
     }
     else
-    {}
+    {
+        var json_response="";
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function(){
+            if(xhr.readyState == 4 && xhr.status==200 ){
+
+                json_response = xhr.responseText;
+                var result = JSON.parse(json_response);
+                if (result.toString() == "OK")
+                    alert("Suggested Project Successfully!");
+            }
+        };
+        xhr.open("POST", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=suggest_project&year="+year.toString()+"&project_name_heb="+project_name_heb.toString()+"&project_name_eng"+project_name_eng.toString()+"&senior_adviser="+senior_adviser.toString()+"&second_adviser="+second_adviser.toString()+"&third_adviser="+third_adviser.toString()+"&abstract_heb="+abstract_heb.toString()+"&abstract_eng"+abstract_eng.toString()+"&company="+company.toString()+"&keywords="+keywords.toString(), false);
+        xhr.send(year,project_name_heb,project_name_eng,senior_adviser,second_adviser,third_adviser,abstract_heb,abstract_eng,company,keywords);
+    }
 }

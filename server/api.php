@@ -449,9 +449,17 @@ function is_user_exist($username, $id)
     }
 }
 
+//not just senior advisers
+function get_second_advisers_list()
+{
+    $db = Zend_Registry::get('db');
+    $data = $db->fetchPairs("SELECT  USERID, concat(ifnull(initcap(trim(USERLASTNAMEENG)), '') , '  ' ,ifnull(initcap(trim(USERFIRSTNAMEENG)), '')) FROM USERS WHERE (USERTYPE > 64 OR USERTYPE=16 OR USERTYPE = 8) ORDER BY initcap(USERLASTNAMEENG)" );
+    return $data;
+}
+
 function get_advisers_list()
 {
-    $sql = "SELECT `USERFIRSTNAMEENG`,`USERLASTNAMEENG` FROM `USERS` WHERE `USERTYPE`>=128";
+    $sql = "SELECT `USERFIRSTNAMEENG`,`USERLASTNAMEENG`,`USERID` FROM `USERS` WHERE `USERTYPE`>=128";
     $conn = get_connection();
     $result = $conn->query($sql);
     $advisers_list = array();
@@ -574,9 +582,202 @@ function getCompanies()
     return $data;
 }
 
+function isKeyExist($projectId){
+    $db = Zend_Registry::get('db');
+    $select = $db->select()->from($this, 'PROJECTID')
+        ->where('PROJECTID = ?', $projectId)
+    ;
+    $data = $db->fetchRow($select);
+    $result = ($data!=null) ? true: false;
+    return $result;
+}
 
 
-$possible_url = array("get_user_list","get_session_data" ,"get_user","is_user_exist","bgu_login","get_advisers_list","get_pictures","search_project", "get_search_results","get_project_by_user_id","get_project_info","get_user_name","get_conference_sessions","get_student_grades","get_project_log","get_project_dates", "get_messages","get_companies");
+function add_new_suggestion($year,$project_name_heb,$project_name_eng,$senior_adviser,$second_adviser,$third_adviser,$abstract_heb,$abstract_eng,$company,$keywords)
+{
+    $db = Zend_Registry::get('db');
+    $suggestionId   = createSuggestionId($year);
+    if ( $suggestionId != null){
+        $companyId = getCompanyIdByCompanyName($company);
+        $limit = 200;
+        while( ($limit > 0) && isKeyExist($suggestionId)){
+            $limit--;
+            $suggestionId  = createSuggestionId($year);
+        }
+        if ($limit > 0) {
+            $curDate = date('Y-M-d');
+            $data = array(
+                'PROJECTID'         => $suggestionId,
+                'PROJECTNAMEENG'    => $project_name_eng,
+                'PROJECTNAMEHEB'    => $project_name_heb,
+                'ABSTRACTENG'       => $abstract_eng,
+                'ABSTRACTHEB'       => $abstract_heb,
+                'COMPANYID'         => $companyId,
+                'SUBMITEDBY'        => $_SESSION['user_info'][0],
+                'LASTUPDATED'       => $curDate
+            );
+            $db->insert('PROJECTSUGGESTIONS',$data);
+        }else{
+            $suggestionId = null;
+        }
+        if ($suggestionId==null)
+            return;
+        else
+        {
+            add_keywords($keywords,$suggestionId);
+            //adviser suggestion
+            if ($senior_adviser==$_SESSION[user_info][0])
+            {
+                addNewAdviserSuggestion($suggestionId, $senior_adviser, 1);//count advisers form 1
+                if ($second_adviser!="")
+                    addNewAdviserSuggestion($suggestionId, $second_adviser, 2);
+                if ($third_adviser!="")
+                    addNewAdviserSuggestion($suggestionId, $third_adviser, 3);
+            }
+            else
+            {
+                return "invalid. adviser!=user";
+            }
+            //project companies
+            addProjectCompany($suggestionId,$companyId);
+        }
+
+    }
+    return $suggestionId;
+}
+
+
+function addProjectCompany($suggestionId, $companyId){
+    $db = Zend_Registry::get('db');
+    if ( $suggestionId == null) {
+        return;
+    }
+    $data = array(
+        'PROJECTID' => $suggestionId,
+        'COMPANYID' =>  $companyId
+    );
+    $db->insert('PROJECTSCOMPANIES',$data);
+}
+
+function addNewAdviserSuggestion($projectId, $adviserId, $adviserNumber){
+    $curDate = date('Y-M-d');
+    $db = Zend_Registry::get('db');
+    $data = array(
+        'PROJECTID'         => $projectId,
+        'ADVISERID'         => $adviserId,
+        'ADVISERNUMBER'     => $adviserNumber
+    );
+
+    $db->insert('ADVISERSUGGESTIONS',$data);
+
+}
+
+function add_keywords($keywords,$suggestionId)
+{
+    $db = Zend_Registry::get('db');
+    $keywordsList = explode(",", $keywords);
+    foreach ($keywordsList as $keyword) {
+        $keyword = trim(strtolower($keyword));
+        $keywordId = getKeywordId($keyword);
+        if ($keywordId == null) { //new keyword
+            $keywordId = addNewKeyword($keyword);
+            $data = array('PROJECTID'=>$suggestionId,
+                'KEYWORDID' =>$keywordId
+            );
+            $db->insert($data);
+        } else {
+            //check this keyword already written for this project;
+            $result = isProjectKeyword($suggestionId, $keywordId);
+            // Zend_Debug::dump($result, 'keywordsProjects');
+            if (!$result) {//only in this case we should add the keyword
+                $data = array('PROJECTID'=>$suggestionId,
+                    'KEYWORDID' =>$keywordId
+                );
+                $db->insert($data);
+            }
+        }
+    }
+}
+
+
+function isProjectKeyword($projectId,$keywordId){
+    $db = Zend_Registry::get('db');
+    $select = $db->select()->from('KEYWORDSPROJECTS', array('KEYWORDID'))
+        ->where('PROJECTID = ?', $projectId)
+        ->where('KEYWORDID = ?', $keywordId)
+    ;
+    $row = $db->fetchRow($select);
+    $result = ($row) ? true : false;
+    return $result;
+}
+
+function getKeywordId($keywordText){
+    $db = Zend_Registry::get('db');
+    $select = $db->select()->from('KEYWORDS', array('KEYWORDID'))
+        ->where('KEYWORDTEXT = ?', $keywordText)
+    ;
+    $row = $db->fetchRow($select);
+    $data = ($row) ? $row->KEYWORDID : null;
+    return $data;
+}
+
+
+function getCompanyIdByCompanyName($company_name)
+{
+    $db = Zend_Registry::get('db');
+    $select=$db->select() ->from('COMPANIES',
+        array('COMPANYID'))
+        ->where('COMPANYNAMEENG = ?', $company_name);
+    $companyId= $db->fetchRow($select);
+    return $companyId;
+}
+
+
+function createSuggestionId ($year){
+
+    $db = Zend_Registry::get('db');
+    $_yearThis = Zend_Registry::get('yearsData')->thisYear;
+    $_yearNext = Zend_Registry::get('yearsData')->nextYear;
+    switch ($year){
+        case  _yearThis:  $seqName =  'S_THIS_YEAR_SEQ';
+            break;
+        case  _yearNext:  $seqName = 'S_NEXT_YEAR_SEQ';
+            break;
+        default:  $seqName = null;
+    }
+    if (!$seqName){ return null;} //year is invalid
+
+    $seq = $db->query("SELECT NextVal('$seqName') as NEXTVAL");
+    $seq = strval($seq->fetch()['NEXTVAL']);
+
+    $suggestionIdTmpl = 's-'.$year.'-000';
+    $lenSeq = strlen($seq);
+    $suggestionId = substr( $suggestionIdTmpl, 0 , strlen($suggestionIdTmpl) - $lenSeq ) . $seq;
+    return $suggestionId;
+}
+
+function addNewKeyword($keywordText){
+    $db = Zend_Registry::get('db');
+    $seqName = 'KEYWORD_SEQ';
+
+    $seq = $db->query("SELECT NextVal('$seqName') as NEXTVAL");
+    $seq = strval($seq->fetch()['NEXTVAL']);
+    $data = array('KEYWORDID' => $seq, 'KEYWORDTEXT' => $keywordText);
+    $db->insert('KEYWORDS',$data);
+    return $seq;
+}
+
+function addKeywordForProjectKeywords($projectId, $keywordId){
+    $db = Zend_Registry::get('db');
+    $data = array('PROJECTID'=>$projectId,
+        'KEYWORDID' =>$keywordId
+    );
+    $db->insert('KEYWORDSPROJECTS',$data);
+}
+
+
+
+$possible_url = array("get_user_list","get_session_data" ,"get_user","is_user_exist","bgu_login","get_advisers_list","get_pictures","search_project", "get_search_results","get_project_by_user_id","get_project_info","get_user_name","get_conference_sessions","get_student_grades","get_project_log","get_project_dates", "get_messages","get_companies","get_second_advisers_list");
 
 $value = "An error has occurred";
 
@@ -586,12 +787,6 @@ if (isset($_GET["action"]) && in_array($_GET["action"], $possible_url))
     {
         case "get_user_list":
             $value = get_user_list();
-            break;
-        case "get_user":
-            if (isset($_GET["id"]))
-                $value = get_user_by_id($_GET["id"]);
-            else
-                $value = "Missing argument";
             break;
         case "get_session_data":
             $value = $_SESSION['user_info'];
@@ -639,6 +834,9 @@ if (isset($_GET["action"]) && in_array($_GET["action"], $possible_url))
         case "get_search_results":
             $value = get_search_results();
             break;
+        case "get_second_advisers_list":
+            $value = get_second_advisers_list();
+            break;
         case "get_project_log":
             $project_id = get_project_id_by_student_id($_SESSION['user_info'][1])["PROJECTID"];
             $value = get_project_log($project_id);
@@ -648,7 +846,7 @@ if (isset($_GET["action"]) && in_array($_GET["action"], $possible_url))
             break;
     }
 }
-$possible_post_actions = array("set_project_id_for_project_info");
+$possible_post_actions = array("set_project_id_for_project_info","suggest_project");
 if (isset($_REQUEST["action"]) && in_array($_REQUEST["action"], $possible_post_actions))
     switch ($_REQUEST["action"])
     {
@@ -656,6 +854,13 @@ if (isset($_REQUEST["action"]) && in_array($_REQUEST["action"], $possible_post_a
             $_SESSION["proj_id_for_proj_info"] = $_REQUEST["project_id"];
             if ($_SESSION["proj_id_for_proj_info"]!="")
                 $value="OK";
+            break;
+        case "suggest_project":
+            $sugg_id = add_new_suggestion($_REQUEST["year"],$_REQUEST["project_name_heb"],$_REQUEST["project_name_eng"],$_REQUEST["senior_adviser"],$_REQUEST["second_adviser"],$_REQUEST["third_adviser"],$_REQUEST["abstract_heb"],$_REQUEST["abstract_eng"],$_REQUEST["company"],$_REQUEST["keywords"]);
+            if ($sugg_id)
+                $value= "OK";
+            else
+                $value = "false";
             break;
     }
 
