@@ -688,8 +688,8 @@ function submitProjectSuggestion() {
         isValidForm = false;
         window.document.getElementById("Senior_Adviser_Name").style.borderColor="red";
     }
-    var second_adviser = window.document.getElementById("advisers_list").value;
-    var third_adviser = window.document.getElementById("advisers_list2").value;
+    var second_adviser = window.document.getElementById("second_advisers_list").value;
+    var third_adviser = window.document.getElementById("second_advisers_list2").value;
     var abstract_heb = window.document.getElementById("abstract_heb").value;
     if (abstract_heb == "") {
         isValidForm = false;
