@@ -40,7 +40,6 @@ window.onload= function() {
                 var result = JSON.parse(json_response);
                 var user_full_name = result.USERLASTNAMEENG+" "+result.USERFIRSTNAMEENG;
                 adviser_name_sugg.value =  result.USERID;
-                adviser_name_sugg.innerText = user_full_name;
             }
         };
         xhr.open("GET", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=get_user_name", false);
@@ -723,7 +722,7 @@ function submitProjectSuggestion() {
                     alert("Suggested Project Successfully!");
             }
         };
-        xhr.open("POST", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=suggest_project&year="+year.toString()+"&project_name_heb="+project_name_heb.toString()+"&project_name_eng"+project_name_eng.toString()+"&senior_adviser="+senior_adviser.toString()+"&second_adviser="+second_adviser.toString()+"&third_adviser="+third_adviser.toString()+"&abstract_heb="+abstract_heb.toString()+"&abstract_eng"+abstract_eng.toString()+"&company="+company.toString()+"&keywords="+keywords.toString(), false);
+        xhr.open("POST", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=suggest_project&year="+year.toString()+"&project_name_heb="+project_name_heb.toString()+"&project_name_eng="+project_name_eng.toString()+"&senior_adviser="+senior_adviser.toString()+"&second_adviser="+second_adviser.toString()+"&third_adviser="+third_adviser.toString()+"&abstract_heb="+abstract_heb.toString()+"&abstract_eng="+abstract_eng.toString()+"&company="+company.toString()+"&keywords="+keywords.toString(), false);
         xhr.send(year,project_name_heb,project_name_eng,senior_adviser,second_adviser,third_adviser,abstract_heb,abstract_eng,company,keywords);
     }
 }

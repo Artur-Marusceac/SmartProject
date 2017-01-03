@@ -595,7 +595,7 @@ function getCompanies()
 
 function isKeyExist($projectId){
     $db = Zend_Registry::get('db');
-    $select = $db->select()->from($this, 'PROJECTID')
+    $select = $db->select()->from('PROJECTSUGGESTIONS', 'PROJECTID')
         ->where('PROJECTID = ?', $projectId)
     ;
     $data = $db->fetchRow($select);
@@ -695,7 +695,7 @@ function add_keywords($keywords,$suggestionId)
             $data = array('PROJECTID'=>$suggestionId,
                 'KEYWORDID' =>$keywordId
             );
-            $db->insert($data);
+            $db->insert('KEYWORDSPROJECTS',$data);
         } else {
             //check this keyword already written for this project;
             $result = isProjectKeyword($suggestionId, $keywordId);
@@ -750,9 +750,11 @@ function createSuggestionId ($year){
     $_yearThis = Zend_Registry::get('yearsData')->thisYear;
     $_yearNext = Zend_Registry::get('yearsData')->nextYear;
     switch ($year){
-        case  _yearThis:  $seqName =  'S_THIS_YEAR_SEQ';
+        case  $_yearThis:
+            $seqName =  'S_THIS_YEAR_SEQ';
             break;
-        case  _yearNext:  $seqName = 'S_NEXT_YEAR_SEQ';
+        case  $_yearNext:
+            $seqName = 'S_NEXT_YEAR_SEQ';
             break;
         default:  $seqName = null;
     }
