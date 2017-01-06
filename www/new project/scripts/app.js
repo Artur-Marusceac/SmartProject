@@ -635,7 +635,7 @@ function get_messages()
                 for (var j=0; j<result.length;j++)
                 {
                     var div= window.document.createElement("div");
-                    div.setAttribute("class","portfolio-item");
+                    div.setAttribute("class","activity-item one-half-responsive");
                     var iElement = window.document.createElement("i");
                     iElement.setAttribute("class","fa fa-info bg-blue-dark activity-item-icon");
                     div.appendChild(iElement);
