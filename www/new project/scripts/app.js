@@ -636,7 +636,9 @@ function get_messages()
                 {
                     var div= window.document.createElement("div");
                     div.setAttribute("class","portfolio-item");
-                    div.appendChild(window.document.createElement("i").setAttribute("class","fa fa-info bg-blue-dark activity-item-icon"));
+                    var iElement = window.document.createElement("i");
+                    iElement.setAttribute("class","fa fa-info bg-blue-dark activity-item-icon");
+                    div.appendChild(iElement);
                     var header=window.document.createElement("h5");
                     header.innerText=result[j].TITLE;
                     div.appendChild(header);
