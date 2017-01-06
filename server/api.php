@@ -375,7 +375,7 @@ function bgu_login($username,$password)
         $user_type = getUserType($id);
         $user_info = array($username, $id, $academic_year, $user_type);
         $_SESSION['user_info'] = $user_info;
-        /*switch ($user_type)
+        switch ($user_type)
         {
             case 144: //adviser
                 return "adviser";
@@ -389,8 +389,10 @@ function bgu_login($username,$password)
                 else
                     return "fourth";
                 break;
-
-        }*/
+            case 16: //faculty member
+                return "adviser";
+                break;
+        }
 
     }
     return $check;
