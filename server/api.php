@@ -375,7 +375,7 @@ function bgu_login($username,$password)
         $user_type = getUserType($id);
         $user_info = array($username, $id, $academic_year, $user_type);
         $_SESSION['user_info'] = $user_info;
-        switch ($user_type)
+        switch ($user_type['USERTYPE'])
         {
             case 144: //adviser
                 return "adviser";
@@ -384,7 +384,7 @@ function bgu_login($username,$password)
                 return "superviser";
                 break;
             case 32://student
-                if ($academic_year=3)
+                if ($academic_year==3)
                     return "third";
                 else
                     return "fourth";
@@ -639,11 +639,11 @@ function add_new_suggestion($year,$project_name_heb,$project_name_eng,$senior_ad
         {
             add_keywords($keywords,$suggestionId);
             //adviser suggestion
-                addNewAdviserSuggestion($suggestionId, $senior_adviser, 1);//count advisers form 1
-                if ($second_adviser!="")
-                    addNewAdviserSuggestion($suggestionId, $second_adviser, 2);
-                if ($third_adviser!="")
-                    addNewAdviserSuggestion($suggestionId, $third_adviser, 3);
+            addNewAdviserSuggestion($suggestionId, $senior_adviser, 1);//count advisers form 1
+            if ($second_adviser!="")
+                addNewAdviserSuggestion($suggestionId, $second_adviser, 2);
+            if ($third_adviser!="")
+                addNewAdviserSuggestion($suggestionId, $third_adviser, 3);
             else
             {
                 return "invalid. adviser!=user";
