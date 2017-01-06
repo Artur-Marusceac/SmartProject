@@ -646,6 +646,7 @@ function get_messages()
                     emTime.innerText=result[j].TIMEDATE;
                     div.appendChild(emTime);
                     var content=window.document.createElement("p");
+                    content.setAttribute("class","half-bottom");
                     content.innerText=result[j].CONTENT;
                     div.appendChild(content);
                     div.appendChild(window.document.createElement("br"));
