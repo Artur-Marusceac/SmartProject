@@ -636,16 +636,17 @@ function get_messages()
                 {
                     var div= window.document.createElement("div");
                     div.setAttribute("class","portfolio-item");
-                    var header=window.document.createElement("h4");
+                    div.appendChild(window.document.createElement("i").setAttribute("class","fa fa-info bg-blue-dark activity-item-icon"));
+                    var header=window.document.createElement("h5");
                     header.innerText=result[j].TITLE;
                     div.appendChild(header);
-                    var emContent=window.document.createElement("em");
-                    emContent.innerText=result[j].CONTENT;
-                    div.appendChild(emContent);
-                    div.appendChild(window.document.createElement("br"));
                     var emTime=window.document.createElement("em");
                     emTime.innerText=result[j].TIMEDATE;
                     div.appendChild(emTime);
+                    var content=window.document.createElement("p");
+                    content.innerText=result[j].CONTENT;
+                    div.appendChild(content);
+                    div.appendChild(window.document.createElement("br"));
                     if (result[j].LINK)
                     {
                         var prefix_link = "/zf/public/data/Messages/";
@@ -726,4 +727,33 @@ function submitProjectSuggestion() {
         xhr.open("POST", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=suggest_project&year="+year.toString()+"&project_name_heb="+project_name_heb.toString()+"&project_name_eng="+project_name_eng.toString()+"&senior_adviser="+senior_adviser.toString()+"&second_adviser="+second_adviser.toString()+"&third_adviser="+third_adviser.toString()+"&abstract_heb="+abstract_heb.toString()+"&abstract_eng="+abstract_eng.toString()+"&company="+company.toString()+"&keywords="+keywords.toString(), false);
         xhr.send(year,project_name_heb,project_name_eng,senior_adviser,second_adviser,third_adviser,abstract_heb,abstract_eng,company,keywords);
     }
+}
+
+
+function user_info()
+{
+    var info_name = window.document.getElementById("info_name");
+    var info_title = window.document.getElementById("info_title");
+    var info_phone = window.document.getElementById("info_phone");
+    var info_mail = window.document.getElementById("info_mail");
+    var info_address = window.document.getElementById("info_address");
+    var json_response="";
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState == 4 && xhr.status==200 ){
+
+            json_response = xhr.responseText;
+            var result = JSON.parse(json_response);
+            if (result)
+            {
+                info_name.innerText = result.NAME;
+                info_title.innerText = result.TITLE;
+                info_address.innerText = result.ADDRESS;
+                info_mail.innerText = result.EMAIL;
+                info_phone.innerText = result.PHONE;
+            }
+        }
+    };
+    xhr.open("GET", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=get_my_info", false);
+    xhr.send();
 }
