@@ -748,6 +748,8 @@ function get_user_info()
     var info_address = window.document.getElementById("info_address");
     var info_id = window.document.getElementById("info_id");
     var info_image = window.document.getElementById("info_image");
+    var info_resume = window.document.getElementById("info_resume");
+    var info_grades = window.document.getElementById("info_grades");
     var json_response="";
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function(){
@@ -766,6 +768,7 @@ function get_user_info()
                 info_mail.innerHTML = "<i class='fa fa-envelope'></i>"+result.EMAIL;
                 info_phone.innerHTML ="<i class='fa fa-phone'></i>"+result.PHONE;
                 info_image.setAttribute("data-original","/StudentsResumeAndGrades/"+id+'/'+"picture.jpg");
+
                 //Preload Image
 
                 $(function() {
@@ -776,6 +779,8 @@ function get_user_info()
                     });
                 });
 
+                info_resume.setAttribute("href","/StudentsResumeAndGrades/"+id+'/'+"resume.docx");
+                info_grades.setAttribute("href","/StudentsResumeAndGrades/"+id+'/'+"grades.pdf");
 
             }
         }
