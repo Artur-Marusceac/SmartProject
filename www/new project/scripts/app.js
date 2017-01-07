@@ -757,7 +757,7 @@ function get_user_info()
             var result = JSON.parse(json_response);
             if (result)
             {
-                info_name.innerText = result.NAME.USERLASTNAMEENG+result.NAME.USERFIRSTNAMEENG;
+                info_name.innerText = result.NAME.USERLASTNAMEENG+" " +result.NAME.USERFIRSTNAMEENG;
                 var id=result.NAME.USERID;
                 info_id.innerText = "ID: "+id;
                 if (result.TITLE)
