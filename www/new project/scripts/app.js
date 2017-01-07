@@ -757,7 +757,7 @@ function get_user_info()
             var result = JSON.parse(json_response);
             if (result)
             {
-                info_name.innerText = result.NAME.LASTNAMEENG+result.NAME.FIRSTNAMEENG;
+                info_name.innerText = result.NAME.USERLASTNAMEENG+result.NAME.USERFIRSTNAMEENG;
                 var id=result.NAME.USERID;
                 info_id.innerText = "ID: "+id;
                 if (result.TITLE)
@@ -766,6 +766,17 @@ function get_user_info()
                 info_mail.innerHTML = "<i class='fa fa-envelope'></i>"+result.EMAIL;
                 info_phone.innerHTML ="<i class='fa fa-phone'></i>"+result.PHONE;
                 info_image.setAttribute("data-original","/StudentsResumeAndGrades/"+id+'/'+"picture.jpg");
+                //Preload Image
+
+                $(function() {
+                    $(".preload-image").lazyload({
+                        threshold : 100,
+                        effect : "fadeIn",
+                        container: $("#page-content-scroll")
+                    });
+                });
+
+
             }
         }
     };
