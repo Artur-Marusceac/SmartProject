@@ -180,6 +180,12 @@ window.onload= function() {
     var messages = document.getElementById("Messages");
     if(messages!==null)
         get_messages();
+
+    var user_info = window.document.getElementById("user_info");
+    if (user_info!==null)
+    {
+        get_user_info();
+    }
 };
 
 function PicturesFromDir(){
@@ -733,7 +739,7 @@ function submitProjectSuggestion() {
 }
 
 
-function user_info()
+function get_user_info()
 {
     var info_name = window.document.getElementById("info_name");
     var info_title = window.document.getElementById("info_title");
