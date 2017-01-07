@@ -779,10 +779,10 @@ function get_user_info()
                     });
                 });
 
-                info_resume.setAttribute("href","/StudentsResumeAndGrades/"+id+'/'+"resume.docx");
+                info_resume.setAttribute("href","/StudentsResumeAndGrades/"+id+'/'+"resume.pdf");
                 info_resume.innerText = "Resume";
                 info_grades.setAttribute("href","/StudentsResumeAndGrades/"+id+'/'+"grades.pdf");
-
+                info_grades.innerText = "Grades";
             }
         }
     };
