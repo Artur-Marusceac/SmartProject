@@ -762,7 +762,7 @@ function get_user_info()
                 info_id.innerText = "ID: "+id;
                 if (result.TITLE)
                     info_title.innerText = result.TITLE;
-                info_address.innerHTML = <i class='fa fa-location-arrow'></i>+result.ADDRESS;
+                info_address.innerHTML = "<i class='fa fa-location-arrow'></i>"+result.ADDRESS;
                 info_mail.innerHTML = "<i class='fa fa-envelope'></i>"+result.EMAIL;
                 info_phone.innerHTML ="<i class='fa fa-phone'></i>"+result.PHONE;
                 info_image.setAttribute("data-original","/StudentsResumeAndGrades/"+id+'/'+"picture.jpg");
