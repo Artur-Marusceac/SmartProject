@@ -746,6 +746,8 @@ function get_user_info()
     var info_phone = window.document.getElementById("info_phone");
     var info_mail = window.document.getElementById("info_mail");
     var info_address = window.document.getElementById("info_address");
+    var info_id = window.document.getElementById("info_id");
+    var info_image = window.document.getElementById("info_image");
     var json_response="";
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function(){
@@ -755,13 +757,15 @@ function get_user_info()
             var result = JSON.parse(json_response);
             if (result)
             {
-
-                info_name.innerText = result.NAME;
+                info_name.innerText = result.NAME.LASTNAMEENG+result.NAME.FIRSTNAMEENG;
+                var id=result.NAME.USERID;
+                info_id.innerText = "ID: "+id;
                 if (result.TITLE)
                     info_title.innerText = result.TITLE;
-                info_address.innerText = result.ADDRESS;
-                info_mail.innerText = result.EMAIL;
+                info_address.innerHTML = <i class='fa fa-location-arrow'></i>+result.ADDRESS;
+                info_mail.innerHTML = "<i class='fa fa-envelope'></i>"+result.EMAIL;
                 info_phone.innerHTML ="<i class='fa fa-phone'></i>"+result.PHONE;
+                info_image.setAttribute("data-original","/StudentsResumeAndGrades/"+id+'/'+"picture.jpg");
             }
         }
     };
