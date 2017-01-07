@@ -787,9 +787,45 @@ function addKeywordForProjectKeywords($projectId, $keywordId){
     $db->insert('KEYWORDSPROJECTS',$data);
 }
 
+function getMyInfo()
+{
+    $db = Zend_Registry::get('db');
+    $user_id = $_SESSION['user_info'][1];
+    $name = get_user_name($user_id);
+    $user_type = getUserType($user_id);
+    $academic_year = $_SESSION['user_info'][2];
+    switch ($user_type['USERTYPE'])
+    {
+        case 144: //adviser
+            $title = "Adviser";
+            break;
+        case 146: //supervisor
+            $title = "Superviser";
+            break;
+        case 32://student
+            if ($academic_year==3)
+                $title = "Third Year Student";
+            else
+                $title = "Fourth Year Student";
+            break;
+        case 16: //faculty member
+            $title = "Adviser";
+            break;
+    }
+    $select=$db->select() ->from('USERS',
+        array('EMAIL','STREET1','CITY1','TELHOME'))
+        ->where('USERID=?', $user_id);
+    $private_details= $db->fetchRow($select);
+    $email = $private_details["EMAIL"];
+    $address = $private_details["STREET1"]." ".$private_details["CITY1"];
+    $phone = $private_details["TELHOME"];
+    $result = array("NAME"=>$name,"TITLE"=>$title,"EMAIL"=>$email,"ADDRESS"=>$address,"PHONE"=>$phone);
+    return $result;
+}
 
 
-$possible_url = array("get_user_list","get_session_data" ,"get_user","is_user_exist","bgu_login","get_advisers_list","get_pictures","search_project", "get_search_results","get_project_by_user_id","get_project_info","get_user_name","get_conference_sessions","get_student_grades","get_project_log","get_project_dates", "get_messages","get_companies","get_second_advisers_list");
+
+$possible_url = array("get_user_list","get_session_data" ,"get_user","is_user_exist","bgu_login","get_advisers_list","get_pictures","search_project", "get_search_results","get_project_by_user_id","get_project_info","get_user_name","get_conference_sessions","get_student_grades","get_project_log","get_project_dates", "get_messages","get_companies","get_second_advisers_list","get_my_info");
 
 $value = "An error has occurred";
 
@@ -856,6 +892,10 @@ if (isset($_GET["action"]) && in_array($_GET["action"], $possible_url))
         case "get_companies":
             $value = getCompanies();
             break;
+        case "get_my_info":
+            $value = getMyInfo();
+            break;
+
     }
 }
 $possible_post_actions = array("set_project_id_for_project_info","suggest_project");

@@ -750,7 +750,8 @@ function user_info()
             if (result)
             {
                 info_name.innerText = result.NAME;
-                info_title.innerText = result.TITLE;
+                if (result.TITLE)
+                    info_title.innerText = result.TITLE;
                 info_address.innerText = result.ADDRESS;
                 info_mail.innerText = result.EMAIL;
                 info_phone.innerText = result.PHONE;
