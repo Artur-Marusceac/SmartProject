@@ -755,12 +755,13 @@ function get_user_info()
             var result = JSON.parse(json_response);
             if (result)
             {
+
                 info_name.innerText = result.NAME;
                 if (result.TITLE)
                     info_title.innerText = result.TITLE;
                 info_address.innerText = result.ADDRESS;
                 info_mail.innerText = result.EMAIL;
-                info_phone.innerText = result.PHONE;
+                info_phone.innerHTML ="<i class='fa fa-phone'></i>"+result.PHONE;
             }
         }
     };
