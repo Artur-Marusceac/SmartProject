@@ -475,10 +475,10 @@ function get_session_registration_info()
                     var session = window.document.createElement("button");
                     session.setAttribute("class","accordion");
                     session.setAttribute("onclick","viewSessionRegistration()");
-                    var div= document.createElement("div")
+                    var div= document.createElement("div");
                     div.setAttribute("class","panel");
 
-                    session.innerHTML = "<span style=\"color:orange\">+result[j].HEAD +"</span><br> <i>"+ result[j].START_TIME.slice(0,-3)+"-"+result[j].END_TIME.slice(0,-3)+"</i>" ;
+                    session.innerHTML = "<span style=\"color:orange\">"+result[j].HEAD +"</span><br> <i>"+ result[j].START_TIME.slice(0,-3)+"-"+result[j].END_TIME.slice(0,-3)+"</i>" ;
                     var p = window.document.createElement("p");
                     p.innerHTML =  result[j].HEAD + "<br> Building: "+result[j].BUILDING+" Room: "+result[j].ROOM + "<br> <i>"+result[j].START_TIME+"-"+result[j].END_TIME +"</i><br>"+"Remaining Seats: "+result[j].SEATS;
                     div.appendChild(p);
