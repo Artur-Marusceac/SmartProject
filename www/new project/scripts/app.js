@@ -482,10 +482,10 @@ function get_session_registration_info()
                     session.innerText = result[j].HEAD + " " + result[j].START_TIME+"-"+result[j].END_TIME;
                     var p = window.document.createElement("p");
                     p.innerHTML =  result[j].HEAD + "<br> Building: "+result[j].BUILDING+" Room: "+result[j].ROOM + "<br> <i>"+result[j].START_TIME+"-"+result[j].END_TIME +"</i><br>"+"Remaining Seats: "+result[j].SEATS;
-                    session.appendChild(p);
+                    div.appendChild(p);
                     var register_button = window.document.createElement("button");
                     register_button.setAttribute("onClick","session_register()");
-                    session.appendChild(register_button);
+                    div.appendChild(register_button);
                     /*var div= document.createElement("div");
                     div.setAttribute("class","portfolio-item");
                     var header=document.createElement("h4");
@@ -518,6 +518,7 @@ function get_session_registration_info()
                     }
                     div.appendChild(xButton);
                                */
+                    session_registration.appendChild(session);
                     session_registration.appendChild(div);
                 }
 
