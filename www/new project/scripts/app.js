@@ -482,7 +482,9 @@ function get_session_registration_info()
                     var p = window.document.createElement("p");
                     p.innerHTML =  result[j].HEAD + "<br> Building: "+result[j].BUILDING+" Room: "+result[j].ROOM + "<br> <i>"+result[j].START_TIME+"-"+result[j].END_TIME +"</i><br>"+"Remaining Seats: "+result[j].SEATS;
                     div.appendChild(p);
-                    var register_button = window.document.createElement("button");
+                    var register_button = window.document.createElement("a");
+                    register_button.setAttribute("href","#");
+                    register_button.setAttribute("class","button button-orange button-round");
                     register_button.setAttribute("onclick","session_register()");
                     register_button.innerText = "Register To Session";
                     div.appendChild(register_button);
