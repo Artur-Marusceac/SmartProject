@@ -804,9 +804,20 @@ function get_user_info()
     xhr.send();
 }
 
-
+/*
 function viewSessionRegistration() {
     var acc = document.getElementsByClassName("accordion");
     acc.classList.toggle("active");
     acc.nextElementSibling.classList.toggle("show");
+}*/
+
+var acc = document.getElementsByClassName("accordion");
+var i;
+if (acc) {
+    for (i = 0; i < acc.length; i++) {
+        acc[i].onclick = function () {
+            this.classList.toggle("active");
+            this.nextElementSibling.classList.toggle("show");
+        }
+    }
 }
