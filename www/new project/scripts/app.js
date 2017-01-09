@@ -478,7 +478,7 @@ function get_session_registration_info()
                     var div= document.createElement("div")
                     div.setAttribute("class","panel");
 
-                    session.innerText = result[j].HEAD + " " + result[j].START_TIME+"-"+result[j].END_TIME;
+                    session.innerHTML = result[j].HEAD + "<br>" + result[j].START_TIME+"-"+result[j].END_TIME;
                     var p = window.document.createElement("p");
                     p.innerHTML =  result[j].HEAD + "<br> Building: "+result[j].BUILDING+" Room: "+result[j].ROOM + "<br> <i>"+result[j].START_TIME+"-"+result[j].END_TIME +"</i><br>"+"Remaining Seats: "+result[j].SEATS;
                     div.appendChild(p);
