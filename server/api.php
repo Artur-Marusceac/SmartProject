@@ -252,10 +252,8 @@ function get_pictures($dir){
 // init result
     $result = array();
 
-// directory to scan
-    $dirTest= '/var/www/html/Data/Conference/'.$dir.'/';
+// directory to traverse
     $directory = new DirectoryIterator('/var/www/html/Data/Conference/'.$dir.'/');
-//$directory = new DirectoryIterator('/var/www/html/Data/Conference/2008/');
 // iterate
     foreach ($directory as $fileinfo) {
         // must be a file
@@ -819,7 +817,23 @@ function getMyInfo()
     $email = $private_details["EMAIL"];
     $address = $private_details["STREET1"]." ".$private_details["CITY1"];
     $phone = $private_details["TELHOME"];
-    $result = array("NAME"=>$name,"TITLE"=>$title,"EMAIL"=>$email,"ADDRESS"=>$address,"PHONE"=>$phone);
+
+    $extensions = array('jpg', 'jpeg', 'png', 'gif', 'bmp');
+    $directory = new DirectoryIterator('/var/www/html/StudentsResumeAndGrades/'.$user_id.'/');
+    foreach ($directory as $fileinfo) {
+        if ($fileinfo->isFile()) {
+            // file extension
+            $extension = strtolower(pathinfo($fileinfo->getFilename(), PATHINFO_EXTENSION));
+            // check if extension match
+            if (in_array($extension, $extensions)) {
+                // add to result
+                $image = $fileinfo->getFilename();
+                break;
+            }
+        }
+    }
+
+    $result = array("NAME"=>$name,"TITLE"=>$title,"EMAIL"=>$email,"ADDRESS"=>$address,"PHONE"=>$phone,"IMAGE"=>$image);
     return $result;
 }
 
