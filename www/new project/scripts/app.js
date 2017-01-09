@@ -474,6 +474,7 @@ function get_session_registration_info()
                 {
                     var session = window.document.createElement("button");
                     session.setAttribute("class","accordion");
+                    session.setAttribute("onclick","viewSessionRegistration()");
                     var div= document.createElement("div")
                     div.setAttribute("class","panel");
 
@@ -801,4 +802,10 @@ function get_user_info()
     };
     xhr.open("GET", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=get_my_info", false);
     xhr.send();
+}
+
+
+function viewSessionRegistration() {
+    this.classList.toggle("active");
+    this.nextElementSibling.classList.toggle("show");
 }
