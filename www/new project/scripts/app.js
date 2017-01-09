@@ -172,10 +172,6 @@ window.onload= function() {
         createSubmissionDatesTable();
     }
 
-    
-    var session_registration=document.getElementById("Session_Registration");
-    if(session_registration!==null)
-        get_session_registration_info();
 
     var messages = document.getElementById("Messages");
     if(messages!==null)
@@ -462,6 +458,8 @@ function CreateSearchTable(db_result)
 function get_session_registration_info()
 {
     var session_registration=document.getElementById("Session_Registration");
+    var session_type_select=document.getElementById("session_type_select").value;
+
     var xhr_project_info = new XMLHttpRequest();
     var json_response="";
     xhr_project_info.onreadystatechange = function(){
@@ -539,7 +537,7 @@ function get_session_registration_info()
          
         }
     };
-    xhr_project_info.open("GET", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=get_conference_sessions", false);
+    xhr_project_info.open("GET", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=get_conference_sessions&type="+session_type_select.toString(), false);
     xhr_project_info.send();
 
 }

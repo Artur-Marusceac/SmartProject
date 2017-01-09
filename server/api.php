@@ -568,11 +568,12 @@ function get_messages($recipient=null){
 }
 
 
-function get_conference_sessions()
+function get_conference_sessions($session_type)
 {
     $db = Zend_Registry::get('db');
     $select=$db->select() ->from('CONFERENCE_SESSIONS',
-        array('ID','HEAD','BUILDING','ROOM','START_TIME','END_TIME','SEATS','TYPE'));
+        array('ID','HEAD','BUILDING','ROOM','START_TIME','END_TIME','SEATS','TYPE'))
+    ->where('TYPE=?',$session_type);
     $sessions= $db->fetchAll($select);
     return $sessions;
 }
@@ -866,7 +867,7 @@ if (isset($_GET["action"]) && in_array($_GET["action"], $possible_url))
             $value = get_project_info_by_user_id($_SESSION['user_info'][1]);
             break;
         case "get_conference_sessions":
-            $value = get_conference_sessions();
+            $value = get_conference_sessions($_GET["type"]);
             break;
         case "get_project_info":
             if ($_SESSION["proj_id_for_proj_info"]!="") {
