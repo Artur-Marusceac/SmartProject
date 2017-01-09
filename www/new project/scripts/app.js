@@ -455,90 +455,58 @@ function CreateSearchTable(db_result)
 }
 
 
-function get_session_registration_info()
-{
-    var session_registration=document.getElementById("Session_Registration");
-    var session_type_select=document.getElementById("session_type_select").value;
+function get_session_registration_info() {
+    var session_registration = document.getElementById("session_registration_div");
+    var session_type_select = document.getElementById("session_type_select").value;
+    if (session_type_select !== "") {
+        var xhr_project_info = new XMLHttpRequest();
+        var json_response = "";
+        xhr_project_info.onreadystatechange = function () {
+            if (xhr_project_info.readyState == 4 && xhr_project_info.status == 200) {
+                json_response = xhr_project_info.responseText;
+                var result = JSON.parse(json_response);
+                if (result) {
+                    for (var j = 0; j < result.length; j++) {
+                        var session = window.document.createElement("button");
+                        session.setAttribute("class", "accordion");
+                        session.setAttribute("onclick", "viewSessionRegistration()");
+                        var div = document.createElement("div");
+                        div.setAttribute("class", "panel");
 
-    var xhr_project_info = new XMLHttpRequest();
-    var json_response="";
-    xhr_project_info.onreadystatechange = function(){
-        if(xhr_project_info.readyState == 4 && xhr_project_info.status==200 ){
-            json_response = xhr_project_info.responseText;
-            var result = JSON.parse(json_response);
-            if (result)
-            {
-                for (var j=0; j<result.length;j++)
-                {
-                    var session = window.document.createElement("button");
-                    session.setAttribute("class","accordion");
-                    session.setAttribute("onclick","viewSessionRegistration()");
-                    var div= document.createElement("div");
-                    div.setAttribute("class","panel");
-
-                    session.innerHTML = "<span style=\"color:orange\">"+result[j].HEAD +"</span><br> <i style=\"font-size:80%\">"+ result[j].START_TIME.slice(0,-3)+"-"+result[j].END_TIME.slice(0,-3)+"</i>" ;
-                    var p = window.document.createElement("p");
-                    p.innerHTML =  result[j].HEAD + "<br> Building: "+result[j].BUILDING+" Room: "+result[j].ROOM + "<br> <i>"+result[j].START_TIME+"-"+result[j].END_TIME +"</i><br>"+"Remaining Seats: "+result[j].SEATS;
-                    div.appendChild(p);
-                    var register_button = window.document.createElement("a");
-                    register_button.setAttribute("href","#");
-                    register_button.setAttribute("class","button button-orange button-round");
-                    register_button.setAttribute("onclick","session_register()");
-                    register_button.innerText = "Register To Session";
-                    div.appendChild(register_button);
-                    /*var div= document.createElement("div");
-                    div.setAttribute("class","portfolio-item");
-                    var header=document.createElement("h4");
-                    header.innerText=result[j].HEAD;
-                    div.appendChild(header);
-                    var emLocation=document.createElement("em");
-                    emLocation.innerText="Building: "+result[j].BUILDING+" Room: "+result[j].ROOM;
-                    div.appendChild(emLocation);
-                    div.appendChild(document.createElement("br"));
-                    var emTime=document.createElement("em");
-                    emTime.innerText=result[j].START_TIME+"-"+result[j].END_TIME;
-                    div.appendChild(emTime);
-                    var pCounter=document.createElement("h4");
-                    pCounter.innerText="Remaining Seats: "+result[j].SEATS;
-                    div.appendChild(pCounter);
-                    var vButton=document.createElement("a");//TODO: add onclick!
-                    vButton.setAttribute("class","user-item-icon-1 bg-green-dark scale-hover");
-                    vButton.setAttribute("id",result[j].ID);
-                    var ivButton=document.createElement("i");
-                    ivButton.setAttribute("class","fa fa-check");
-                    vButton.appendChild(ivButton);
-                    var xButton=document.createElement("a");
-                    xButton.setAttribute("class","user-item-icon-2 bg-red-dark scale-hover");
-                    xButton.setAttribute("id",result[j].ID);
-                    var ixButton=document.createElement("i");
-                    ixButton.setAttribute("class","fa fa-time");
-                    xButton.appendChild(ixButton);
-                    if(result[j].SEATS>0) {
-                        div.appendChild(vButton);
+                        session.innerHTML = "<span style=\"color:orange\">" + result[j].HEAD + "</span><br> <i style=\"font-size:80%\">" + result[j].START_TIME.slice(0, -3) + "-" + result[j].END_TIME.slice(0, -3) + "</i>";
+                        var p = window.document.createElement("p");
+                        p.innerHTML = result[j].HEAD + "<br> Building: " + result[j].BUILDING + " Room: " + result[j].ROOM + "<br> <i>" + result[j].START_TIME + "-" + result[j].END_TIME + "</i><br>" + "Remaining Seats: " + result[j].SEATS;
+                        div.appendChild(p);
+                        var register_button = window.document.createElement("a");
+                        register_button.setAttribute("href", "#");
+                        register_button.setAttribute("class", "button button-orange button-round");
+                        register_button.setAttribute("onclick", "session_register()");
+                        register_button.innerText = "Register To Session";
+                        div.appendChild(register_button);
+                        session_registration.appendChild(session);
+                        session_registration.appendChild(div);
                     }
-                    div.appendChild(xButton);
-                               */
-                    session_registration.appendChild(session);
-                    session_registration.appendChild(div);
-                }
 
-                var acc = document.getElementsByClassName("accordion");
-                var i;
-                if (acc) {
-                    for (i = 0; i < acc.length; i++) {
-                        acc[i].onclick = function () {
-                            this.classList.toggle("active");
-                            this.nextElementSibling.classList.toggle("show");
+                    var acc = document.getElementsByClassName("accordion");
+                    var i;
+                    if (acc) {
+                        for (i = 0; i < acc.length; i++) {
+                            acc[i].onclick = function () {
+                                this.classList.toggle("active");
+                                this.nextElementSibling.classList.toggle("show");
+                            }
                         }
                     }
+
                 }
 
             }
-         
-        }
-    };
-    xhr_project_info.open("GET", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=get_conference_sessions&type="+session_type_select.toString(), false);
-    xhr_project_info.send();
+        };
+        xhr_project_info.open("GET", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=get_conference_sessions&type=" + session_type_select.toString(), false);
+        xhr_project_info.send();
+    }
+    else
+        alert("You muse pick one of the session types!");
 
 }
 
