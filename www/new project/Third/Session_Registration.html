@@ -107,14 +107,14 @@
         
    <div class="content">
        <p>Please Choose Session Type</p>
+       <div class="select-wrapper">
+           <select onchange="get_session_registration_info()" name="session_registration" id="session_type_select">
+               <option value="">-pick one session type-</option>
+               <option value="0">Morning</option>
+               <option value="1">Noon</option>
+           </select>
+       </div>
        <div id="session_registration_div">
-            <div class="select-wrapper">
-                <select onchange="get_session_registration_info()" name="session_registration" id="session_type_select">
-                    <option value="">-pick one session type-</option>
-                    <option value="0">Morning</option>
-                    <option value="1">Noon</option>
-                </select>
-            </div>
        </div>
                 <!--div class="portfolio-adaptive-controls">
                     <h4>Change View</h4>
