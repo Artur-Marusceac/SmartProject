@@ -503,6 +503,9 @@ function get_session_registration_info() {
             }
         };
         xhr_project_info.open("GET", "http://smartprojects.ee.bgu.ac.il/zf/test/SmartProject/server/api.php?action=get_conference_sessions&type=" + session_type_select.toString(), false);
+        while (session_registration.firstChild) {
+            session_registration.removeChild(session_registration.firstChild);
+        }
         xhr_project_info.send();
     }
     else
