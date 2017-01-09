@@ -477,8 +477,6 @@ function get_session_registration_info()
                     var div= document.createElement("div")
                     div.setAttribute("class","panel");
 
-                    var script = window.document.createElement("script");
-                    script.innerHTML="var acc = document.getElementsByClassName(\"accordion\");var i;for (i = 0; i < acc.length; i++) {session[i].onclick = function(){this.classList.toggle(\"active\");this.nextElementSibling.classList.toggle(\"show\");}}"
                     session.innerText = result[j].HEAD + " " + result[j].START_TIME+"-"+result[j].END_TIME;
                     var p = window.document.createElement("p");
                     p.innerHTML =  result[j].HEAD + "<br> Building: "+result[j].BUILDING+" Room: "+result[j].ROOM + "<br> <i>"+result[j].START_TIME+"-"+result[j].END_TIME +"</i><br>"+"Remaining Seats: "+result[j].SEATS;
