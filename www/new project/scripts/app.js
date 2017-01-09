@@ -472,7 +472,21 @@ function get_session_registration_info()
             {
                 for (var j=0; j<result.length;j++)
                 {
-                    var div= document.createElement("div");
+                    var session = window.document.createElement("button");
+                    session.setAttribute("class","accordion");
+                    var div= document.createElement("div")
+                    div.setAttribute("class","panel");
+
+                    var script = window.document.createElement("script");
+                    script.innerHTML="var acc = document.getElementsByClassName(\"accordion\");var i;for (i = 0; i < acc.length; i++) {session[i].onclick = function(){this.classList.toggle(\"active\");this.nextElementSibling.classList.toggle(\"show\");}}"
+                    session.innerText = result[j].HEAD + " " + result[j].START_TIME+"-"+result[j].END_TIME;
+                    var p = window.document.createElement("p");
+                    p.innerHTML =  result[j].HEAD + "<br> Building: "+result[j].BUILDING+" Room: "+result[j].ROOM + "<br> <i>"+result[j].START_TIME+"-"+result[j].END_TIME +"</i><br>"+"Remaining Seats: "+result[j].SEATS;
+                    session.appendChild(p);
+                    var register_button = window.document.createElement("button");
+                    register_button.setAttribute("onClick","session_register()");
+                    session.appendChild(register_button);
+                    /*var div= document.createElement("div");
                     div.setAttribute("class","portfolio-item");
                     var header=document.createElement("h4");
                     header.innerText=result[j].HEAD;
@@ -503,7 +517,7 @@ function get_session_registration_info()
                         div.appendChild(vButton);
                     }
                     div.appendChild(xButton);
-                               
+                               */
                     session_registration.appendChild(div);
                 }
 
@@ -680,40 +694,40 @@ function get_messages()
 function submitProjectSuggestion() {
     var isValidForm = true;
     var year = window.document.getElementById("year_suggestion").value;
-    if (year == "") {
+    if (year === "") {
         isValidForm = false;
         window.document.getElementById("year_suggestion").style.borderColor="red";
     }
     var project_name_heb = window.document.getElementById("Project_Name_Heb").value;
-    if (project_name_heb == "") {
+    if (project_name_heb === "") {
         isValidForm = false;
         window.document.getElementById("Project_Name_Heb").style.borderColor="red";
     }
     var project_name_eng = window.document.getElementById("Project_Name_Eng").value;
-    if (project_name_eng == "") {
+    if (project_name_eng === "") {
         isValidForm = false;
         window.document.getElementById("Project_Name_Eng").style.borderColor="red";
     }
     var senior_adviser = window.document.getElementById("Senior_Adviser_Name").value;
-    if (senior_adviser == "") {
+    if (senior_adviser === "") {
         isValidForm = false;
         window.document.getElementById("Senior_Adviser_Name").style.borderColor="red";
     }
     var second_adviser = window.document.getElementById("second_advisers_list").value;
     var third_adviser = window.document.getElementById("second_advisers_list2").value;
     var abstract_heb = window.document.getElementById("abstract_heb").value;
-    if (abstract_heb == "") {
+    if (abstract_heb === "") {
         isValidForm = false;
         window.document.getElementById("abstract_heb").style.borderColor="red";
     }
     var abstract_eng = window.document.getElementById("abstract_eng").value;
-    if (abstract_eng == "") {
+    if (abstract_eng === "") {
         isValidForm = false;
         window.document.getElementById("abstract_eng").style.borderColor="red";
     }
     var company = window.document.getElementById("company_list").value;
     var keywords = window.document.getElementById("keywords").value;
-    if (keywords == "") {
+    if (keywords === "") {
         isValidForm = false;
         window.document.getElementById("keywords").style.borderColor="red";
     }
@@ -778,7 +792,7 @@ function get_user_info()
                         container: $("#page-content-scroll")
                     });
                 });
-
+                //href on projects.ee.bgu.ac.il: Data/Students_Photos/2017/id.jpg
                 info_resume.setAttribute("href","/StudentsResumeAndGrades/"+id+'/'+"resume.pdf");
                 info_resume.innerText = "Resume";
                 info_grades.setAttribute("href","/StudentsResumeAndGrades/"+id+'/'+"grades.pdf");
