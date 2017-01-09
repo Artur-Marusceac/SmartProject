@@ -482,8 +482,8 @@ function get_session_registration_info()
                     p.innerHTML =  result[j].HEAD + "<br> Building: "+result[j].BUILDING+" Room: "+result[j].ROOM + "<br> <i>"+result[j].START_TIME+"-"+result[j].END_TIME +"</i><br>"+"Remaining Seats: "+result[j].SEATS;
                     div.appendChild(p);
                     /*var register_button = window.document.createElement("button");
-                    register_button.setAttribute("onClick","session_register()");*/
-                    div.appendChild(register_button);
+                    register_button.setAttribute("onClick","session_register()");
+                    div.appendChild(register_button);*/
                     /*var div= document.createElement("div");
                     div.setAttribute("class","portfolio-item");
                     var header=document.createElement("h4");
